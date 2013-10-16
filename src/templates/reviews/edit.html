@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block head_title %}{% if review.id %}Редактирование{% else %}Добавление{% endif %} обзора - {% endblock %}
+
+{% block extra_head %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_URL }}css/forms.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_URL }}css/uploader.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="{{ STATIC_URL }}plupload/css/plupload.queue.css" type="text/css">
+
+<script type="text/javascript" src="{{ STATIC_URL }}tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/review.post.tinymce.init.js"></script>
+
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<script type="text/javascript" src="{{ STATIC_URL }}plupload/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}plupload/js/jquery.plupload.queue.min.js"></script>
+
+<script type="text/javascript">
+//	global variables initialization
+	var review_id = "{{ review.id }}";
+	var attachedPostPhotos = new Array();
+
+</script>
+
+{% endblock %}
+
+{% block body %}
+<div class="content_bg">
+
+	<div class="wrapper-content content-top">	
+	
+		<div class="grey_bg">
+	
+	
+			<div class="wide">
+	
+	<h1 class="center">{% if review.id %}Редактирование{% else %}Добавление{% endif %} обзора</h1>
+    <p class="formnotes">Поля с красными звездочками обязательны<span class="req">*</span> для заполнения.</p>
+    
+	<div class="hr"><div><hr /></div></div>
+	
+	{% if blog_form.errors %}
+	<div class="errorbox">
+		{% if blog_form.non_field_errors %}
+			<p>{% for e in blog_form.non_field_errors %}{{ e|escape }}{% endfor %}</p>
+		{% endif %}
+		{% if blog_form.title.errors %}
+			<p>Заголовок {% for e in blog_form.title.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+		{% endif %}
+    	{% if blog_form.body.errors %}
+			<p>Текст: {% for e in blog_form.body.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+		{% endif %}
+		{% if blog_form.body_style.errors %}
+			<p>Тип кузова: {% for e in blog_form.body_style.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+		{% endif %}
+		{% if blog_form.car_segment.errors %}
+			<p>Сегмент: {% for e in blog_form.car_segment.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+		{% endif %}
+		
+
+	</div>
+	{% endif %}
+		   
+    <form class="form" id="reviewform" method="POST" action="">
+        {% csrf_token %}
+		
+		<input type="hidden" name="allow_comments" value="1" />
+		<input type="hidden" name="attachedPostPhotos" id="attachedPostPhotos" value="" />
+		
+		<div class="item">
+			<div class="legend"><label for="id_title">Заголовок<em>*</em></label></div>
+			<div class="element">
+				<span>{{ blog_form.title }}</span>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="legend">
+				<label for="id_body">Текст<em>*</em></label>
+			</div>
+			<div class="element">
+				<span style="padding-right: 15px;">{{ blog_form.body }}</span><br />
+				<span class="tooltip" style="margin-top: -12px;">Используйте кнопку <img src="/static/images/pagebreak.png" title="Добавить разрыв страницы" height="25px;" style="margin-top: -4px; position: absolute;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; для выделения аннотации.</span>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="legend">
+				<label for="id_body_style">Тип кузова<em>*</em></label>
+			</div>
+			<div class="element">
+				<span>{{ blog_form.body_style }}</span>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="legend">
+				<label for="id_car_segment">Сегмент рынка<em>*</em></label>
+			</div>
+			<div class="element">
+				<span>{{ blog_form.car_segment }}</span>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="legend">
+				<label for="id_body_style">Автомобиль</label>
+				<span>Марка и модель автомобиля<br /> описываемого в обзоре</span>	
+			</div>
+			<div class="element">
+				<span>{{ blog_form.car }}</span>
+				<span class="tooltip">Пример: Hyundai i40 или Bentley Continental Flying Spur 'Series 51'</span>
+			</div>
+		</div>
+
+		{% if user.is_staff %}
+		<div class="item">
+			<div class="legend">
+				<label for="id_realauthor">Автор</label>
+				<span>Реальный автор публикации</span>				
+			</div>
+			<div class="element">
+				<span>{{ blog_form.realauthor }}</span>
+			</div>
+		</div>
+		
+		<div class="item">
+			<div class="legend">
+				<label for="id_source">Источник</label>
+				<span>Ссылка на источник</span>				
+			</div>
+			<div class="element"><span>{{ blog_form.source }}</span></div>
+		</div>
+		{% endif %}	
+    	
+		<div class="item">
+			<div class="legend">
+				<label for="id_tags">Тэги</label>
+				<span>В качестве разделителя<br /> используйте запятую либо пробел</span>
+			</div>
+			<div class="element">
+				<span>{{ blog_form.tags }}</span><br />
+				<span class="tooltip">Ключевы слова описывающие платформу, тип двигателя, дизайн студию</span>
+			</div>
+		</div>
+		
+			
+		
+		<div class="item">
+			<div class="legend">
+				<label for="id_images">Фотографии</label>
+				<span>Формат файла &nbsp;&mdash; JPEG, PNG <br />Размер изображения до 5Мб.</span>
+			</div>
+			
+			<div id="uploader_container" class="iu" 
+				style="position: absolute; top:635px; bottom:0; left:0; right:0; margin: auto; z-index: 200000; width: 685px; height: 350px; display: none;">
+				
+				<div id="upload_closebtn" class="closebtn" title="Закрыть">&nbsp;</div>
+				<div id="uploader" style="margin-top: 16px;">
+					<p style="margin-left: 20px;">У Вашего браузера нет поддержки Flash или HTML5.</p>
+				</div>	
+			</div>
+			
+			<div id="photo-placeholder" class="element">
+				<div id="photos_bar"></div>
+				<div class="iu-button" style="width: 120px; height: 90px; display: block;">
+					<p id="upload_btn" style="line-height: 90px;">
+						<span>Загрузить</span>
+					</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+
+	
+		<div class="item">
+			<div class="element" style="margin-left: 40%"><button type="submit">Готово!</button></div>
+		</div>
+		
+    </form>
+	
+			</div>
+		</div>
+	</div>        
+</div>
+{% endblock %}
+
+{% block extra_body %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/review.post.js" defer></script>
+{% endblock %}

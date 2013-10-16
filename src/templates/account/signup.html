@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block head_title %}Регистрация - {% endblock %}
+
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/forms.css" type="text/css" media="screen" />
+{% endblock%}
+
+
+{% block body %}
+<div class="content_bg">
+
+	<div class="wrapper-content content-top">	
+	
+		<div class="grey_bg">
+	
+	
+			<div class="wide">
+	
+			    <h1 class="center">Регистрация</h1>
+			    <p class="formnotes">Поля с красными звездочками обязательны<span class="req">*</span> для заполнения.</p>
+			
+			{% if user.is_authenticated %}
+			    <p  class="formnotes">Вы уже вошли</p>
+			{% else %}
+			    <p  class="formnotes">Если у Вы уже зарегистрированны на нашем сайте воспользуйтей <a href="{% url acct_login %}">этой ссылкой</a>!</p>
+			{% endif %}
+						    
+				<div class="hr"><div><hr /></div></div>
+			        
+				{% if form.errors %}
+				<div class="errorbox">
+					{% if form.non_field_errors %}
+						<p>{% for e in form.non_field_errors %}{{ e|escape }}{% endfor %}</p>
+					{% endif %}
+					{% if form.username.errors %}
+						<p>Имя пользователя: {% for e in form.username.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+					{% endif %}
+			    	{% if form.password1.errors %}
+						<p>Пароль: {% for e in form.password1.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+					{% endif %}
+					{% if form.password2.errors %}
+						<p>Пароль (повторите): {% for e in form.password2.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+					{% endif %}
+					{% if form.email.errors %}
+						<p>Электронная почта: {% for e in form.email.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+					{% endif %}
+				</div>
+				{% endif %}
+			
+		        <form class="form" id="signup_form" method="post" action="{% url acct_signup %}">
+		            {% csrf_token %}
+					
+					<div class="item">
+						<div class="legend">
+							<label for="id_username">Имя пользователя<em>*</em></label>
+							<span>Тут допускаются только латинские буквы,<br />цифры и дефис, от 3 до 16 символов</span>
+						</div>
+						<div class="element">
+							<span>
+								<input type="text" value="" maxlength="16" class="stdinput" id="id_username" name="username">
+								<em></em>
+								<br />
+								<span class="tooltip">Поменять логин после регистрации будет невозможно</span>
+							</span>
+						</div>
+					</div>
+					
+					<div class="item">
+						<div class="legend">
+							<label for="id_password1">Пароль<em>*</em></label>
+							<span>От 5 до 32 знаков</span>
+						</div>
+						<div class="element">
+							<span>
+								<input type="password" value="" maxlength="32" class="stdinput" id="id_password1" name="password1">
+							</span>
+						</div>
+					</div>
+					
+					<div class="item">
+						<div class="legend">
+							<label for="id_password2">Пароль (повторите)<em>*</em></label>
+						</div>
+						<div class="element">
+							<span>
+								<input type="password" value="" maxlength="32" class="stdinput" id="id_password2" name="password2">
+							</span>
+						</div>
+					</div>	
+					
+					<div class="item">
+						<div class="legend">
+							<label for="id_email">Электронная почта<em>*</em></label>
+							<span>На этот адрес мы вышлем подтверждение о регистрации</span>
+						</div>
+						<div class="element">
+							<span>
+								<input type="text" value="" maxlength="64" class="stdinput" id="id_email" name="email">
+							</span>
+						</div>
+					</div>
+							
+				    {% if redirect_field_value %}
+		                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+		            {% endif %}
+		                
+					<div class="item">
+						<div class="element"><button type="submit">Готово!</button></div>
+					</div>
+		            
+		        </form>
+		        
+		        <p class="text">Если Вы испытываете трудности с регистрацией то свяжитесь с нами по <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.</p>
+
+			</div>
+		</div>
+	</div>        
+</div>
+{% endblock %}
+
+{% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+    	$j("#id_username").focus();
+//        $j(function(){
+//            $j('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $j('#id_username'), event: 'change'});
+//            $j("#id_username").focus();
+//        });
+    </script>
+{% endblock %}

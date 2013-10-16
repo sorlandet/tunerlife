@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% load account_tags %}
+
+{% block head_title %}Вход - {% endblock %}
+
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/forms.css" type="text/css" media="screen" />
+{% endblock%}
+
+
+{% block body %}
+<div class="content_bg">
+	<div class="wrapper-content content-top">	
+		<div class="grey_bg">
+			<div class="wide">
+	
+			    <h1 class="center">Представьтесь, пожалуйста</h1>
+			
+			{% if user.is_authenticated %}
+			    {% user_display user as user_display %}
+				<p class="formnotes"><span class="warning">Примечание</span>: Вы уже вошли как <strong>{{ user_display }}</strong>.</p>
+			{% else %}
+				
+				{% url acct_signup as acct_signup_url %}
+				{% url acct_passwd_reset as acct_passwd_reset_url %}
+				
+				<p class="formnotes">Вам возможно потребуется пройти процедуру <a href="{{ acct_signup_url }}">регистрации</a>...</p>
+				
+				<div class="hr"><div><hr /></div></div>
+				
+				{% if form.errors %}
+				<div class="errorbox">
+					{% if form.non_field_errors %}
+						<p>{% for e in form.non_field_errors %}{{ e|escape }}{% endfor %}</p>
+					{% endif %}
+					{% if form.username.errors %}
+						<p>Имя пользователя: {% for e in form.username.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+					{% endif %}
+			    	{% if form.password.errors %}
+						<p>Пароль: {% for e in form.password.errors %}<span>{{ e|escape }}</span>{% endfor %}</p>
+					{% endif %}
+				</div>
+				{% endif %}
+				<form class="form" id="login_form" method="post" action="{% url acct_login %}">
+			        {% csrf_token %}
+			            
+					<div class="item">
+						<div class="legend">
+							<label for="id_username">Имя пользователя</label>
+							<span>Введите свой никнейм</span>
+						</div>
+						<div class="element">
+							<span><input type="text" value="" maxlength="16" class="stdinput" id="id_username" name="username"></span>
+						</div>
+					</div>
+					
+				    <div class="item">
+						<div class="legend"><label for="id_password">Пароль</label></div>
+						<div class="element">
+							<span><input type="password" value="" maxlength="32" class="stdinput" id="id_password" name="password"></span>
+							<span><a href="{{ acct_passwd_reset_url }}">Забыли пароль?</a></span>
+						</div>
+					</div>
+				
+					<div class="item">
+						<div class="element">
+							<span><input type="checkbox" name="remember" class="checkboxinput" id="id_remember"></span>
+							<label for="id_remember">Помнить меня 3 недели</label>
+						</div>
+					</div>
+				    		
+			        
+			        {% if redirect_field_value %}
+			            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+			        {% endif %}
+					
+					<div class="item">
+						<div class="element"><button type="submit">Готово!</button></div>
+					</div>
+			
+			    </form>
+			{% endif %}
+			</div>
+		</div>
+	</div>        
+</div>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+		$j("#id_username").focus();
+    </script>
+{% endblock %}

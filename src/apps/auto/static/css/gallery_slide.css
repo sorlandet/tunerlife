@@ -1,0 +1,166 @@
+
+
+div.gallery-slide {
+	width: 960px; height: 728px;
+	padding: 0;
+	overflow: hidden;
+	margin: 0 auto;
+	background: #fff;
+	display: none;
+}
+
+div.gallery-slide .content,
+div.gallery-slide .navigation-container { margin: 0 20px; }
+
+div.slideshow-container { clear: both; height: 540px; }
+
+div.slideshow {	vertical-align: top; background: #000; }
+
+div.slideshow span.image-wrapper {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+div.slideshow a.advance-link {
+	display: block;
+	line-height: 0; /* This should be set to be at least the height of the largest image in the slideshow with padding */
+	text-align: center;
+}
+
+div.slideshow a.advance-link:hover,
+div.slideshow a.advance-link:active,
+div.slideshow a.advance-link:visited { text-decoration: none; }
+div.slideshow a.advance-link:focus { outline: none; }
+
+div.slideshow img {
+	border: none;
+	background: #000 !important;
+	min-width: 920px; max-width: 920px;
+}
+
+
+
+div.navigation-container {
+	position: relative;
+	z-index: 500;
+}
+
+
+div.navigation {
+	position: relative;
+	z-index: 500;
+	width: 925px;
+}
+
+div.navigation a.pageLink {
+	display: block;
+	position: relative;
+	float: left;
+	width: 29px;
+	background-position: center center;
+	background-repeat: no-repeat;
+
+}
+
+div.navigation a.prev {
+	background: url(/static/images/prev.gif) no-repeat top left;
+	z-index: 500;
+	cursor: pointer;
+	display: block;
+	float: right;
+}
+
+div.navigation a.prev:hover { background: url(/static/images/prev_hover.gif) no-repeat top left; }
+
+div.navigation a.next {
+	background: url(/static/images/next.gif) no-repeat top left;
+	z-index: 500;
+	cursor: pointer;
+	display: block;
+	float: right; 
+	margin: 0 5px 0 1px;
+}
+
+div.navigation a.next:hover { background: url(/static/images/next_hover.gif) no-repeat top left; }
+
+div.navigation a.pageLink:focus { outline: none; }
+
+
+
+
+
+ul.thumbs {
+	position: relative;
+	float: left;
+	margin: 0; padding: 0;
+	height:159px;
+	overflow:hidden;
+}
+
+	ul.thumbs li {
+		float: left;
+		padding: 0;
+		margin: 0px;
+		list-style: none;
+	}
+	
+	ul.thumbs li a span {
+		display: block;
+		padding: 10px 0 0 0;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 10px;
+		text-transform: uppercase;
+		color: #949393;
+	}
+	ul.thumbs li.selected a span {
+		text-decoration: underline;
+		color: #000;
+	}
+	
+a.thumb {
+	padding: 1px 5px 0 0;
+	display: block;
+}
+a.thumb:focus {
+	outline: none;
+}
+ul.thumbs img {
+	border: none;
+	display: block;
+	min-width: 180px; max-width: 180px;
+}
+
+
+
+
+
+
+/*
+div.slideshow-container,
+div.loader,
+div.slideshow a.advance-link {
+	width: 899px; /* This should be set to be at least the width of the largest image in the slideshow with padding */
+}
+*/
+
+div.loader,
+div.slideshow a.advance-link,
+div.caption-container {
+	height: 516px; /* This should be set to be at least the height of the largest image in the slideshow with padding */	
+}
+
+
+*+html div.slideshow-container {height:523px;}
+
+@media all and (-webkit-min-device-pixel-ratio:10000),
+not all and (-webkit-min-device-pixel-ratio:0) {
+  div.slideshow-container {height: 525px;}
+}
+
+
+
+
+
+

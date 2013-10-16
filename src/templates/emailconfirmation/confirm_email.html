@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head_title %}Электронный адрес подтвержден - {% endblock %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+{% endblock%}
+
+
+{% block body %}
+<div class="content_bg">
+	<div class="wrapper-content content-top">	
+		<div class="grey_bg">
+			<div class="wide">
+			{% if email_address %}
+				
+				{% load account_tags %}
+				
+				{% user_display email_address.user as user_display %}
+				
+				<h1>Электронный адрес подтвержден</h1>
+					
+				<p class="text">Вы подтвердили что <i>{{ email_address.email }}</i> является  e-mail адресом для пользователя <strong>{{ user_display }}</strong>.</p>
+			{% else %}
+        		<p class="text">Не верный код подтверждения</p>
+    		{% endif %}
+			</div>
+		</div>
+	</div>        
+</div>
+{% endblock %}

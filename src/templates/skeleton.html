@@ -1,0 +1,154 @@
+{% load i18n %}
+{% load url from future %}
+{% load static from staticfiles %}
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ LANGUAGE_CODE }}"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="{{ LANGUAGE_CODE }}"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="{{ LANGUAGE_CODE }}"> <![endif]-->
+<!--[if IEMobile 7]>
+<html class="no-js ie-mobile" lang="{{ LANGUAGE_CODE }}"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="{{ LANGUAGE_CODE }}">
+<!--<![endif]-->
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta charset="utf-8"/>
+{% comment %}
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="language" content="{{ LANGUAGE_CODE }}" />
+{% endcomment %}
+
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block meta-description %}{% endblock %}" />
+    <meta name='yandex-verification' content='58286f17fffb3c72' />
+
+{% comment %}
+    keywords are not useful now
+    <meta name="keywords" content="{% block meta-keywords %}knowledge, tyre and tire size, pcd, rims, wheel size, wheel pcd, tires and wheels for freestyle, wheel offset, rim offset, wheel fitment, rim size, wheel parameters, wheel dimension, wheel specs, offset size, car wheel catalogue dimensions {% endblock %}" />
+{% endcomment %}
+
+    {% block meta %}{% endblock %}
+
+    <link rel="shortcut icon" href="{% static "img/icons/favicon.ico" %}"/>
+    <link rel="home" href="{% url 'home' %}" />
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/responsive.css" %}" rel="stylesheet"/>
+
+    <!-- Flexslider -->
+    <link href="{% static "css/flexslider.css" %}" rel="stylesheet"/>
+
+    <!-- Theme style -->
+    <link href="{% static "css/theme-style.css" %}" rel="stylesheet"/>
+
+    <!-- Your custom override -->
+    <link href="{% static "css/custom-style.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/colour-red.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/bootstrap-select.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/sprites.css" %}" rel="stylesheet" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+
+    <!--[if lt IE 9]>
+    <script src="{% static "js/html5.js" %}" type="text/javascript"></script>
+    <![endif]-->
+
+    <link rel="apple-touch-icon" href="{% static "img/icons/apple-touch-icon-iphone.png" %}" />
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static "img/icons/apple-touch-icon-ipad.png" %}" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static "img/icons/apple-touch-icon-iphone4.png" %}" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static "img/icons/apple-touch-icon-ipad3.png" %}" />
+
+    {% if LANGUAGE_CODE == "en" %}
+        <link href='http://fonts.googleapis.com/css?family=Rambla|Calligraffitti|Open+Sans:400,700,300' rel='stylesheet' type='text/css'/>
+        <link href="http://razmerkoles.ru{{ request.get_full_path }}" rel="alternate" hreflang="ru"/>
+    {% endif %}
+
+    {% if LANGUAGE_CODE == "ru" %}
+        <link href='http://fonts.googleapis.com/css?family=Rambla|Calligraffitti|Cuprum|Open+Sans:400,700,300&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'/>
+        <link href="http://www.wheel-size.com{{ request.get_full_path }}" rel="alternate" hreflang="en"/>
+    {% endif %}
+
+    {% block extra_css %}{% endblock %}
+
+    {% block link %}{% endblock %}
+
+    <script src="{% static "js/libs/jquery/jquery-1.8.3.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/libs/jquery/jquery.cookie.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/libs/jquery/jqBootstrapValidation.js" %}" type="text/javascript"></script>
+
+</head>
+
+<body class="{% block body-class %}{% endblock %} {{ LANGUAGE_CODE }}">
+    {% block google_analitics %}{% endblock %}
+
+    <div id="navigation" class="wrapper">
+        {% block header-section %}{% endblock %}
+    </div>
+
+    <!-- block below should always be present - special indent block-->
+    <div id="highlighted" class="hero">
+        <div class="inner"></div>
+    </div>
+
+    <div id="content" class="wrapper">
+        {% block content-section %}{% endblock %}
+    </div>
+
+
+    <div id="content-below" class="wrapper">
+        {% block content-below-section %}{% endblock %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="wrapper">
+        {% block footer-section %}{% endblock %}
+    </footer>
+
+
+    <!--Scripts -->
+    <script src="{% static "js/libs/bootstrap/bootstrap.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/libs/bootstrap/bootstrap-select.min.js" %}" type="text/javascript"></script>
+
+    {% comment %}
+    <script src="{% static "js/libs/bootstrap/bootstrap-scrollspy.js" %}" type="text/javascript"></script>
+
+    <script src="static/js/bootstrap-transition.js"></script>
+    <script src="static/js/bootstrap-alert.js"></script>
+    <script src="static/js/bootstrap-affix.js"></script>
+    <script src="static/js/bootstrap-modal.js"></script>
+    <script src="static/js/bootstrap-dropdown.js"></script>
+
+    <script src="static/js/bootstrap-tab.js"></script>
+    <script src="static/js/bootstrap-tooltip.js"></script>
+    <script src="static/js/bootstrap-popover.js"></script>
+    <script src="static/js/bootstrap-button.js"></script>
+    <script src="static/js/bootstrap-collapse.js"></script>
+    <script src="static/js/bootstrap-carousel.js"></script>
+    <script src="static/js/bootstrap-typeahead.js"></script>
+    {% endcomment %}
+
+    <!--Non-Bootstrap JS-->
+
+    <!--
+    <script src="static/js/jquery.quicksand.js"></script>
+    <script src="static/js/jquery.flexslider-min.js"></script>
+    -->
+
+    <script src="{% static "js/script.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/contacts.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/finder.js" %}" type="text/javascript"></script>
+
+    <!--Custom scripts mainly used to trigger libraries -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

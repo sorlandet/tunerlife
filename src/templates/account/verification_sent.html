@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head_title %}Регистрация - {% endblock %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+{% endblock%}
+
+
+{% block body %}
+<div class="content_bg">
+	<div class="wrapper-content content-top">	
+		<div class="grey_bg">
+			<div class="wide">
+				<h1>Подтверждение регистрации</h1>
+					
+				<p class="text">Спасибо за регистрацию.</p>
+				<p class="text">На Ваш электронный адрес отправлено письмо с подтверждением регистрации.</p>
+			</div>
+		</div>
+	</div>        
+</div>
+{% endblock %}

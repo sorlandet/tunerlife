@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+
+{% block head_title_base %}
+TUNERLIFE.RU &sum; все автомобили мира: отзывы, фото, видео, блоги
+{% endblock%}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/gallery_slide.css" type="text/css" />
+	
+	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery.galleriffic.js"></script> 
+	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery.opacityrollover.js"></script> 
+	<script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery.vSlider.js"></script>
+{% endblock%}
+
+{% block body %}
+
+	{% include "inc_gallery_slide.html" %}
+
+	<div class="content_bg">
+		<div class="wrapper-content content-top ">
+			<!--content-->
+			<div class="grey_bg">
+				<div class="clear">
+   
+					<!--left-->
+					<div id="left">
+						<div class="wrapper-box module">
+							<div class="clear">
+								<div class="boxIndent">
+									<ul class="menu">
+										<li class="item1"><a href="/action?option=com_content&amp;view=frontpage&amp;Itemid=1"><span>Acura</span></a></li>
+										<li class="item27"><a href="/action?option=com_content&amp;view=article&amp;id=19&amp;Itemid=27"><span>Alfa Romeo</span></a></li>
+										<li class="item34"><a href="/action?option=com_content&amp;view=article&amp;id=22&amp;Itemid=34"><span>Audi</span></a></li>
+										<li class="item2"><a href="/action?option=com_content&amp;view=article&amp;id=5&amp;Itemid=2"><span>BMW</span></a></li>
+										<li class="item37"><a href="/action?option=com_content&amp;view=section&amp;id=4&amp;Itemid=37"><span>Buick</span></a></li>
+										<li class="item41"><a href="/action?option=com_content&amp;view=section&amp;id=3&amp;Itemid=41"><span>Cadillac</span></a></li>
+										<li class="item50"><a href="/action?option=com_content&amp;view=category&amp;layout=blog&amp;id=1&amp;Itemid=50"><span>Caterham</span></a></li>
+										<li class="item48"><a href="/action?option=com_weblinks&amp;view=categories&amp;Itemid=48"><span>Chevrolet</span></a></li>
+										<li class="item49"><a href="/action?option=com_newsfeeds&amp;view=categories&amp;Itemid=49"><span>Chrysler</span></a></li>
+										<li class="item72"><a href="/action?option=com_content&amp;view=article&amp;id=14&amp;Itemid=72"><span>Citroen</span></a></li>
+										<li class="item73"><a href="/action?option=com_content&amp;view=article&amp;id=17&amp;Itemid=73"><span>Dodge</span></a></li>
+										<li class="item74"><a href="/action?option=com_content&amp;view=article&amp;id=32&amp;Itemid=74"><span>Ferrari</span></a></li>
+										<li class="item75"><a href="/action?option=com_content&amp;view=article&amp;id=10&amp;Itemid=75"><span>Fiat</span></a></li>
+										<li class="item76"><a href="/action?option=com_content&amp;view=article&amp;id=37&amp;Itemid=76"><span>Ford</span></a></li>
+										<li class="item77"><a href="/action?option=com_content&amp;view=article&amp;id=32&amp;Itemid=77"><span>GMC</span></a></li>
+										<li class="item78"><a href="/action?option=com_content&amp;view=article&amp;id=31&amp;Itemid=78"><span>Honda</span></a></li>
+										<li class="item79"><a href="/action?option=com_content&amp;view=article&amp;id=15&amp;Itemid=79"><span>Hummer</span></a></li>
+										<li class="item80"><a href="/action?option=com_content&amp;view=article&amp;id=33&amp;Itemid=80"><span>Hyundai</span></a></li>
+										<li class="item81"><a href="/action?option=com_content&amp;view=article&amp;id=34&amp;Itemid=81"><span>Infiniti</span></a></li>
+										<li class="item82"><a href="/action?option=com_content&amp;view=article&amp;id=31&amp;Itemid=82"><span>Jaguar</span></a></li>
+										<li class="item83"><a href="/action?option=com_content&amp;view=article&amp;id=40&amp;Itemid=83"><span>Jeep</span></a></li>
+										<li class="item84"><a href="/action?option=com_content&amp;view=article&amp;id=24&amp;Itemid=84"><span>Lancia</span></a></li>
+										<li class="item85"><a href="/action?option=com_content&amp;view=article&amp;id=38&amp;Itemid=85"><span>Land Rover</span></a></li>
+										<li class="item86"><a href="/action?option=com_content&amp;view=article&amp;id=13&amp;Itemid=86"><span>Lexus</span></a></li>
+										<li class="item87"><a href="/action?option=com_content&amp;view=article&amp;id=39&amp;Itemid=87"><span>Lincoln</span></a></li>
+										<li class="item88"><a href="/action?option=com_content&amp;view=article&amp;id=13&amp;Itemid=88"><span>Lotus</span></a></li>
+										<li class="item89"><a href="/action?option=com_content&amp;view=article&amp;id=39&amp;Itemid=89"><span>Maserati</span></a></li>
+										<li class="item90"><a href="/action?option=com_content&amp;view=article&amp;id=14&amp;Itemid=90"><span>Mazda</span></a></li>
+										<li class="item91"><a href="/action?option=com_content&amp;view=article&amp;id=15&amp;Itemid=91"><span>Mercedes</span></a></li>
+										<li class="item92"><a href="/action?option=com_content&amp;view=article&amp;id=13&amp;Itemid=92"><span>MINI</span></a></li>
+										<li class="item93"><a href="/action?option=com_content&amp;view=article&amp;id=28&amp;Itemid=93"><span>Nissan</span></a></li>
+										<li class="item94"><a href="/action?option=com_content&amp;view=article&amp;id=37&amp;Itemid=94"><span>Oldsmobile</span></a></li>
+										<li class="item95"><a href="/action?option=com_content&amp;view=article&amp;id=17&amp;Itemid=95"><span>Opel</span></a></li>
+										<li class="item96"><a href="/action?option=com_content&amp;view=article&amp;id=15&amp;Itemid=96"><span>other</span></a></li>
+									</ul>
+								</div>
+							</div>  
+						</div>
+					</div>
+        
+					<!--center-->
+					<div id="content">
+ 
+						<!--right-->
+						<div id="right">
+							<div class="wrapper-box module news-event">
+								<div class="boxTitle">
+									<div class="title">
+										<div class="right-bg">
+											<div class="left-bg"><h3>Top News</h3></div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="clear">
+									<div class="boxIndent">
+										<div style="float: left; width: 100%;">
+											<a href="#" class="v_prev"></a>
+											<a href="#" class="v_next"></a>  
+											<div class="globalnews" style="margin: 0pt;">
+      
+											<div class="vSlider">
+												<div class="keeper">
+
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img4.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center>
+															<a href="">Opel GTC Concept</a><br /><span>Dunt ac viverra selortam eu massa. Quisue dam lorem interdum vita. At nequ eget nsus...</span>
+														</div>
+													</div>
+
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img3.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center>
+															<a href="">VW Eos</a><br /><span>At nequ eget nsus leveln nec eroulum ante ipsum prin faucibure cubind. Sit consectetuer...</span>
+														</div>
+													</div>
+
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img2.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center> <a href="/action?option=com_content&amp;view=article&amp;id=51:citroen-ds3&amp;catid=35:news-a-events">Citroen DS3</a> <br /><span>Eicitu din velit sed l pare a augue c aug elit mrerit sit amet tincidun. Sit consectetuer...</span>
+														</div>
+													</div>
+													
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img1.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center> <a href="/action?option=com_content&amp;view=article&amp;id=52:bmw-3-series-2011&amp;catid=35:news-a-events">BMW 3 Series 2011</a> <br/>   <span>At nequ eget nisus lveln nec eroulum ante ipsum prin faucibure cubind. The point of using...</span>
+														</div>
+													</div>
+													
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img5.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center> <a href="/action?option=com_content&amp;view=article&amp;id=54:aston-martin&amp;catid=35:news-a-events">Aston Martin</a> <br/>   <span>Eicitu din velit sed l pare a augue c aug elit mrerit sit amet tincidun. Sit consectetuer...</span>
+														</div>
+													</div>
+													
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img6.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center> <a href="/action?option=com_content&amp;view=article&amp;id=55:mercedes-cls-&amp;catid=35:news-a-events">Mercedes CLS </a> <br/>   <span>At nequ eget nisus lveln nec eroulum ante ipsum prin faucibure cubind. The point of using...</span>
+														</div>
+													</div>
+													
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img7.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center> <a href="/action?option=com_content&amp;view=article&amp;id=56:bmw-6-coupe-concept-&amp;catid=35:news-a-events">BMW 6 Coupe</a> <br/>   <span>At nequ eget nisus lveln nec eroulum ante ipsum prin faucibure cubind. The point of using...</span>
+														</div>
+													</div>
+													
+													<div class="gn_static_1">
+														<div class="news_bg">
+															<center><a href="/"><img src="{{ STATIC_URL }}images/news_big-img8.jpg" alt="Image" style="float: left; margin: 0pt 15px 0pt 0pt; border: 0pt none;" height="79" width="89" /></a></center> <a href="/action?option=com_content&amp;view=article&amp;id=57:volvo-s60-&amp;catid=35:news-a-events">Volvo S60 </a> <br/>   <span>At nequ eget nsus leveln nec eroulum ante ipsum prin faucibure cubind. Sit consectetuer...</span>
+														</div>
+													</div>
+									            </div>
+									        </div>
+
+										</div>
+									</div>
+									
+									<div class="gn_clear"></div>
+								</div>
+							</div>  
+						</div>
+		
+						<div class="wrapper-box module">
+                       		<div class="clear">
+                 				<div class="boxIndent">
+                    				<form action="/joomla_31986/index.php?option=com_spsnewsletter&amp;view=spsnewsletter" method="post" name="subscribeFormModule" id="subscribeFormModule">
+										<div id="nlr-bg">
+											<h3>Newsletter</h3>
+											<div class="newslatter png">
+												<span>Enter your email to join our mailing list</span>
+        										<div class="input_news">	
+        											<input class="moduleInput" name="email" id="email" size="10" type="text" />
+  
+    												<input class="moduleButton png" name="Submit" value="" type="submit" />
+      											</div>
+
+											</div>
+										</div>
+										<input name="option" value="com_spsnewsletter" type="hidden" />
+										<input name="task" value="addSubscriber" type="hidden" />
+
+									</form>
+								</div>	
+							</div>  
+						</div>
+
+					</div>
+                      
+					<div class="container">
+    		
+						<div class="clear">
+							<table class="blog" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td valign="top">
+											<table cellpadding="0" cellspacing="0" width="100%">
+												<tbody>
+													<tr>
+														<td class="article_column" valign="top" width="100%">
+															<div class="article-title">
+																<table class="contentpaneopen">
+																	<tbody>
+																		<tr>
+																			<td class="contentheading" width="100%">
+																				<div class="article-title-text">Volvo S60</div>
+																				<div class="article-indent"></div>
+																			</td>
+	                                            						</tr>
+																	</tbody>
+																</table>
+															</div>
+	
+															<div class="wrapper1-border">
+																<div class="wrapper1-bg clear">
+																	<div class="article-text-indent">
+																		<div class="clear">
+																			<table class="contentpaneopen">
+																				<tbody>
+																					<tr>
+																						<td colspan="2" valign="top">
+																							<img src="{{ STATIC_URL }}images/index_img1.jpg" alt="" class="newsimg" />
+																							<span>At nequ eget nisus leveln nec eroulum ante ipsum prin faucibure 
+																							csollcitu din velit sed l pharetugue c aug elit magdrerit sit amet 
+																							tincidunt ac... </span>
+																						</td>
+																					</tr>
+																					
+																					<tr>
+																						<td colspan="2">
+																							<div class="indent-more">
+																								<a href="/action?option=com_content&amp;view=article&amp;id=45:volvo-s60&amp;catid=1:latest-news&amp;Itemid=50" class="png readon">Read more</a>
+																							</div>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															
+															<div class="article-separator-indent"><span class="article_separator">&nbsp;</span></div>
+	
+															<div class="article-title">
+																<table class="contentpaneopen">
+																	<tbody>
+																		<tr>
+																			<td class="contentheading" width="100%">
+																				<div class="article-title-text">Range Rover Evoque</div>
+		                    													<div class="article-indent"></div>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+	    
+															<div class="wrapper1-border">
+													    		<div class="wrapper1-bg clear">
+													        		<div class="article-text-indent">
+													                	<div class="clear">
+																			<table class="contentpaneopen">
+																				<tbody>
+																					<tr>
+																						<td colspan="2" valign="top">
+																							<img src="{{ STATIC_URL }}images/index_img2.jpg" alt="" class="newsimg" />
+																							<span>Quisque diam lorem interdum vitaapibus ac scue vitae ec eget 
+																							tellus non erat lacinia ftuonec in velit vel ipsum auctorvorpt 
+																							feliestibulum iacu...</span>
+																						</td>
+																					</tr>
+		                                                                        	<tr>
+		                            													<td colspan="2">
+		                            														<div class="indent-more"><a href="/action?option=com_content&amp;view=article&amp;id=6:range-rover-evoque&amp;catid=1:latest-news&amp;Itemid=50" class="png readon">Read more</a></div>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															
+															<div class="article-separator-indent">
+																<span class="article_separator">&nbsp;</span>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+            
+							</div>
+						</div>
+						
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+ 
+{% endblock%}
+
+
+{% block extra_body %}
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$j('#logo').fadeIn(300); // Logo show for IE 7
+			// We only want these styles applied when javascript is enabled
+			$j('.gallery-slide').fadeIn(300);
+			$j('div.content').css('display', 'block');
+
+			// Initially set opacity on thumbs and add
+			// additional styling for hover effect on thumbs
+			var onMouseOutOpacity = 1.0;
+			$('#thumbs ul.thumbs li, div.navigation a.pageLink').opacityrollover({
+				mouseOutOpacity:   onMouseOutOpacity,
+				mouseOverOpacity:  1.0,
+				fadeSpeed:         'fast',
+				exemptionSelector: '.selected'
+			});
+			
+			// Initialize Advanced Galleriffic Gallery
+			var gallery = $('#thumbs').galleriffic({
+				delay:                     6500,
+				numThumbs:                 5,
+				preloadAhead:              5,
+				enableTopPager:            false,
+				enableBottomPager:         false,
+				imageContainerSel:         '#slideshow',
+				controlsContainerSel:      '#controls',
+				captionContainerSel:       '#caption',
+				loadingContainerSel:       '#loading',
+				renderSSControls:          true,
+				renderNavControls:         true,
+				playLinkText:              'Play Slideshow',
+				pauseLinkText:             'Pause Slideshow',
+				prevLinkText:              '&lsaquo; Previous Photo',
+				nextLinkText:              'Next Photo &rsaquo;',
+				nextPageLinkText:          'Next &rsaquo;',
+				prevPageLinkText:          '&lsaquo; Prev',
+				enableHistory:             false,
+				enableKeyboardNavigation:  false,
+				autoStart:                 true,
+				syncTransitions:           true,
+				defaultTransitionDuration: 900,
+				onSlideChange:             function(prevIndex, nextIndex) {
+					// 'this' refers to the gallery, which is an extension of $('#thumbs')
+					this.find('ul.thumbs').children()
+						.eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
+						.eq(nextIndex).fadeTo('fast', 1.0);
+
+					// Update the photo index display
+					this.$captionContainer.find('div.photo-index')
+						.html('Photo '+ (nextIndex+1) +' of '+ this.data.length);
+				},
+				onPageTransitionOut:       function(callback) {
+					this.fadeTo('fast', 0.0, callback);
+				},
+				onPageTransitionIn:        function() {
+					var prevPageLink = this.find('a.prev').css('visibility', 'visible');
+					var nextPageLink = this.find('a.next').css('visibility', 'visible');
+					
+					// Show appropriate next / prev page links
+					if (this.displayedPage > 0)
+						prevPageLink.css('visibility', 'visible');
+
+					var lastPage = this.getNumPages() - 1;
+					if (this.displayedPage < lastPage)
+						nextPageLink.css('visibility', 'visible');
+
+					this.fadeTo('fast', 1.0);
+				}
+			});
+
+			/**************** Event handlers for custom next / prev page links **********************/
+
+			gallery.find('a.prev').click(function(e) {
+				gallery.previousPage();
+				e.preventDefault();
+			});
+
+			gallery.find('a.next').click(function(e) {
+				gallery.nextPage();
+				e.preventDefault();
+			});
+
+
+			/****************************************************************************************/
+		});
+	</script>
+        
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+		$j('.vSlider').fadeIn(300); 
+		
+		$j(window).load(function(){
+			$j('.vSlider').vSlider({})
+		})
+	</script>
+{% endblock %}

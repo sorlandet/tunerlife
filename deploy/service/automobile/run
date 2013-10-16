@@ -1,0 +1,18 @@
+#!/bin/sh
+
+PROJECTNAME=automobile
+PORT=9000
+USERNAME=wwwpub
+
+GUNICORN=/home/$USERNAME/.virtualenvs/automobile-test/bin/gunicorn
+SOURCEPATH=/opt/www/private/$PROJECTNAME
+LOGPATH=/var/log/$PROJECTNAME/gunicorn
+PID=/var/run/$PROJECTNAME/gunicorn.pid
+
+if [ -f $PID ]
+    then rm $PID
+fi
+
+cd $SOURCEPATH
+
+exec $GUNICORN -c $SOURCEPATH/gunicorn.conf.py --pid=$PID src.wsgi --bind=127.0.0.1:$PORT --access-logfile $LOGPATH/access.log --error-logfile $LOGPATH/error.log

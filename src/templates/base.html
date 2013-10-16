@@ -1,0 +1,81 @@
+{% extends "site_base.html" %}
+
+{% block body_base %}
+<div class="body">
+
+  	<!--header-->
+	<div class="header">
+		<div class="head">
+  
+  			<h1 id="logo">
+  				<a href="http://tunerlife.ru/" title="TUNERLIFE.RU"><img title="TUNERLIFE.RU" src="{{ STATIC_URL }}images/logo.png" alt="Tunerlife" /></a>
+			</h1>
+			
+  			<div class="login_right">
+  				{% block login %}{% include "inc_account_bar.html" %}{% endblock %}
+			</div>
+			
+  			<div class="clearfix"></div>
+  
+			<div class="nav">
+				<ul class="menu sf-menu sf-horizontal">
+					<li class="first-child {% if '/' in request.path %}active" id="current"{% else %}"{% endif %}><a href="/"><span>Главная</span></a></li>
+					<li class="parent {% if '/reviews/' in request.path %}active" id="current"{% else %}"{% endif %}>
+						<a href="/reviews/"><span>Обзоры</span></a>
+						<ul>
+							<li class="first-child"><a href="/review/add/"><span>Добавить</span></a></li>
+						</ul>
+					</li>
+					
+					<!--
+					<li class="parent item55">
+						<a href="http://cms.template-help.com/joomla_31986/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=28&amp;Itemid=55"><span>About</span></a>
+						<ul>
+							<li class="first-child item59"><a href="http://cms.template-help.com/joomla_31986/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=29&amp;Itemid=59"><span>Overview</span></a></li>
+							<li class="item60"><a href="http://cms.template-help.com/joomla_31986/index.php?option=com_content&amp;view=category&amp;id=30&amp;Itemid=60"><span>our team</span></a></li>
+							<li class="item61"><a href="http://cms.template-help.com/joomla_31986/index.php?option=com_content&amp;view=section&amp;layout=blog&amp;id=3&amp;Itemid=61"><span>history</span></a></li>
+							<li class="last-child item62"><a href="http://cms.template-help.com/joomla_31986/index.php?option=com_content&amp;view=article&amp;id=41&amp;Itemid=62"><span>awards</span></a></li>
+						</ul>
+					</li>
+					
+					<li class="item54"><a href="http://cms.template-help.com/joomla_31986/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=28&amp;Itemid=54"><span>Forum</span></a></li>
+					<li class="item56"><a href="http://cms.template-help.com/joomla_31986/index.php?option=com_content&amp;view=section&amp;layout=blog&amp;id=3&amp;Itemid=56"><span>News</span></a></li>
+					<li class="last-child item58"><a href="http://cms.template-help.com/joomla_31986/index.php?option=com_contact&amp;view=contact&amp;id=2&amp;Itemid=58"><span>Contacts</span></a></li>
+					-->
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	
+	{% block body %}{% endblock %}
+
+	
+	<!--footer-->
+	<div class="footer">
+		<div class="foot">
+			<div class="footertxt">
+				<div>&copy; 2010&mdash;2011 TUNERLIFE.RU</div>
+				<!--<div>TUNERLIFE.RU&nbsp;&mdash; проект компании <a href="http://artions.com/">artions.com</a></div>-->
+				<span class="footerlinks">
+					<a rel="about" href="/about/">О&nbsp;проекте</a> &nbsp;&nbsp;&nbsp;
+					<a href="/promo/">Реклама и сотрудничество</a> &nbsp;&nbsp;&nbsp;
+					
+					<a rel="license" href="/rules/">Правила сайта</a> &nbsp;&nbsp;&nbsp;
+					
+					
+					<a href="/feedback/">Обратная связь</a>
+				</span>
+			</div>
+			<div class="footernav">
+				<a href="#top" id="totop">В начало страницы</a><br>
+				<a rel="home" href="/">На главную страницу</a><br>
+				<!--[if IE]>
+				<a href="#" id="tofav">Поставить закладку</a><br />
+				<![endif]-->
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}

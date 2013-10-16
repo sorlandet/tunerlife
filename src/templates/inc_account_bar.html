@@ -1,0 +1,41 @@
+{% load account_tags %}
+
+{% if user.is_authenticated %}
+	
+	{% url acct_logout as acct_logout_url %}
+	
+	<table border="0" cellpadding="0" cellspacing="1" width="100%">
+		<tbody>
+			<tr>
+				<td nowrap="nowrap">
+					<span class="mainlevel">Добро пожаловать,&nbsp;<strong style="font-size: 12px;">{% user_display user %}</strong></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				{% if user.is_staff %}
+					<a class="mainlevel" title="Перейти к административному интерфейсу сайта" href="/admin/" id="carslnk">Админка</a>&nbsp;
+				{% endif %}
+					<a class="mainlevel" title="Завершить работу под моим именем" href="{% url acct_logout %}" >Выход</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+{% else %}
+	
+	{% url acct_login as acct_login_url %}
+    {% url acct_signup as acct_signup_url %}
+	
+	<table border="0" cellpadding="0" cellspacing="1" width="100%">
+		<tbody>
+			<tr>
+				<td nowrap="nowrap">
+					<span class="mainlevel">Уже есть аккаунт?</span>
+					<a href="{{ acct_signup_url }}" class="mainlevel">Регистрация</a>
+					<span class="mainlevel">или</span>
+					<a href="{{ acct_login_url }}" class="mainlevel">Вход</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+{% endif %}

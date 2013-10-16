@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% load tagging_tags threadedcommentstags pytils_dt %}
+
+{% block head_title %}{{review.title}} - {% endblock %}
+
+
+{% block extra_head %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+	function show_reply_form(comment_id, url, person_name) {
+	    var comment_reply = $j('#quickreply-' + comment_id);
+		var anker_reply = $j('#a-' + comment_id);
+	    var to_add = $j( new Array(
+			'<li>',
+			'<div style="margin: 0px; position: static; overflow: hidden;">',
+			'	<form method="POST" class="commentform" style="margin: 0px;" action="' + url + '">',
+			"{% csrf_token %}",
+			'		<div><h4>Ответ на комментарий</h4></div>',
+			'		<div class="item">',
+			'			<div class="element"><textarea rows="7" cols="20" class="widetx" id="id_comment" name="comment"></textarea></div>',
+			'		</div>',
+			'		<div class="item">',
+			'			<div class="element">',
+			'				<div class="spinner"><button type="submit">Готово!</button></div>',
+			'				<p class="notes">Комментарий&nbsp;&mdash; осмысленный текст длиной не&nbsp;менее 10&nbsp;знаков. На&nbsp;сайте запрещены: любое упоминание оценок, ругательства всех видов, переход на&nbsp;личности, тексты translitom или на&nbsp;любом иностранном языке, изъяснения заглавными буквами и&nbsp;вопиюще безграмотное выражение своих мыслей. Будьте осторожны, особо тупые комментарии и&nbsp;любые ругательства удаляются с&nbsp;сайта вместе с&nbsp;авторами! Смотрите также <a href="/rules/#comments" rel="external" target="_blank">Правила сайта</a>.</p>',
+			'			</div>',
+			'		</div>',
+			'	</form>',
+			'</div>',
+			'</li>'
+		).join(''));
+	    to_add.css("display", "none");
+	    comment_reply.after(to_add);
+	    to_add.slideDown(function() {
+	        anker_reply.replaceWith(new Array('<a id="a-', comment_id, '" href="javascript:hide_reply_form(\'', comment_id, '\',\'', url, '\',\'', person_name, '\')" rel="quickreply">Отменить ответ</a>').join(''));
+	    });
+	}
+	
+	function hide_reply_form(comment_id, url, person_name) {
+    var comment_reply = $('#quickreply-' + comment_id);
+	var anker_reply = $('#a-' + comment_id);
+    comment_reply.next().slideUp(function (){
+        //comment_reply.next('.response').remove();
+        anker_reply.replaceWith(new Array('<a id="a-', comment_id,'" href="javascript:show_reply_form(\'', comment_id, '\',\'', url, '\',\'', person_name, '\')" rel="quickreply">Ответить</a>').join(''));
+    });
+}
+</script>
+
+{% endblock %}
+
+
+{% block body %}
+<div class="content_bg">
+
+	<div class="wrapper-content content-top">	
+	
+		<div class="grey_bg">
+	
+	
+			<div class="wide">
+				
+				<div id="post" class="reviews">
+	
+					<div class="post_wrapper">
+						{% with review as blog_post %}
+					    	
+							<div class="post_item">
+								<!--<div title="8 октября в 13:47" class="eventtime">5 минут назад</div>-->
+								<div class="blog-post-header">
+									<span class="date">{{ blog_post.published|ru_strftime:"%d %B %Y" }} в {{ blog_post.published|date:"H:i" }}</span>
+									
+									<h1 class="title"><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h1>
+									
+							    </div>
+								
+								<div class="clear"></div>
+								
+							    <div class="blog-post-body">{{ blog_post.body|safe }}</div>
+								
+							    <div class="blog-post-meta">
+							    	<div class="inform">
+							    		
+							    		<span>
+							    			<a title="Тип кузова" href="/info/body-styles/">Тип кузова</a>:&nbsp;{{blog_post.body_style}}
+										</span>
+										
+										<span>
+							    			<a title="Сегмент рынка" href="/info/body-styles/">Сегмент рынка</a>:&nbsp;{{blog_post.car_segment}}
+										</span>
+										
+							    	</div>
+									
+							    	<div class="tags">
+							    		{% if blog_post.tags %}
+							    		<span>Тэги:&nbsp;</span>
+										<span>
+											{% tags_for_object blog_post as tag_list %}
+											
+											{% for tag in tag_list %}
+												<a title="{{tag.name}}" href="/tag/{{tag.name|urlencode}}/">{{ tag.name }}</a>
+												{% if not forloop.last %}, {% endif %}
+											{% endfor %}
+										</span>
+										{% endif %}
+									</div>
+									
+									<div class="meta">
+										
+										{% if review.author == user %}
+											<span class="edit_link">
+												<a href="/review/edit/?id={{ blog_post.id }}" title="Редактировать запись">редактировать</a>
+											</span>
+										{% endif %}
+										
+										<span class="author">{{ blog_post.author }}</span>
+									</div>
+									
+							    </div>
+							</div>
+						{% endwith %}
+					</div>
+				
+					<div id="usercomments">
+						
+						{% get_threaded_comment_tree for review as tree %}
+						
+						<ul class="usercomments">
+						{% for comment in tree %}
+							<li id="quickreply-{{ comment.id }}">
+								<div id="{{ comment.id }}" style="margin-left: {{ comment.depth }}em;">
+									<div class="hr">
+										<div><hr></div>
+									</div>
+									
+									<div class="vcard">
+										<span><a href="{{ comment.website }}">{{ comment.name }}</a></span>
+									</div>
+									
+									<div class="text">
+										<p>{% auto_transform_markup comment %}</p>
+									</div>
+									
+									<div class="date"><strong>{{ comment.user }}</strong>  {{ comment.date_submitted|ru_strftime:"%d %B %Y" }} в {{ comment.date_submitted|date:"H:i" }} <a title="Ссылка на этот комментарий" href="#{{ comment.id }}">#</a></div>
+									
+									<div class="quickreply">
+										<a id="a-{{ comment.id }}" href="javascript:show_reply_form('{{ comment.id }}','{% get_comment_url review comment %}','{{ comment.name }}')" rel="quickreply">Ответить</a>
+									</div>
+									
+								</div>
+							</li>
+						{% endfor %}
+						</ul>
+					</div>	
+						
+					<div class="hr">
+						<div><hr></div>
+					</div>
+					
+					{% if user.is_authenticated %}
+					<h3>Ваш комментарий</h3>
+						
+					<form method="POST" 
+					  	  action="{% get_comment_url review %}" 
+						  class="commentform" id="postreply" >
+						{% csrf_token %}
+						{% get_threaded_comment_form as form %} 
+						<div class="item">
+							<div class="element"><textarea rows="7" cols="20" class="widetx" id="id_comment" name="comment"></textarea></div>
+						</div>
+						<div class="item">
+							<div class="element">
+								<div class="spinner"><button type="submit">Готово!</button></div>
+								<p class="notes">Комментарий&nbsp;&mdash; осмысленный текст длиной не&nbsp;менее 10&nbsp;знаков. На&nbsp;сайте запрещены: любое упоминание оценок, ругательства всех видов, переход на&nbsp;личности, тексты translitom или на&nbsp;любом иностранном языке, изъяснения заглавными буквами и&nbsp;вопиюще безграмотное выражение своих мыслей. Будьте осторожны, особо тупые комментарии и&nbsp;любые ругательства удаляются с&nbsp;сайта вместе с&nbsp;авторами! Смотрите также <a href="/rules/#comments" rel="external" target="_blank">Правила сайта</a>.</p>
+							</div>
+						</div>
+					</form>
+					{% else %}
+					<div class="terms">
+						<p>Для комментирования на нашем сайте, пожалуйста пройдите процедуру <a href="/account/signup/?next=//{{ blog_post.slug }}/">регистрации</a>	или выполните <a href="/account/login/?next=/{{ blog_post.section.slug }}/{{ blog_post.slug }}/">вход</a>.</p>
+					</div>
+					{% endif %}
+					
+				</div>
+			</div>
+		</div>
+	</div>        
+</div>
+{% endblock %}
+
+
+{% comment %}
+	
+{% block sidebar %}		
+{{ block.super }}
+<div class="tagcloud">
+	<ul>
+		{% tag_cloud_for_model blog.Post as tags with steps=6 min_count=1 distribution=log %}
+		{% for tag in tags %}
+		<li class="o{{tag.font_size}}">
+			<a title="{{tag}}" href="/tag/{{tag|iriencode}}/">{{tag.name}} ({{tag.font_size}})</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %}
+
+{% endcomment %}
+
+{% block footer %}
+	<div class="footernav">
+		<a id="totop" href="#top">В начало страницы</a>&nbsp;&nbsp;•<br>
+		<a href="/" rel="home">На главную страницу</a>&nbsp;&nbsp;•<br>
+		<!--[if IE]>
+		<a href="#" id="tofav">Поставить закладку</a>&nbsp;&nbsp;•<br />
+		<![endif]-->
+	</div>
+{% endblock %}

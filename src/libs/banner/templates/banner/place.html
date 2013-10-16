@@ -1,0 +1,37 @@
+{% load url from future %}
+
+{% if banner %}
+    {% if banner.is_swf %}
+        <object
+                classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0"
+                {% if banner_place.width %}width="{{ banner_place.width }}"{% endif %}
+                {% if banner_place.height %}height="{{ banner_place.height }}"{% endif %}>
+            <param name="allowScriptAccess" value="Always">
+            <param name="menu" value="false">
+            <param name="quality" value="high">
+            <param name="wmode" value="opaque">
+            <param name="movie" value="{{ banner.file.url }}">
+            <param name="flashvars" value="url={% url banner_click banner.id %}?place={{ banner_place.id }}">
+
+            <embed src="{{ banner.file.url }}"
+                   flashvars="url={% url 'banner:banner_click' banner.id %}?place={{ banner_place.id }}"
+                   quality="high"
+                   allowscriptaccess="Always"
+                   wmode="opaque"
+                   menu="false"
+                   swliveconnect="FALSE"
+                   type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+                   {% if banner_place.width %}width="{{ banner_place.width }}"{% endif %}
+                   {% if banner_place.height %}height="{{ banner_place.height }}"{% endif %}>
+        </object>
+    {% else %}
+        <a href="{% url 'banner:banner_click' banner.id %}?place={{ banner_place.id }}" target="{{ banner.url_target }}">
+            <img src="{{ banner.file.url }}"
+                 alt="{{ banner.alt }}"
+                 {% if banner_place.width %}width="{{ banner_place.width }}"{% endif %}
+                 {% if banner_place.height %}height="{{ banner_place.height }}"{% endif %} />
+        </a>
+    {% endif %}
+{% endif %}

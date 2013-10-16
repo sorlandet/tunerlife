@@ -1,0 +1,21 @@
+[
+{
+  "pk": 1, 
+  "model": "banner.campaign", 
+  "fields": {
+    "created_at": "2013-03-16T11:32:54Z", 
+    "name": "Advertisement campaign", 
+    "updated_at": "2013-07-31T11:07:57Z"
+  }
+},
+{
+  "pk": 1, 
+  "model": "banner.place", 
+  "fields": {
+    "width": 240, 
+    "height": null, 
+    "name": "Right sidebar", 
+    "slug": "sidebar"
+  }
+}
+]

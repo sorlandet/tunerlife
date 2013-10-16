@@ -1,0 +1,313 @@
+.content {
+	display: none;
+	clear: both;
+	position: relative; 
+	z-index: 2;
+}
+
+.content a {
+	text-decoration: none;
+	text-align:center;
+}
+
+.content a:hover, .content a:active {
+	text-decoration: underline;
+}
+
+.wide {
+    padding: 20px 20px 40px;
+    width: 920px;
+}
+
+.center {
+    text-align: center;
+}
+
+.wide h1{
+    color: #000000;
+    font-size: 2.4em;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 0.5em;
+    padding-top: 5px;
+    text-shadow: 1px 1px #FFFFFF;
+}
+
+.wide .text {
+    font-size: 95%;
+    line-height: 1.4;
+}
+
+.hr {
+    clear: both;
+    height: 2px;
+    overflow: hidden;
+    padding: 15px 0;
+}
+
+.hr div {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #CCCCCC;
+    height: 1px;
+    overflow: hidden;
+}
+
+.hr hr {
+    display: none;
+}
+
+
+.clear {
+    clear: both;
+}
+
+
+.blog-post-body .teasebreak { visibility: hidden; height: 0px; width: 0px; padding: 0; margin: 0; }
+
+.blog-post-body p object { margin-top: 10px; }
+
+.blog-post-tease img, .blog-post-body img {max-width: 920px;}
+
+
+
+/* Reviews */
+
+.reviews {color: #404040;}
+
+.reviews .post_wrapper {}
+
+.reviews .post_wrapper .post_item {margin-top: 10px;}
+
+.reviews .post_wrapper .post_item .blog-post-header {}
+
+.reviews .post_wrapper .post_item .blog-post-header .title{ float: left; }
+
+.reviews .post_wrapper .post_item .blog-post-header .date{ float: right; margin-top: -15px;  color: #808080; font-size: 11px;}
+
+.reviews .post_wrapper .post_item .blog-post-header .title { color: #404040; font-size: 1.7em;}
+
+.reviews .post_wrapper .post_item .blog-post-header .title a, 
+.reviews .post_wrapper .post_item .blog-post-header .title a:visited {
+	color: #404040;
+    text-decoration: none;
+}
+
+.reviews .post_wrapper .post_item .blog-post-tease {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.reviews .post_wrapper .post_item .blog-post-body {
+	font-size: 14px;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.reviews .post_wrapper .post_item .blog-post-meta {
+    padding-top: 5px;
+    color: #808080; font-size: 11px;
+}
+
+.reviews .post_wrapper .post_item .blog-post-meta .inform { padding-bottom: 5px; }
+.reviews .post_wrapper .post_item .blog-post-meta .inform span+span { margin-left: 15px; }
+
+.reviews .post_wrapper .post_item .blog-post-meta .tags { padding-bottom: 5px; }
+
+.reviews .post_wrapper .post_item .blog-post-meta .meta { padding-bottom: 25px; }
+
+.reviews .post_wrapper .post_item .blog-post-meta  a, 
+.reviews .post_wrapper .post_item .blog-post-meta  a:visited {
+    border-bottom: 1px dotted #808080;
+    color: #808080;
+    cursor: pointer;
+    
+    text-decoration: none;
+}
+
+.reviews .post_wrapper .post_item .blog-post-meta .meta .see_full { float: left; }
+
+.reviews .post_wrapper .post_item .blog-post-meta .meta .comments { float: left; margin-left: 50px; }
+
+.reviews .post_wrapper .post_item .blog-post-meta .meta .edit_link { float: left; }
+
+.reviews .post_wrapper .post_item .blog-post-meta .meta .author { float: right; font-weight: bold; }
+
+
+
+/* Pager */
+
+.pager {
+    clear: both;
+    font-size: 11px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.pager strong, .pager a, .pager span {
+    padding: 2px;
+}
+
+.pager span strong {
+    background: none repeat scroll 0 0 #6D95C5;
+    border: 1px solid #6D95C5;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 2px 5px;
+}
+
+.pager strong {
+    font-weight: normal;
+}
+
+.pager span a, .pager span a:visited {
+    border: 1px solid #D8D9DB;
+    color: #404040;
+    padding: 2px 5px;
+    text-decoration: none;
+}
+
+
+/* Comment module styles */
+
+.usercomments {
+    clear: both;
+    overflow: hidden;
+    list-style: none outside none;
+}
+
+.usercomments li {
+    clear: both;
+    padding-bottom: 1px;
+}
+
+.usercomments .hr {
+    margin-top: 0;
+    padding-top: 15px;
+}
+
+.usercomments .vcard {
+    clear: both;
+    width: 480px;
+}
+
+.usercomments .vcard span {
+	margin-left: 110px;
+	float: left;
+    font-size: 12px;
+    padding-top: 4px;
+}
+
+.vcard {
+    max-width: 480px;
+    overflow: hidden;
+}
+
+
+
+.usercomments .text {
+    clear: both;
+    font-size: 95%;
+    line-height: 1.4;
+    margin-top: 0.4em;
+}
+
+.text {
+    font-size: 95%;
+    line-height: 1.4;
+}
+
+
+
+.usercomments .date {
+    clear: both;
+    color: #808080;
+    float: left;
+    font-size: 11px;
+    margin-bottom: 5px;
+    margin-left: 0 !important;
+    margin-right: 0;
+    margin-top: -5px;
+    position: relative;
+}
+
+.usercomments .date a, 
+.usercomments .date a:visited {
+    color: #808080;
+}
+
+/*
+a, a:visited {
+    color: #003399;
+}
+*/
+
+.quickreply {
+    float: left;
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0 0 -15px;
+    padding-left: 20px;
+    position: relative;
+    top: -8px;
+}
+
+.quickreply a, .quickreply a:visited {
+    border-bottom: 1px dotted #808080;
+    color: #808080;
+    text-decoration: none;
+}
+
+/* Comment system form*/
+
+.commentform {
+    overflow: hidden;
+}
+
+.commentform h4 {margin-bottom: 0px; margin-top: 5px;}
+
+.commentform .item {
+    clear: left;
+    display: block;
+    float: none;
+    width: 100%;
+}
+
+.commentform .element {
+    margin: 0 0 15px;
+}
+
+.commentform .widetx {
+    width: 98% !important;
+}
+
+.commentform textarea {
+    font-size: 14px;
+    width: 98%;
+}
+
+.commentform .spinner {
+    float: right;
+    padding: 0 0 0 22px;
+}
+
+.commentform .notes {
+    color: #808080;
+    font-size: 11px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.commentform .notes a, 
+.commentform .notes a:visited {
+    color: #808080;
+}
+
+.commentform button {
+    font-size: 20px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 1.6;
+    width: 150px;
+}

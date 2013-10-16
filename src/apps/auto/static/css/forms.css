@@ -1,0 +1,137 @@
+.formnotes {
+	/*font-size: 1.2em;*/
+	line-height: 1em;
+	text-align: center;
+}
+
+.form .legend em, .form .sublegend em, .req {
+	color:#CC0000;
+	font-style:normal;
+	letter-spacing:0;
+	margin-left:1px;
+}
+
+.form .item {
+	clear: left;
+	display: block;
+	overflow: hidden;
+	width: 100%;
+}
+
+.form .legend {
+	display: block;
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	line-height: 21px;
+	padding: 6px 0 15px;
+	text-align: right;
+	width: 20%;
+}
+
+.form .element {
+	display: block;
+	font-style: normal;
+	font-size: 13px;
+	line-height: 16px;
+	margin-left: 20%;
+	padding: 3px 0 15px 15px;
+}
+
+
+.form .legend span {
+	color: #808080;
+	display: block;
+	font: 11px/1.18 Arial;
+	letter-spacing: 0;
+	padding-top: 4px;
+}
+
+.form .legend span strong {
+    color: #CC0000;
+    font-weight: normal;
+}
+
+
+.form button {
+    font-size: 20px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 1.6;
+    width: 150px;
+}
+
+
+.tooltip {
+	color: #808080;
+	display: block;
+	font: 11px/1.18 Arial;
+	letter-spacing: 0;
+	padding-top: 4px;
+}
+
+
+
+.errorbox {
+    background: none repeat scroll 0 0 #990000;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 15px 0;
+    padding: 1px 20px;
+}
+
+.errorbox a, .errorbox a:visited { color: #fff; }
+
+.successbox {
+    background: none repeat scroll 0 0 #669900;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 15px 0;
+    padding: 1px 20px;
+}
+
+.successbox p, .errorbox p {
+    line-height: 1.2;
+    margin: 10px 0;
+}
+
+
+#signup_form .legend,
+#login_form .legend,
+#pswd_reset_form .legend {
+	width: 40%;
+}
+
+#signup_form .element,
+#login_form .element,
+#pswd_reset_form .element {
+	margin-left: 40%;
+}
+
+#signup_form .element .stdinput,
+#login_form .element .stdinput, 
+#pswd_reset_form .element .stdinput {
+    width: 250px;
+}
+
+
+
+/* Review Form */
+
+#reviewform .element span textarea {visibility: hidden;}
+
+#reviewform #id_title { width: 700px; }
+
+#id_body_ifr {width: 700px !important;}
+
+#reviewform #id_body_style, #reviewform #id_car_segment { width: 200px; }
+
+#reviewform #id_car, #reviewform #id_realauthor { width: 350px; }
+
+#reviewform #id_source, #reviewform #id_tags { width: 700px; }
+
+
+#feedbackform #id_subject{ width: 700px; }
+
+#feedbackform #id_message{ width: 690px; height: 200px; }

@@ -1,0 +1,130 @@
+/* CSS Document */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td		{
+	padding: 0; 
+	margin: 0;
+}
+
+html	{
+	height: 100%;
+	color: #404040;
+}
+
+body 	{
+	line-height: 1;
+	font-size: 1em;
+}
+
+table 	{
+	border-collapse:collapse; 
+	border:0px; 
+	width:100%;
+	padding:0;
+}
+a, object {
+	outline:none;
+}
+
+td 		{
+	vertical-align:top;
+	text-align:left;
+}
+
+th 		{
+	text-align:left; 
+	vertical-align:top
+}
+
+img		{
+	border:none
+}
+
+
+h1, h2 {
+    color: #000000;
+    /*font-size: 2.4em;*/
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 0.5em;
+    padding-top: 5px;
+    text-shadow: 1px 1px #FFFFFF;
+}
+
+h1 		{
+	font-size:130%
+}
+h2 		{
+	font-size:120%
+}
+
+h3 		{
+	font-size:110%
+}
+h4		{
+	font-size:110%
+}
+
+p		{
+	padding:0px 0px 10px 0px;
+}
+
+textarea .inputbox {
+	width:300px; 
+	height:100px; 
+	margin:0px 0px 5px 0px;
+}
+
+select	{
+	height:auto; 
+	margin:0px 0px 2px 0px; 
+	vertical-align:middle
+}
+
+ul {
+	list-style:disc;
+	margin:0px 0px 0px 15px;
+}
+ol {
+	margin:0px 0px 0px 15px;
+}
+
+.width	{
+	width:100%
+}
+.main	{
+	margin:auto; 
+	text-align:left
+}
+.clearfix:after {content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+
+.shadow-top {
+    background: url("/static/images/bg-shadow-top.png") no-repeat scroll center center transparent;
+    height: 48px;
+}
+
+.shadow-middle {
+    background: url("/static/images/bg-shadow-middle.png") repeat-y scroll center center transparent;
+    padding: 1px 0;
+}
+
+.shadow-bottom {
+    background: url("/static/images/bg-shadow-bottom.png") no-repeat scroll center center transparent;
+    height: 56px;
+}
+
+.body {
+    margin: -29px auto;
+    position: relative;
+    width: 960px;
+    word-wrap: break-word;
+}

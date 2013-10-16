@@ -1,0 +1,45 @@
+.iu {background-color: white;}
+	
+/* Image uploader */
+.iu input {font-size: 11px;}
+.iu .clear {height: 1px; overflow: hidden;}
+.iu .button {margin: 10px 0 0 5px; float: right;}
+.iu .submit {margin: 10px 0 0 5px; float: right; font-weight: bold;}
+.iu .spinner {margin-top: 10px; float: right; width: 22px; height: 22px;}
+.iu h4 {margin: 0; padding: 0 0 10px; font-size: 18px; line-height: 1; color: #404040; font-weight: normal;}
+.iu form {clear: left;}
+
+.iu-img {float: left; position: relative; line-height: 0; overflow: hidden; cursor: pointer; background-color: #fff; background-repeat: no-repeat; background-position: 50% 50%;}
+.iu-img ins {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url(/static/images/image-shade-sm.png) bottom repeat-x; text-decoration: none;}
+.ie6 .iu-img ins {background: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/static/images/image-shade-sm.png, sizingMethod=scale);}
+.iu-img ins del {position: absolute; bottom: 0; right: 6px; line-height: 1; padding-bottom: 8px; color: #fff; font-size: 11px; text-decoration: none;}
+.iu-img ins em {border-bottom: 1px dotted #fff; font-style: normal; color: #fff !important; font-size: 11px !important;}
+.iu-img span {float: left; background: #999; color: #fff; font-weight: bold; font-size: 11px; line-height: 1; padding: 1px 3px; margin: 5px 0 0 5px; border: 1px solid #fff;}
+.iu-button {float: left; background: #999; cursor: pointer;}
+.iu-button p {margin: 0; color: #fff; font-size: 11px; font-weight: bold; text-align: center;}
+.iu-button span {border-bottom: 1px dotted #fff;}
+
+.iu-upload, .iu-crop, .iu-confirm, .iu-modify {padding: 12px 15px 14px; overflow: hidden; display: none;}
+.iu-upload .description {margin-top: 5px; color: #808080; font-size: 11px; line-height: 12px;}
+.iu-crop .cropwrapper {position: relative; line-height: 0;}
+.iu-crop .imageshade {position: relative;}
+.iu-crop .shade {position: absolute; top: 0; left: 0; background: #000; opacity: 0.60;}
+.ie .iu-crop .shade {filter: alpha(opacity=60);}
+.iu-crop .description {margin: 5px 0 10px; color: #808080; font-size: 11px; line-height: 12px;}
+.iu-crop .description span {text-decoration: none; color: #039; border-bottom: 1px dotted #039; cursor: pointer;}
+.iu-crop .crop {position: absolute; cursor: move; overflow: hidden;}
+.iu-crop .crop div {position: absolute; border: 1px dotted #fff; opacity: 0.3;}
+.ie .iu-crop .crop div {filter: alpha(opacity=30);}
+.iu-crop .crop img {position: absolute;}
+.iu-crop .resizehandler {position: absolute; cursor: se-resize; width: 15px; height: 15px; background: url(/images/resize-handler.png);}
+.ie6 .iu-crop .resizehandler {background: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/images/resize-handler.png, sizingMethod=crop);}
+.iu-crop .imageshade,
+.iu-confirm .imagewrapper,
+.iu-modify .imagewrapper {background: url(/images/spinner.gif) no-repeat center; line-height: 0; overflow: hidden; float: left; line-height: 0;}
+
+.iu-modify .scrollwrapper,
+.iu-confirm .scrollwrapper {position: relative; max-height: 600px; overflow: auto;}
+.ie6 .iu-modify .scrollwrapper,
+.ie6 .iu-confirm .scrollwrapper {width: 100%; height: expression(this.scrollHeight > 600 ? "600px" : "auto");}
+
+.closebtn {position: absolute; top: 0; right: 0; width: 16px; height: 16px; overflow: hidden; background: url(/static/images/sq-btn-close.gif); cursor: pointer;}

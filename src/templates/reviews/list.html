@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% load tagging_tags pytils_dt %}
+
+{% block head_title %}Обзоры - {% endblock %}
+
+
+{% block extra_head %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />
+
+{% endblock %}
+
+
+{% block body %}
+<div class="content_bg">
+
+	<div class="wrapper-content content-top">	
+	
+		<div class="grey_bg">
+	
+	
+			<div class="wide">
+				
+				<div class="reviews">
+
+					<div class="post_wrapper">
+				    {% for review in review_list %}
+					
+						{% with review as blog_post %}
+					    	
+							<div class="post_item">
+								<!--<div title="8 октября в 13:47" class="eventtime">5 минут назад</div>-->
+								<div class="blog-post-header">
+									<span class="date">{{ blog_post.published|ru_strftime:"%d %B %Y" }} в {{ blog_post.published|date:"H:i" }}</span>
+									
+									<span class="title">
+										<h3><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h3>
+									</span>
+									
+							    </div>
+								
+								<div class="clear"></div>
+								
+							    <div class="blog-post-tease">
+										{% if blog_post.tease %}
+											{% with blog_post.tease as body %}
+												{{ body|safe }} 
+								        	{% endwith %}
+								        {% else %}
+								        	{% with blog_post.body|truncatewords_html:"300" as body %}
+												{{ body|safe }}
+								            {% endwith %}
+								        {% endif %}
+							    </div>
+								
+							    <div class="blog-post-meta">
+							    	<div class="inform">
+							    		
+							    		<span>
+							    			<a title="Тип кузова" href="/info/body-styles/">Тип кузова</a>:&nbsp;{{blog_post.body_style}}
+										</span>
+										
+										<span>
+							    			<a title="Сегмент рынка" href="/info/car-segments/">Сегмент рынка</a>:&nbsp;{{blog_post.car_segment}}
+										</span>
+										
+							    	</div>
+									
+							    	<div class="tags">
+							    		{% if blog_post.tags %}
+							    		<span>Тэги:&nbsp;</span>
+										<span>
+											{% tags_for_object blog_post as tag_list %}
+											
+											{% for tag in tag_list %}
+												<a title="{{tag.name}}" href="/tag/{{tag.name|urlencode}}/">{{ tag.name }}</a>
+												{% if not forloop.last %}, {% endif %}
+											{% endfor %}
+										</span>
+										{% endif %}
+									</div>
+									
+									<div class="meta">
+										<span class="see_full"><a title="Просмотреть {{ blog_post.title }} полностью" href="{{ blog_post.get_absolute_url }}">Полностью</a></span>
+										
+										{% if blog_post.comments_count %}
+											<span class="comments"><a title="Перейти к комментариям" href="{{ blog_post.get_absolute_url }}#usercomments">комментариев</a>:&nbsp;{{ blog_post.comments_count }}</span>
+										{% endif %}
+										
+										{% if blog_post.author == user %}
+											<span class="edit_link" style="margin-left: 15px;">
+												<a href="/review/edit/?id={{ blog_post.id }}" title="Редактировать запись">редактировать</a>
+											</span>
+										{% endif %}
+										
+										<span class="author">{{ blog_post.author }}</span>
+									</div>
+									
+							    </div>
+							</div>
+							
+							
+							
+							
+							
+							{% if not forloop.last %}
+							<div class="hr">
+								<div><hr></div>
+							</div>
+							{% endif %}
+						
+						{% endwith %}
+				    {% endfor %}
+					</div>
+				
+				</div>
+
+				{% if has_next or has_previous %}
+					<p class="pager">
+						
+						<a title="1" href="?page=1">Первая</a>
+						
+						{% if has_previous %}
+				            <a title="{{ previous }}" href="?page={{ previous }}" rel="next">Пред.</a>
+						{% else %}
+							Пред.
+				        {% endif %}
+						
+						<span>
+							{% for linkpage in paginator.page_range %}
+								{% ifequal linkpage page %}
+									<strong>{{ page }}</strong>
+								{% else %}
+									<a href="?page={{ linkpage  }}">{{ linkpage  }}</a>	
+								{% endifequal  %}
+								
+							{% endfor %}
+						</span>
+						
+						{% if has_next %}
+							<a title="{{ next  }}" href="?page={{ next  }}" rel="next">След.</a>
+				        {% endif %}
+						
+						<a title="{{ paginator.num_pages }}" href="?page=last">Последняя</a>
+					</p>
+				{% endif %}
+
+				
+			</div>
+		</div>
+	</div>        
+</div>
+{% endblock %}
+
+{% comment %}
+ 
+{% block sidebar %}		
+{{ block.super }}
+<div class="tagcloud">
+	<ul>
+		{% tag_cloud_for_model blog.Post as tags with steps=6 min_count=1 distribution=log %}
+		{% for tag in tags %}
+		<li class="o{{tag.font_size}}">
+			<a title="{{tag}}" href="/tag/{{tag|iriencode}}/">{{tag.name}} ({{tag.font_size}})</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %}
+
+{% endcomment %}
