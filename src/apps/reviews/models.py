@@ -13,9 +13,9 @@ from tagging.models import Tag
 
 from threadedcomments.models import ThreadedComment
 
-from tunerlife.apps import utils
-from tunerlife.apps.auto.models import BodyStyle, CarSegment
-from tunerlife.apps.reviews.utils import create_thumbnail, delete_thumbnail, get_thumbnail_url
+from src.apps import utils
+from src.apps.auto.models import BodyStyle, CarSegment
+from src.apps.reviews.utils import create_thumbnail, delete_thumbnail, get_thumbnail_url
 
 
 

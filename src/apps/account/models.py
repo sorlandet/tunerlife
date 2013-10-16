@@ -11,8 +11,7 @@ from django.contrib.auth.models import User, AnonymousUser
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 from emailconfirmation.signals import email_confirmed
-from timezones.fields import TimeZoneField
-
+from timezone_field import TimeZoneField
 
 
 class Account(models.Model):

@@ -2,7 +2,7 @@
 
 from django.conf.urls.defaults import *
 
-from tunerlife.apps.reviews import views
+from src.apps.reviews import views
 #from lentadtp.apps.blog.forms import *
 #from lentadtp.apps.blog.views import tags, with_tag
 

@@ -17,13 +17,14 @@ from django.utils.hashcompat import sha_constructor
 from django.utils.http import int_to_base36
 # ...
 from emailconfirmation.models import EmailAddress
-from timezones.forms import TimeZoneField
-# ...
-from apps.account.models import Account, PasswordReset
-from apps.account.models import OtherServiceInfo, other_service, update_other_services
-from apps.account.utils import user_display, perform_login
 
-from apps.utils import get_send_mail
+# ...
+from timezone_field import TimeZoneField
+from src.apps.account.models import Account, PasswordReset
+from src.apps.account.models import OtherServiceInfo, other_service, update_other_services
+from src.apps.account.utils import user_display, perform_login
+
+from src.apps.utils import get_send_mail
 
 
 send_mail = get_send_mail()

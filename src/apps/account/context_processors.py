@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from apps.account.models import Account, AnonymousAccount
+from src.apps.account.models import Account, AnonymousAccount
 
 
 def account(request):

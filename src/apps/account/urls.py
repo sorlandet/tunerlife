@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
 
-from apps.account.forms import SignupForm
+from src.apps.account.forms import SignupForm
 
 signup_view = "apps.account.views.signup"
 

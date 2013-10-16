@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 
-from tunerlife.apps.reviews.models import Review
+from src.apps.reviews.models import Review
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ["title", "published", "creator_ip", "allow_comments", "status"]

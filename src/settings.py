@@ -247,18 +247,11 @@ CACHES = {
     }
 }
 
-ZINNIA_ENTRY_BASE_MODEL = 'src.apps.article.entry.Article'
-ZINNIA_WYSIWYG = 'tinymce'
+#MARKDOWN_EDITOR_SKIN = 'simple'
 
-SOUTH_MIGRATION_MODULES = {
-    'zinnia': 'src.apps.article.zinnia_migrations',
-}
+#CONTACTS_RECIPIENT_LIST = ['info@wheel-size.com']
 
-MARKDOWN_EDITOR_SKIN = 'simple'
-
-CONTACTS_RECIPIENT_LIST = ['info@wheel-size.com']
-
-COMMENTS_APP = 'threadedcomments'
+#COMMENTS_APP = 'threadedcomments'
 
 
 ROSETTA_MESSAGES_PER_PAGE = 30

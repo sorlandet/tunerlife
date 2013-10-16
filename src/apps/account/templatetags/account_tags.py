@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 
-from apps.account.utils import user_display
+from src.apps.account.utils import user_display
 
 
 

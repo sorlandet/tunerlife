@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from tunerlife.apps.auto.models import BodyStyle, CarSegment
+from src.apps.auto.models import BodyStyle, CarSegment
 
 class BodyStyleAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'type')

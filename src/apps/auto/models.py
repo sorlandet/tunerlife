@@ -11,8 +11,8 @@ class BodyStyle(models.Model):
         verbose_name_plural = u"Типы автомобильных кузовов"
         ordering = ["name"]
     
-    CLOSED_BODY  = 1
-    OPEN_BODY    = 2
+    CLOSED_BODY = 1
+    OPEN_BODY = 2
     UTILITY_BODY = 3
     
     TYPE_CHOICES = (
@@ -21,10 +21,10 @@ class BodyStyle(models.Model):
         (UTILITY_BODY,   u"Грузопассажирские"),
     )
     
-    name = models.CharField(max_length = 100)
-    slug = models.SlugField(max_length = 100, db_index = True)
-    type = models.IntegerField(choices = TYPE_CHOICES)
-    description = models.TextField(blank = True)
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, db_index=True)
+    type = models.IntegerField(choices=TYPE_CHOICES)
+    description = models.TextField(blank=True)
     
     tags = TagField()
     
@@ -38,9 +38,9 @@ class CarSegment(models.Model):
         verbose_name_plural = u"Типы автомобильных сегментов"
         ordering = ["name"]
         
-    name = models.CharField(max_length = 200)
-    slug = models.SlugField(max_length = 200, db_index = True)
-    description = models.TextField(blank = True)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, db_index=True)
+    description = models.TextField(blank=True)
     
     tags = TagField()
     

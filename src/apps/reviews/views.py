@@ -13,14 +13,15 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
+from django.utils.translation import ugettext
 
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import list_detail
+#from django.views.generic import list_detail
 
 
-from tunerlife.apps.auto.models import *
-from tunerlife.apps.reviews.models import *
-from tunerlife.apps.reviews.forms import ReviewForm
+from src.apps.auto.models import *
+from src.apps.reviews.models import *
+from src.apps.reviews.forms import ReviewForm
 
 
 REVIEWS_PER_PAGE = settings.REVIEWS_PER_PAGE
@@ -31,10 +32,10 @@ REVIEWS_PER_PAGE = settings.REVIEWS_PER_PAGE
 @csrf_exempt
 def img_uploader(request, **kwargs):
     if request.method == "POST":
-        print request.POST
+        #print request.POST
         
         uploadedImage = request.FILES['file']
-        print uploadedImage
+        #print uploadedImage
         
         total = Photo.objects.all().count()
         folder_index = str(total / 1000)
@@ -49,7 +50,7 @@ def img_uploader(request, **kwargs):
         if not os.path.exists(upload_full_path):
             os.makedirs(upload_full_path)
         
-        print request.raw_post_data
+        #print request.raw_post_data
         
         dest = open(os.path.join(upload_full_path, filename), 'a')
         for chunk in uploadedImage.chunks(): 
@@ -82,13 +83,13 @@ def tumb_loader(request):
     if not review_id:
         return HttpResponse('') 
     
-    print review_id
+    #print review_id
     pps = ReviewPhoto.objects.filter(review = review_id)
     r = []
     for pp in pps:
         p = pp.photo
         r.append({'id': p.id, 'tumb': p.get_thumbnail_url(), 'img': p.get_absolute_url()})
-    print r
+    #print r
     ret = json.dumps(r)
     return HttpResponse(ret) 
 
@@ -107,22 +108,22 @@ def add_review(request):
             
             messages.add_message(request, messages.SUCCESS, u"Успешно сохранен review '%s'" % review.title)
 
-            return HttpResponseRedirect(reverse("show_review_by_slug", kwargs = {'review_slug': review.slug}))
+            return HttpResponseRedirect(reverse("show_review_by_slug", kwargs={'review_slug': review.slug}))
         
     else:
         form = ReviewForm()
     
-    return render_to_response('reviews/edit.html', { "blog_form": form }, context_instance = RequestContext(request))
+    return render_to_response('reviews/edit.html', {"blog_form": form}, context_instance=RequestContext(request))
 
 
 def show_review_by_slug(request, review_slug):
     
-    review = get_object_or_404(Review, slug = review_slug)
+    review = get_object_or_404(Review, slug=review_slug)
     
     reviews = Review.objects.all()
     
     if not request.user.is_staff or request.user != review.author :
-        reviews = reviews.filter(status = Review.PUBLISHED)
+        reviews = reviews.filter(status=Review.PUBLISHED)
     
     extra_context_dic = {}
     
@@ -176,7 +177,7 @@ def edit_review(request, form_class = ReviewForm):
             return HttpResponseRedirect(reverse("show_review_by_slug", kwargs = {'review_slug': review.slug}))
 
         else:
-            blog_form = form_class(instance = post)
+            blog_form = form_class(instance=post)
     else:
         initials = {'body_style': review.body_style,
                     'car_segment': review.car_segment,

@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth import login
 
-from apps.account.signals import user_logged_in
+from src.apps.account.signals import user_logged_in
 
 
 LOGIN_REDIRECT_URLNAME = getattr(settings, "LOGIN_REDIRECT_URLNAME", "")

@@ -7,8 +7,8 @@ from django import forms
 
 from tagging.forms import TagField 
 
-from tunerlife.apps.reviews.models import Review, Photo, ReviewPhoto
-from tunerlife.apps.auto.models import BodyStyle, CarSegment
+from src.apps.reviews.models import Review, Photo, ReviewPhoto
+from src.apps.auto.models import BodyStyle, CarSegment
 
 TEASE_TEXT_LENGTH = 500
 TEASE_BREAK = '<hr class="teasebreak" />'

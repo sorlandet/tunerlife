@@ -22,12 +22,12 @@ association_model = models.get_model("django_openid", "Association")
 if association_model is not None:
     from django_openid.models import UserOpenidAssociation
 
-from apps.account.utils import get_default_redirect, user_display
-from apps.account.models import OtherServiceInfo
-from apps.account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
-from apps.account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
-from apps.account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
-from apps.account.forms import TwitterForm
+from src.apps.account.utils import get_default_redirect, user_display
+from src.apps.account.models import OtherServiceInfo
+from src.apps.account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
+from src.apps.account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
+from src.apps.account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
+from src.apps.account.forms import TwitterForm
 
 
 
