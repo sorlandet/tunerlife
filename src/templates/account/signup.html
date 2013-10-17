@@ -25,7 +25,7 @@
 			{% if user.is_authenticated %}
 			    <p  class="formnotes">Вы уже вошли</p>
 			{% else %}
-			    <p  class="formnotes">Если у Вы уже зарегистрированны на нашем сайте воспользуйтей <a href="{% url acct_login %}">этой ссылкой</a>!</p>
+			    <p  class="formnotes">Если у Вы уже зарегистрированны на нашем сайте воспользуйтей <a href="{% url 'account:acct_login' %}">этой ссылкой</a>!</p>
 			{% endif %}
 						    
 				<div class="hr"><div><hr /></div></div>
@@ -50,7 +50,7 @@
 				</div>
 				{% endif %}
 			
-		        <form class="form" id="signup_form" method="post" action="{% url acct_signup %}">
+		        <form class="form" id="signup_form" method="post" action="{% url 'account:acct_signup' %}">
 		            {% csrf_token %}
 					
 					<div class="item">
@@ -126,9 +126,11 @@
     {% include_validation %}
     <script type="text/javascript">
     	$j("#id_username").focus();
+        {% comment %}
 //        $j(function(){
-//            $j('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $j('#id_username'), event: 'change'});
+//            $j('#signup_form').validate('{% url 'account:signup_form_validate' %}', {type: 'table', fields: ['username'], dom: $j('#id_username'), event: 'change'});
 //            $j("#id_username").focus();
 //        });
+        {% endcomment %}
     </script>
 {% endblock %}

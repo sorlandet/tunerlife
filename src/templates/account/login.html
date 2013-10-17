@@ -24,8 +24,8 @@
 				<p class="formnotes"><span class="warning">Примечание</span>: Вы уже вошли как <strong>{{ user_display }}</strong>.</p>
 			{% else %}
 				
-				{% url acct_signup as acct_signup_url %}
-				{% url acct_passwd_reset as acct_passwd_reset_url %}
+				{% url 'account:acct_signup' as acct_signup_url %}
+				{% url 'account:acct_passwd_reset' as acct_passwd_reset_url %}
 				
 				<p class="formnotes">Вам возможно потребуется пройти процедуру <a href="{{ acct_signup_url }}">регистрации</a>...</p>
 				
@@ -44,7 +44,7 @@
 					{% endif %}
 				</div>
 				{% endif %}
-				<form class="form" id="login_form" method="post" action="{% url acct_login %}">
+				<form class="form" id="login_form" method="post" action="{% url 'account:acct_login' %}">
 			        {% csrf_token %}
 			            
 					<div class="item">

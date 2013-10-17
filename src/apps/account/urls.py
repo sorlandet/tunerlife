@@ -31,7 +31,7 @@ urlpatterns = patterns("src.apps.account.views",
     url(r"^language/$", "language_change", name="acct_language_change"),
     url(r"^logout/$", logout, {"template_name": "account/logout.html"}, name="acct_logout"),
     
-    url(r"^confirm_email/(\w+)/$", confirm_email, name="acct_confirm_email"),
+
     
     # password reset
     url(r"^password_reset/$", "password_reset", name="acct_passwd_reset"),
@@ -40,4 +40,8 @@ urlpatterns = patterns("src.apps.account.views",
     
     # ajax validation
     (r"^validate/$", validate, {"form_class": SignupForm}, "signup_form_validate"),
+)
+
+urlpatterns += patterns("",
+    url(r"^confirm_email/(\w+)/$", confirm_email, name="acct_confirm_email"),
 )

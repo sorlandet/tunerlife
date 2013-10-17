@@ -37,10 +37,10 @@ urlpatterns = patterns('',
 
     url(r'', include('src.apps.account.urls', namespace='account')),
 
-    #
-    #url(r'^admin/', include(admin.site.urls)),
-    #url(r'^admin_tools/', include('admin_tools.urls')),
-    #
+
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin_tools/', include('admin_tools.urls')),
+
     #url(r'^tinymce/', include('tinymce.urls')),
     #
     #url(r'^markdown/preview/$', MarkdownTemplateView.as_view(), name='django_markdown_preview'),
