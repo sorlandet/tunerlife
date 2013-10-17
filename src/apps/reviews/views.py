@@ -17,16 +17,25 @@ from django.utils.translation import ugettext
 
 from django.views.decorators.csrf import csrf_exempt
 #from django.views.generic import list_detail
-
+from django.views.generic import TemplateView
 
 from src.apps.auto.models import *
+from src.apps.mixin import CacheMixin
 from src.apps.reviews.models import *
 from src.apps.reviews.forms import ReviewForm
 
 
-REVIEWS_PER_PAGE = settings.REVIEWS_PER_PAGE
+class HomeView(CacheMixin, TemplateView):
+    template_name = 'index.html'
+    cache_timeout = 60*60*24*3
 
-
+    #def get_context_data(self, **kwargs):
+    #    context = super(HomeView, self).get_context_data(**kwargs)
+    #    context['manufacturers'] = self.get_manufacturers()
+    #    return context
+    #
+    #def get_manufacturers(self):
+    #    return Manufacturer.objects.all()
 
 
 @csrf_exempt
@@ -140,7 +149,7 @@ def show_reviews(request):
     
     extra_context_dic = {}
         
-    return list_detail.object_list(request, queryset = reviews, paginate_by = REVIEWS_PER_PAGE,
+    return list_detail.object_list(request, queryset = reviews, paginate_by = settings.REVIEWS_PER_PAGE,
                     template_object_name = 'review', template_name = 'reviews/list.html',
                     extra_context = extra_context_dic, allow_empty = True)
     

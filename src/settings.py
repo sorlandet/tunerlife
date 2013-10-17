@@ -28,7 +28,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en' #'en-us'
+LANGUAGE_CODE = 'ru' #'en-us'
 
 gettext = lambda s: s
 
@@ -160,28 +160,31 @@ INSTALLED_APPS = [
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-    'threadedcomments',
-    'django.contrib.comments',
+    #'threadedcomments',
+    #'django.contrib.comments',
 
 
     # 3rd party
     'south',
-    'tagging',      # django-tagging==0.3.1
-    'tinymce',      # django-tinymce==1.5.1
-    'zinnia',       # django-blog-zinnia==0.12.3
+    'tagging',            # django-tagging==0.3.1
+    'tinymce',            # django-tinymce==1.5.1
+    'timezone_field',     # django-timezone-field==1.0
+    'ajax_validation',    # django-ajax-validation==0.1.3
+    'emailconfirmation',  # django-email-confirmation==0.2
+    #'zinnia',             # django-blog-zinnia==0.12.3
     #'sorl.thumbnail',
     #'rest_framework',
     #'easy_thumbnails',
     #'django_markdown',
     #'autocomplete_light',
 
-    'src.libs.file_manager',  # Pavel
-    'src.libs.banner',
-    'src.libs.faq',
+    #'src.libs.file_manager',  # Pavel
+    #'src.libs.banner',
+    #'src.libs.faq',
 
     'src.apps.account',
     'src.apps.auto',
-    'src.apps.reviews',
+    #'src.apps.reviews',
 ]
 
 # A sample logging configuration. The only tangible logging
@@ -254,8 +257,7 @@ CACHES = {
 #COMMENTS_APP = 'threadedcomments'
 
 
-ROSETTA_MESSAGES_PER_PAGE = 30
-ROSETTA_POFILE_WRAP_WIDTH = 0
+REVIEWS_PER_PAGE = 10
 
 try:
     from settings_local import *

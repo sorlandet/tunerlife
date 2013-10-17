@@ -1,4 +1,6 @@
 {% load account_tags %}
+{% load i18n %}
+{% load static from staticfiles %}
 
 {% if user.is_authenticated %}
 	
@@ -23,8 +25,8 @@
 	</table>
 {% else %}
 	
-	{% url acct_login as acct_login_url %}
-    {% url acct_signup as acct_signup_url %}
+	{% url 'account:acct_login' as acct_login_url %}
+    {% url 'account:acct_signup' as acct_signup_url %}
 	
 	<table border="0" cellpadding="0" cellspacing="1" width="100%">
 		<tbody>

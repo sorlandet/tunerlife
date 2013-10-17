@@ -8,22 +8,15 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
-
 from django.template.loader import render_to_string
-
 from django.utils.translation import ugettext_lazy as _, ugettext
-from django.utils.encoding import smart_unicode
-from django.utils.hashcompat import sha_constructor
 from django.utils.http import int_to_base36
-# ...
+
 from emailconfirmation.models import EmailAddress
+from timezone_field import TimeZoneFormField
 
-# ...
-from timezone_field import TimeZoneField
 from src.apps.account.models import Account, PasswordReset
-from src.apps.account.models import OtherServiceInfo, other_service, update_other_services
-from src.apps.account.utils import user_display, perform_login
-
+from src.apps.account.utils import perform_login
 from src.apps.utils import get_send_mail
 
 
@@ -433,7 +426,7 @@ class ResetPasswordKeyForm(forms.Form):
 
 class ChangeTimezoneForm(AccountForm):
     
-    timezone = TimeZoneField(label=_("Timezone"), required=True)
+    timezone = TimeZoneFormField()
     
     def __init__(self, *args, **kwargs):
         super(ChangeTimezoneForm, self).__init__(*args, **kwargs)
