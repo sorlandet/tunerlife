@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, RedirectView
 #import autocomplete_light
 #
 #from src.apps.article.sitemaps import article_sitemaps
+from src.apps.account.views import confirm_email
 from src.apps.reviews import views as reviews_views
 #from src.apps.size.sitemaps import size_sitemaps
 #from src.apps.wheel.sitemaps import wheel_sitemaps
@@ -37,6 +38,8 @@ urlpatterns = patterns('',
 
     url(r'', include('src.apps.account.urls', namespace='account')),
 
+
+    url(r"^confirm_email/(\w+)/$", confirm_email, name="emailconfirmation_confirm_email"),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),

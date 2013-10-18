@@ -1,34 +1,26 @@
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.http import base36_to_int
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-from django.contrib import messages
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.contrib.auth.tokens import default_token_generator
-
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
-association_model = models.get_model("django_openid", "Association")
-#if association_model is not None:
-#    from django_openid.models import UserOpenidAssociation
-
 from src.apps.account.utils import get_default_redirect, user_display
-from src.apps.account.models import OtherServiceInfo
-from src.apps.account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
+from src.apps.account.forms import AddEmailForm, ChangePasswordForm
 from src.apps.account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
 from src.apps.account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
-from src.apps.account.forms import TwitterForm
 
+
+association_model = models.get_model("django_openid", "Association")
 
 
 def group_and_bridge(kwargs):
@@ -57,13 +49,28 @@ def group_context(group, bridge):
     }
 
 
+def confirm_email(request, confirmation_key):
+    from django.contrib.auth import login as django_login
+
+    confirmation_key = confirmation_key.lower()
+    email_address = EmailConfirmation.objects.confirm_email(confirmation_key)
+
+    user = email_address.user
+    user.is_active = True
+
+    user.backend = settings.AUTHENTICATION_BACKENDS[0]
+    django_login(request, user)
+
+    return render_to_response("emailconfirmation/confirm_email.html", {
+        "email_address": email_address,
+    }, context_instance=RequestContext(request))
+
+
 def login(request, **kwargs):
 
     form_class = kwargs.pop("form_class", LoginForm)
     template_name = kwargs.pop("template_name", "account/login.html")
     success_url = kwargs.pop("success_url", None)
-    associate_openid = kwargs.pop("associate_openid", False)
-    openid_success_url = kwargs.pop("openid_success_url", None)
     url_required = kwargs.pop("url_required", False)
     extra_context = kwargs.pop("extra_context", {})
     redirect_field_name = kwargs.pop("redirect_field_name", "next")
@@ -79,12 +86,7 @@ def login(request, **kwargs):
         form = form_class(request.POST, group=group)
         if form.is_valid():
             form.login(request)
-            if associate_openid and association_model is not None:
-                for openid in request.session.get("openids", []):
-                    assoc, created = UserOpenidAssociation.objects.get_or_create(
-                        user=form.user, openid=openid.openid
-                    )
-                success_url = openid_success_url or success_url
+
             messages.add_message(request, messages.SUCCESS,
                 ugettext(u"Successfully logged in as %(user)s.") % {
                     "user": user_display(form.user)
@@ -403,93 +405,3 @@ def timezone_change(request, **kwargs):
     })
 
     return render_to_response(template_name, RequestContext(request, ctx))
-
-
-@login_required
-def language_change(request, **kwargs):
-
-    form_class = kwargs.pop("form_class", ChangeLanguageForm)
-    template_name = kwargs.pop("template_name", "account/language_change.html")
-
-    group, bridge = group_and_bridge(kwargs)
-
-    if request.method == "POST":
-        form = form_class(request.user, request.POST)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS,
-                ugettext(u"Language successfully updated.")
-            )
-            next = request.META.get("HTTP_REFERER", None)
-            return HttpResponseRedirect(next)
-    else:
-        form = form_class(request.user)
-
-    ctx = group_context(group, bridge)
-    ctx.update({
-        "form": form,
-    })
-
-    return render_to_response(template_name, RequestContext(request, ctx))
-
-
-@login_required
-def other_services(request, **kwargs):
-
-    from microblogging.utils import twitter_verify_credentials
-
-    template_name = kwargs.pop("template_name", "account/other_services.html")
-
-    group, bridge = group_and_bridge(kwargs)
-
-    twitter_form = TwitterForm(request.user)
-    twitter_authorized = False
-    if request.method == "POST":
-        twitter_form = TwitterForm(request.user, request.POST)
-
-        if request.POST["actionType"] == "saveTwitter":
-            if twitter_form.is_valid():
-                from microblogging.utils import twitter_account_raw
-                twitter_account = twitter_account_raw(
-                    request.POST["username"], request.POST["password"])
-                twitter_authorized = twitter_verify_credentials(
-                    twitter_account)
-                if not twitter_authorized:
-                    messages.add_message(request, messages.ERROR,
-                        ugettext("Twitter authentication failed")
-                    )
-                else:
-                    twitter_form.save()
-                    messages.add_message(request, messages.SUCCESS,
-                        ugettext(u"Successfully authenticated.")
-                    )
-    else:
-        from microblogging.utils import twitter_account_for_user
-        twitter_account = twitter_account_for_user(request.user)
-        twitter_authorized = twitter_verify_credentials(twitter_account)
-        twitter_form = TwitterForm(request.user)
-
-    ctx = group_context(group, bridge)
-    ctx.update({
-        "twitter_form": twitter_form,
-        "twitter_authorized": twitter_authorized,
-    })
-
-    return render_to_response(template_name, RequestContext(request, ctx))
-
-
-@login_required
-def other_services_remove(request):
-
-    group, bridge = group_and_bridge(kwargs)
-
-    # @@@ this is a bit coupled
-    OtherServiceInfo.objects.filter(user=request.user).filter(
-        Q(key="twitter_user") | Q(key="twitter_password")
-    ).delete()
-
-    messages.add_message(request, messages.SUCCESS,
-        ugettext("Removed twitter account information successfully.")
-    )
-
-    return HttpResponseRedirect(reverse("acct_other_services"))

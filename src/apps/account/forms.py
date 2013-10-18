@@ -1,8 +1,7 @@
 import re
-# ...
+
 from django import forms
 from django.conf import settings
-
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -32,7 +31,6 @@ EMAIL_AUTHENTICATION = getattr(settings, "ACCOUNT_EMAIL_AUTHENTICATION", False)
 UNIQUE_EMAIL = getattr(settings, "ACCOUNT_UNIQUE_EMAIL", False)
 
 
-
 class GroupForm(forms.Form):
     
     def __init__(self, *args, **kwargs):
@@ -43,13 +41,13 @@ class GroupForm(forms.Form):
 class LoginForm(GroupForm):
     
     password = forms.CharField(
-        label = _("Password"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("Password"),
+        widget=forms.PasswordInput(render_value=False)
     )
     remember = forms.BooleanField(
-        label = _("Remember Me"),
-        help_text = _("If checked you will stay logged in for 3 weeks"),
-        required = False
+        label=_("Remember Me"),
+        help_text=_("If checked you will stay logged in for 3 weeks"),
+        required=False
     )
     
     user = None
@@ -58,10 +56,13 @@ class LoginForm(GroupForm):
         super(LoginForm, self).__init__(*args, **kwargs)
         ordering = []
         if EMAIL_AUTHENTICATION:
-            self.fields["email"] = forms.EmailField(label = ugettext("E-mail"),)
+            self.fields["email"] = forms.EmailField(label=_("E-mail"))
             ordering.append("email")
         else:
-            self.fields["username"] = forms.CharField(label = _("Username"), min_length = 3, max_length = 16, widget = forms.TextInput())
+            self.fields["username"] = forms.CharField(label=_("Username"),
+                                                      min_length=3,
+                                                      max_length=16,
+                                                      widget=forms.TextInput())
             ordering.append("username")
         ordering.extend(["password", "remember"])
         self.fields.keyOrder = ordering
@@ -85,14 +86,14 @@ class LoginForm(GroupForm):
         user = authenticate(**self.user_credentials())
         if user:
             if user.is_active:
-                self.user = user
+                self.user=user
             else:
                 raise forms.ValidationError(_("This account is currently inactive."))
         else:
             if EMAIL_AUTHENTICATION:
-                error = _("The e-mail address and/or password you specified are not correct.")
+                error=_("The e-mail address and/or password you specified are not correct.")
             else:
-                error = _("The username and/or password you specified are not correct.")
+                error=_("The username and/or password you specified are not correct.")
             raise forms.ValidationError(error)
         return self.cleaned_data
     
@@ -106,14 +107,20 @@ class LoginForm(GroupForm):
 
 class SignupForm(GroupForm):
     
-    username = forms.CharField(label = _("Username"), min_length = 3, max_length = 16, widget = forms.TextInput())
-    
-    password1 = forms.CharField(label = _("Password"), min_length = 5, max_length = 32, widget = forms.PasswordInput(render_value = False))
-    password2 = forms.CharField(label = _("Password (again)"), min_length = 5, max_length = 32, widget = forms.PasswordInput(render_value = False))
+    username = forms.CharField(label=_("Username"),
+                               min_length=3, max_length=16,
+                               widget=forms.TextInput())
+    password1 = forms.CharField(label=_("Password"),
+                                min_length=5, max_length=32,
+                                widget=forms.PasswordInput(render_value=False))
+    password2 = forms.CharField(label=_("Password (again)"),
+                                min_length=5, max_length=32,
+                                widget=forms.PasswordInput(render_value=False))
     
     email = forms.EmailField()
     
-    confirmation_key = forms.CharField(max_length = 40, required = False, widget = forms.HiddenInput())
+    confirmation_key = forms.CharField(max_length=40, required=False,
+                                       widget=forms.HiddenInput())
     
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
@@ -152,8 +159,7 @@ class SignupForm(GroupForm):
     def create_user(self, username=None, commit=True):
         user = User()
         if username is None:
-            raise NotImplementedError("SignupForm.create_user does not handle "
-                "username=None case. You must override this method.")
+            raise NotImplementedError("SignupForm.create_user does not handle username=None case. You must override this method.")
         user.username = username
         user.email = self.cleaned_data["email"].strip().lower()
         password = self.cleaned_data.get("password1")
@@ -176,49 +182,16 @@ class SignupForm(GroupForm):
         username = self.cleaned_data.get("username")
         email = self.cleaned_data["email"]
         
-        if self.cleaned_data["confirmation_key"]:
-            from friends.models import JoinInvitation # @@@ temporary fix for issue 93
-            try:
-                join_invitation = JoinInvitation.objects.get(confirmation_key=self.cleaned_data["confirmation_key"])
-                confirmed = True
-            except JoinInvitation.DoesNotExist:
-                confirmed = False
-        else:
-            confirmed = False
-        
-        # @@@ clean up some of the repetition below -- DRY!
-        
-        if confirmed:
-            if email == join_invitation.contact.email:
-                new_user = self.create_user(username)
-                join_invitation.accept(new_user) # should go before creation of EmailAddress below
-                if request:
-                    messages.add_message(request, messages.INFO,
-                        ugettext(u"Your e-mail address has already been verified")
-                    )
-                # already verified so can just create
-                EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
-            else:
-                new_user = self.create_user(username)
-                join_invitation.accept(new_user) # should go before creation of EmailAddress below
-                if email:
-                    if request:
-                        messages.add_message(request, messages.INFO,
-                            ugettext(u"Confirmation e-mail sent to %(email)s") % {
-                                "email": email,
-                            }
-                        )
-                    EmailAddress.objects.add_email(new_user, email)
-        else:
-            new_user = self.create_user(username)
-            if email:
-                if request and not EMAIL_VERIFICATION:
-                    messages.add_message(request, messages.INFO,
-                        ugettext(u"Confirmation e-mail sent to %(email)s") % {
-                            "email": email,
-                        }
-                    )
-                EmailAddress.objects.add_email(new_user, email)
+        new_user = self.create_user(username)
+
+        if email:
+            if request and not EMAIL_VERIFICATION:
+                messages.add_message(request, messages.INFO,
+                    _(u"Confirmation e-mail sent to %(email)s") % {
+                        "email": email,
+                    }
+                )
+            EmailAddress.objects.add_email(new_user, email)
         
         if EMAIL_VERIFICATION:
             new_user.is_active = False
@@ -233,24 +206,6 @@ class SignupForm(GroupForm):
         An extension point for subclasses.
         """
         pass
-
-
-class OpenIDSignupForm(SignupForm):
-    
-    def __init__(self, *args, **kwargs):
-        # remember provided (validated!) OpenID to attach it to the new user
-        # later.
-        self.openid = kwargs.pop("openid", None)
-        # pop these off since they are passed to this method but we can't
-        # pass them to forms.Form.__init__
-        kwargs.pop("reserved_usernames", [])
-        kwargs.pop("no_duplicate_emails", False)
-        
-        super(OpenIDSignupForm, self).__init__(*args, **kwargs)
-        
-        # these fields make no sense in OpenID
-        del self.fields["password1"]
-        del self.fields["password2"]
 
 
 class UserForm(forms.Form):
@@ -273,9 +228,8 @@ class AccountForm(UserForm):
 class AddEmailForm(UserForm):
     
     email = forms.EmailField(
-        label = _("E-mail"),
-        required = True,
-        widget = forms.TextInput(attrs={"size": "30"})
+        label=_("E-mail"),
+        widget=forms.TextInput(attrs={"size": "30"})
     )
     
     def clean_email(self):
@@ -306,16 +260,16 @@ class AddEmailForm(UserForm):
 class ChangePasswordForm(UserForm):
     
     oldpassword = forms.CharField(
-        label = _("Current Password"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("Current Password"),
+        widget=forms.PasswordInput(render_value=False)
     )
     password1 = forms.CharField(
-        label = _("New Password"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("New Password"),
+        widget=forms.PasswordInput(render_value=False)
     )
     password2 = forms.CharField(
-        label = _("New Password (again)"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("New Password (again)"),
+        widget=forms.PasswordInput(render_value=False)
     )
     
     def clean_oldpassword(self):
@@ -337,12 +291,12 @@ class ChangePasswordForm(UserForm):
 class SetPasswordForm(UserForm):
     
     password1 = forms.CharField(
-        label = _("Password"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("Password"),
+        widget=forms.PasswordInput(render_value=False)
     )
     password2 = forms.CharField(
-        label = _("Password (again)"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("Password (again)"),
+        widget=forms.PasswordInput(render_value=False)
     )
     
     def clean_password2(self):
@@ -358,7 +312,7 @@ class SetPasswordForm(UserForm):
 
 class ResetPasswordForm(forms.Form):
     
-    email = forms.EmailField(label = _("E-mail"))
+    email = forms.EmailField(label=_("E-mail"))
     
     def clean_email(self):
         if EmailAddress.objects.filter(email__iexact=self.cleaned_data["email"], verified=True).count() == 0:
@@ -396,12 +350,12 @@ class ResetPasswordForm(forms.Form):
 class ResetPasswordKeyForm(forms.Form):
     
     password1 = forms.CharField(
-        label = _("New Password"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("New Password"),
+        widget=forms.PasswordInput(render_value=False)
     )
     password2 = forms.CharField(
-        label = _("New Password (again)"),
-        widget = forms.PasswordInput(render_value=False)
+        label=_("New Password (again)"),
+        widget=forms.PasswordInput(render_value=False)
     )
     
     def __init__(self, *args, **kwargs):
@@ -435,40 +389,3 @@ class ChangeTimezoneForm(AccountForm):
     def save(self):
         self.account.timezone = self.cleaned_data["timezone"]
         self.account.save()
-
-
-class ChangeLanguageForm(AccountForm):
-    
-    language = forms.ChoiceField(
-        label = _("Language"),
-        required = True,
-        choices = settings.LANGUAGES
-    )
-    
-    def __init__(self, *args, **kwargs):
-        super(ChangeLanguageForm, self).__init__(*args, **kwargs)
-        self.initial.update({"language": self.account.language})
-    
-    def save(self):
-        self.account.language = self.cleaned_data["language"]
-        self.account.save()
-
-
-class TwitterForm(UserForm):
-    username = forms.CharField(label=_("Username"), required=True)
-    password = forms.CharField(
-        label = _("Password"),
-        required = True,
-        widget = forms.PasswordInput(render_value=False)
-    )
-    
-    def __init__(self, *args, **kwargs):
-        super(TwitterForm, self).__init__(*args, **kwargs)
-        self.initial.update({"username": other_service(self.user, "twitter_user")})
-    
-    def save(self):
-        from microblogging.utils import get_twitter_password
-        update_other_services(self.user,
-            twitter_user = self.cleaned_data["username"],
-            twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data["password"]),
-        )

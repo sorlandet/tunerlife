@@ -53,7 +53,7 @@ USE_I18N = True
 USE_L10N = False
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -254,8 +254,11 @@ CACHES = {
 
 #CONTACTS_RECIPIENT_LIST = ['info@wheel-size.com']
 
-#COMMENTS_APP = 'threadedcomments'
+COMMENTS_APP = 'threadedcomments'
 
+ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_EMAIL_AUTHENTICATION = False
+EMAIL_CONFIRMATION_DAYS = 7
 
 REVIEWS_PER_PAGE = 10
 

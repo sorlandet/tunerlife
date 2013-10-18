@@ -3,7 +3,6 @@ from django.contrib.auth.views import logout
 from django.views.generic import TemplateView
 
 from ajax_validation.views import validate
-from emailconfirmation.views import confirm_email
 
 from src.apps.account.forms import SignupForm
 
@@ -25,14 +24,9 @@ urlpatterns = patterns("src.apps.account.views",
     
     url(r"^timezone/$", "timezone_change", name="acct_timezone_change"),
     
-    url(r"^other_services/$", "other_services", name="acct_other_services"),
-    url(r"^other_services/remove/$", "other_services_remove", name="acct_other_services_remove"),
-    
-    url(r"^language/$", "language_change", name="acct_language_change"),
     url(r"^logout/$", logout, {"template_name": "account/logout.html"}, name="acct_logout"),
     
 
-    
     # password reset
     url(r"^password_reset/$", "password_reset", name="acct_passwd_reset"),
     url(r"^password_reset/done/$", "password_reset_done", name="acct_passwd_reset_done"),
@@ -42,6 +36,3 @@ urlpatterns = patterns("src.apps.account.views",
     (r"^validate/$", validate, {"form_class": SignupForm}, "signup_form_validate"),
 )
 
-urlpatterns += patterns("",
-    url(r"^confirm_email/(\w+)/$", confirm_email, name="acct_confirm_email"),
-)
