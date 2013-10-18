@@ -57,6 +57,7 @@ def confirm_email(request, confirmation_key):
 
     user = email_address.user
     user.is_active = True
+    user.save()
 
     user.backend = settings.AUTHENTICATION_BACKENDS[0]
     django_login(request, user)
