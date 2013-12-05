@@ -37,15 +37,15 @@ urlpatterns = patterns('',
     url(r'^$', reviews_views.HomeView.as_view(), name='home'),
 
     url(r'', include('src.apps.account.urls', namespace='account')),
-
+    url(r'', include('src.apps.yahoo.urls', namespace='yahoo')),
 
     url(r"^confirm_email/(\w+)/$", confirm_email, name="emailconfirmation_confirm_email"),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
 
-    #url(r'^tinymce/', include('tinymce.urls')),
-    #
+
+
     #url(r'^markdown/preview/$', MarkdownTemplateView.as_view(), name='django_markdown_preview'),
     #url(r'^markdown/', include('django_markdown.urls')),
     #
