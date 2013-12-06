@@ -2,7 +2,7 @@ import json
 import requests
 
 
-class YahooAuctionAPI():
+class YahooAuctionAPI(object):
     url = ''
     query = {}
     headers = {}
@@ -11,7 +11,7 @@ class YahooAuctionAPI():
     error_code = ''
 
     def set_query(self, key, value):
-        self.query.setdefault(key, value)
+        self.query[key] = value
 
     def execute(self):
         if self.method == 'GET':
@@ -22,9 +22,9 @@ class YahooAuctionAPI():
                               headers=self.headers, timeout=self.timeout)
         if r.status_code == requests.codes.ok:
             # print r.encoding
-            ret = r.content
+            print r.url
 
-            return json.loads(ret.lstrip('loaded(').rstrip(')'), encoding=r.encoding)
+            return json.loads(r.content.lstrip('loaded(').rstrip(')'), encoding=r.encoding)
 
         self.error_code = r.status_code
 
@@ -43,7 +43,7 @@ class YahooAuctionAPI():
         self.timeout = timeout
 
 
-class APIAccessBase():
+class APIAccessBase(object):
     API_OPTION_APPID = "appid"
     API_OPTION_URL = "url"
     API_OPTION_PAGE = "page"
@@ -81,20 +81,10 @@ class Search(APIAccessBase):
     version = None
 
     def __init__(self, application_id, version):
-        APIAccessBase.__init__(self, application_id)
+        super(Search, self).__init__(application_id)
         self.version = version
 
     def action(self):
         url = '%s%s/%s' % (self.AUCTION_API_URL, self.version, self.API_NAME)
         self.set_option(self.API_OPTION_URL, url)
-        return APIAccessBase.action(self)
-
-    def set_option(self, key, value):
-        APIAccessBase.set_option(self, key, value)
-
-
-
-
-
-
-
+        return super(Search, self).action()
