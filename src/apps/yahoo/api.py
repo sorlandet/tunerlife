@@ -1,10 +1,11 @@
+import json
 import requests
 
 
 class YahooAuctionAPI():
     url = ''
     query = {}
-    headers = {'User-Agent': 'auction-api-developer'}
+    headers = {}
     method = 'GET'
     timeout = 30.0
     error_code = ''
@@ -20,7 +21,10 @@ class YahooAuctionAPI():
             r = requests.post(self.url, data=self.query,
                               headers=self.headers, timeout=self.timeout)
         if r.status_code == requests.codes.ok:
-            return r.json()
+            # print r.encoding
+            ret = r.content
+
+            return json.loads(ret.lstrip('loaded(').rstrip(')'), encoding=r.encoding)
 
         self.error_code = r.status_code
 
@@ -53,6 +57,7 @@ class APIAccessBase():
 
     def __init__(self, application_id):
         self.api = YahooAuctionAPI()
+        self.api.headers.setdefault('User-Agent', 'Yahoo  AppID :  %s' % application_id)
         self.api.set_query(self.API_OPTION_APPID, application_id)
 
     def action(self):

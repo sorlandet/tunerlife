@@ -11,4 +11,16 @@
 
     <button type="submit">Search</button>
     </form>
+
+
+    <textarea cols="116" rows="10">{{ jsonp }}</textarea>
+
+    <ul>
+    {% for item in items %}
+        <li>
+            <h2><a href="{{ item.ItemUrl }}">{{ item.Title }}</a></h2>
+            <img src="{{ item.Image }}">
+        </li>
+    {% endfor %}
+    </ul>
 {% endblock %}

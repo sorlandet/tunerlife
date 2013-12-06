@@ -24,7 +24,11 @@ class YahooSearchView(FormView):
         obj.set_option('query', query)
         obj.set_option('output', 'json')
 
-        print obj.action()
+        response = obj.action()
+
+        data['jsonp'] = response
+
+        data['items'] = response['ResultSet']['Result']['Item']
 
         return data
 
