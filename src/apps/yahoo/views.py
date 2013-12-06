@@ -20,15 +20,16 @@ class YahooSearchView(FormView):
     def get_context_data(self, **kwargs):
         data = super(YahooSearchView, self).get_context_data(**kwargs)
         query = self.request.GET.get('query')
-        obj = Search('dj0zaiZpPXFONUl2dTR2ck5wYyZzPWNvbnN1bWVyc2VjcmV0Jng9YmY-', 'V2')
-        obj.set_option('query', query)
-        obj.set_option('output', 'json')
 
-        response = obj.action()
+        if query:
+            obj = Search('dj0zaiZpPXFONUl2dTR2ck5wYyZzPWNvbnN1bWVyc2VjcmV0Jng9YmY-', 'V2')
+            obj.set_option('query', query)
+            obj.set_option('output', 'json')
 
-        data['jsonp'] = response
+            response = obj.action()
 
-        data['items'] = response['ResultSet']['Result']['Item']
+            data['jsonp'] = response
+            data['items'] = response['ResultSet']['Result']['Item']
 
         return data
 
