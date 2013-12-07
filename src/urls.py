@@ -63,6 +63,10 @@ if settings.DEBUG:
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     )
+if settings.DEBUG:
+    urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'^static/(?P<path>.*)$', 'serve'),
+    )
 
 if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += patterns('',
