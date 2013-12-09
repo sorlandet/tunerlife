@@ -1,0 +1,513 @@
+<form id="form" action="{% url 'yahoo:yahoosearchajax' %}"  class="form-stacked" accept-charset="utf-8">
+    <div id="fixfilter">
+                <div class="field" id="type">
+                    <label for="id_type">Тип</label>
+
+                    <select id="id_type" name="type">
+                        <option selected=""></option>
+                        <option value="3">Диски с резиной</option>
+                        <option value="2">Только диски</option>
+                    </select>
+                </div>
+
+                <div class="field" id="size">
+                    <label for="id_size">Диаметр</label>
+                    <select id="id_size" name="size">
+                        <option selected=""></option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                    </select>
+                </div>
+
+                <div class="field" id="width">
+                    <label for="id_width">Ширина</label>
+                    <select id="id_width" name="width">
+                        <option selected=""></option>
+                        <option>6.0</option>
+                        <option>6.5</option>
+                        <option>7.0</option>
+                        <option>7.5</option>
+                        <option>8.0</option>
+                        <option>8.5</option>
+                        <option>9.0</option>
+                        <option>9.5</option>
+                        <option>10.0</option>
+                        <option>10.5</option>
+                        <option>11.0</option>
+                        <option>11.5</option>
+                        <option>12.0</option>
+                        <option>12.5</option>
+                        <option>13.0</option>
+                        <option>13.5</option>
+                    </select>
+                </div>
+
+                <div class="field" id="pcd">
+                    <label for="id_pcd">P.C.D.</label>
+                    <select id="id_pcd" name="pcd" class="select optional">
+                        <option selected=""></option>
+                        <option>4x98</option>
+                        <option>4x100</option>
+                        <option>4x114.3</option>
+                        <option>4x108</option>
+                        <option>4x130</option>
+                        <option>5x100</option>
+                        <option>5x105</option>
+                        <option>5x108</option>
+                        <option>5x110</option>
+                        <option>5x112</option>
+                        <option>5x114.3</option>
+                        <option>5х115</option>
+                        <option>5x120</option>
+                        <option>5x127</option>
+                        <option>5x130</option>
+                        <option>5x139.7</option>
+                        <option>5x150</option>
+                        <option>6x114.3</option>
+                        <option>6x127</option>
+                        <option>6x139.7</option>
+                        <option>6x150</option>
+                    </select>
+                </div>
+
+                <div class="field" id="offset">
+                    <label for="id_offset">Вылет &nbsp;&nbsp;&nbsp;&nbsp;+/-</label>
+                    <select id="id_offset" name="offset">
+                        <option selected=""></option>
+						<option>-62</option>
+                        <option>-55</option>
+                        <option>-51</option>
+                        <option>-50</option>
+                        <option>-48</option>
+                        <option>-46</option>
+                        <option>-45</option>
+                        <option>-42</option>
+                        <option>-40</option>
+                        <option>-38</option>
+                        <option>-34</option>
+                        <option>-33</option>
+                        <option>-32</option>
+                        <option>-30</option>
+                        <option>-28</option>
+                        <option>-27</option>
+                        <option>-26</option>
+                        <option>-25</option>
+                        <option>-24</option>
+                        <option>-22</option>
+                        <option>-20</option>
+                        <option>-19</option>
+                        <option>-18</option>
+                        <option>-17</option>
+                        <option>-15</option>
+                        <option>-14</option>
+                        <option>-13</option>
+                        <option>-12</option>
+                        <option>-11</option>
+                        <option>-10</option>
+                        <option>-9</option>
+                        <option>-8</option>
+                        <option>-7</option>
+                        <option>-6</option>
+                        <option>-5</option>
+                        <option>-3</option>
+                        <option>-2</option>
+                        <option>-1</option>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>25</option>
+                        <option>26</option>
+                        <option>27</option>
+                        <option>28</option>
+                        <option>29</option>
+                        <option>30</option>
+                        <option>31</option>
+                        <option>32</option>
+                        <option>33</option>
+                        <option>34</option>
+                        <option>35</option>
+                        <option>36</option>
+                        <option>37</option>
+                        <option>38</option>
+                        <option>39</option>
+                        <option>40</option>
+                        <option>41</option>
+                        <option>42</option>
+                        <option>43</option>
+                        <option>44</option>
+                        <option>45</option>
+                        <option>46</option>
+                        <option>47</option>
+                        <option>48</option>
+                        <option>49</option>
+                        <option>50</option>
+                        <option>51</option>
+                        <option>52</option>
+                        <option>53</option>
+                        <option>54</option>
+                        <option>55</option>
+                        <option>56</option>
+                        <option>57</option>
+                        <option>58</option>
+                        <option>59</option>
+                        <option>60</option>
+                        <option>61</option>
+                        <option>62</option>
+                        <option>63</option>
+                        <option>64</option>
+                        <option>65</option>
+                        <option>67</option>
+                        <option>68</option>
+                        <option>70</option>
+                        <option>71</option>
+                        <option>72</option>
+                        <option>80</option>
+                        <option>82</option>
+                        <option>85</option>
+                        <option>86</option>
+                        <option>87</option>
+                        <option>90</option>
+                        <option>97</option>
+                        <option>99</option>
+                    </select>
+
+                    <select id="id_offsetd" name="offsetd">
+                        <option selected=""></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+
+                <div class="field" id="brand">
+                    <label for="id_brand">Производитель</label>
+                    <select id="id_brand" name="brand">
+                        <option></option>
+						<option>2CRAVE</option>
+                        <option>5ZIGEN</option>
+                        <option>A-TECH</option>
+                        <option>ABC</option>
+                        <option>ABFLUG</option>
+                        <option>ABT</option>
+                        <option>AC SCHNITZER</option>
+                        <option>ACR</option>
+                        <option>ADVAN</option>
+                        <option>ADVANTI RACING</option>
+                        <option>AEZ</option>
+                        <option>ALUTEC</option>
+                        <option>AME</option>
+                        <option>AMEMIYA</option>
+                        <option>AMERICAN RACING</option>
+                        <option>AMG</option>
+                        <option>ANTERA</option>
+                        <option>ASW</option>
+                        <option>ATP</option>
+                        <option>ATRUM</option>
+                        <option>AVS</option>
+                        <option>AWS</option>
+                        <option>AZECT</option>
+                        <option>BADX</option>
+                        <option>BBS</option>
+                        <option>BFGOODRICH</option>
+                        <option>BIG END</option>
+                        <option>BLACK RACING</option>
+                        <option>BLEST</option>
+                        <option>BLINGZ </option>
+                        <option>BLITZ</option>
+                        <option>BLORUS</option>
+                        <option>BMW</option>
+                        <option>BORBET</option>
+                        <option>BOYZ</option>
+                        <option>BRADLEY</option>
+                        <option>BREYTON</option>
+                        <option>BRIDGESTONE</option>
+                        <option>BUDDY CLUB P1 RACING</option>
+                        <option>BUDDYCLUB</option>
+                        <option>CANDY WALK</option>
+                        <option>CARLSSON</option>
+                        <option>CELSIOR</option>
+                        <option>CENTER LINE</option>
+                        <option>CHEVROLET</option>
+                        <option>CONCEPT NEPER</option>
+                        <option>COSMIC</option>
+                        <option>CRIMSON</option>
+                        <option>CROSS SPEED</option>
+                        <option>CST</option>
+                        <option>DAIHATSU</option>
+                        <option>DECORSA</option>
+                        <option>DEERFIELD</option>
+                        <option>DEGEO</option>
+                        <option>DEMODA</option>
+                        <option>DOTZ</option>
+                        <option>DUNLOP</option>
+                        <option>ELFORD</option>
+                        <option>ENKEI</option>
+                        <option>ERGLANZ</option>
+                        <option>EURO HART</option>
+                        <option>EXCEEDER</option>
+                        <option>EXPLORER</option>
+                        <option>FABULOUS</option>
+                        <option>FAKER</option>
+                        <option>FALKEN</option>
+                        <option>G-SQUARE</option>
+                        <option>GARSON</option>
+                        <option>GEWALT</option>
+                        <option>GOODYEAR</option>
+                        <option>GRAM LIGHTS</option>
+                        <option>GRAM+LIGHTS</option>
+                        <option>HAMANN</option>
+                        <option>HAYASHI RACING</option>
+                        <option>HOKUTO RACING</option>
+                        <option>HONDA</option>
+                        <option>IMPUL</option>
+                        <option>INSURANCE</option>
+                        <option>INTER MILANO</option>
+                        <option>JAOS</option>
+                        <option>JUNCTION PRODUCE</option>
+                        <option>KAKIMOTO</option>
+                        <option>KAOTIK</option>
+                        <option>KOENIG</option>
+                        <option>KOSEI</option>
+                        <option>KYOHO</option>
+                        <option>LAND CRUISER</option>
+                        <option>LARGO</option>
+                        <option>LEGZAS</option>
+                        <option>LEHRMEISTER</option>
+                        <option>LEMANS</option>
+                        <option>LEONIS</option>
+                        <option>LEXANI</option>
+                        <option>LEXUS</option>
+                        <option>LINEA SPORT</option>
+                        <option>LIZEA</option>
+                        <option>LODIO DRIVE</option>
+                        <option>LONGCHAMP</option>
+                        <option>LORINSER</option>
+                        <option>LOWENHART</option>
+                        <option>LUCKY STAR</option>
+                        <option>MAE</option>
+                        <option>MANARAY</option>
+                        <option>MANARAY SPORT</option>
+                        <option>MARK X</option>
+                        <option>MAZDA</option>
+                        <option>MAZDA SPEED</option>
+                        <option>MERCEDES</option>
+                        <option>MITSUBISHI</option>
+                        <option>MODENA</option>
+                        <option>MOMO</option>
+                        <option>MONZA</option>
+                        <option>MUGEN</option>
+                        <option>MYRTLE</option>
+                        <option>NEO</option>
+                        <option>NISMO</option>
+                        <option>NISSAN</option>
+                        <option>OZ</option>
+                        <option>PANASPORTS</option>
+                        <option>PIAA</option>
+                        <option>PIRELLI</option>
+                        <option>PORSCHE</option>
+                        <option>PRODRIVE</option>
+                        <option>PURAUDES</option>
+                        <option>RACING HART</option>
+                        <option>RACING SPARCO</option>
+                        <option>RALLI ART</option>
+                        <option>RAYS</option>
+                        <option>RAYS G-GAMES</option>
+                        <option>RAYS NISMO</option>
+                        <option>RAYS SEBRING</option>
+                        <option>RAYS UNITED ARROWS</option>
+                        <option>RAYS VERSUS</option>
+                        <option>RAYS VOLK RACING</option>
+                        <option>RAYS+VERSUS</option>
+                        <option>REPLICA</option>
+                        <option>RH</option>
+                        <option>RIAL</option>
+                        <option>RINSPEED</option>
+                        <option>RIVERSIDE</option>
+                        <option>RONAL</option>
+                        <option>RONDELL</option>
+                        <option>SCHNEIDER</option>
+                        <option>SEBRING</option>
+                        <option>SPARCO</option>
+                        <option>SPEEDLINE</option>
+                        <option>SPIEL</option>
+                        <option>SPIRITS</option>
+                        <option>SPORSH</option>
+                        <option>SPORTEC</option>
+                        <option>SPRINT HART</option>
+                        <option>SSR</option>
+                        <option>STARFORM</option>
+                        <option>STEINER</option>
+                        <option>STEINMETZ</option>
+                        <option>STERN</option>
+                        <option>STICH</option>
+                        <option>STILAUTO</option>
+                        <option>STRADA</option>
+                        <option>SUBARU</option>
+                        <option>SUPERSTAR</option>
+                        <option>SUZUKI</option>
+                        <option>SUZUKI SPORTS</option>
+                        <option>SYNDICATE</option>
+                        <option>TECNOCAST</option>
+                        <option>TECNOMAGNESIO</option>
+                        <option>TMW</option>
+                        <option>TOPY</option>
+                        <option>TOYO TIRE</option>
+                        <option>TOYOTA</option>
+                        <option>TRD</option>
+                        <option>TSW</option>
+                        <option>U.S.LINE</option>
+                        <option>VEILSIDE</option>
+                        <option>VENDETTA</option>
+                        <option>VENERDI</option>
+                        <option>VENTAS</option>
+                        <option>VERSUS</option>
+                        <option>VIENA</option>
+                        <option>VOLKRACING</option>
+                        <option>VOLKSWAGEN</option>
+                        <option>WALD</option>
+                        <option>WATANABE</option>
+                        <option>WEDS</option>
+                        <option>WORK</option>
+                        <option>YOKOHAMA</option>
+                        <option>ZAUBER</option>
+                        <option>ZEIT</option>
+                    </select>
+                </div>
+
+                <div class="field" id="season">
+                    <label for="id_season">Сезон</label>
+                    <select id="id_season" name="season">
+                        <option></option>
+						<option value="1">Лето</option>
+                        <option value="2">Зима-шипы</option>
+                        <option value="3">Зима-липучка</option>
+                    </select>
+                </div>
+
+                <div class="field" id="item_status">
+                    <label for="id_offset">Состояние</label>
+                    <select id="id_item_status" name="item_status">
+                        <option value="0"></option>
+                        <option value="1">Новый</option>
+                        <option value="2">Б/У</option>
+                    </select>
+                </div>
+
+                <div class="field" id="aucminprice">
+                    <label for="id_aucminprice">Цена от</label>
+                    <select id="id_aucminprice" name="aucminprice">
+                        <option></option>
+                        <option>10000</option>
+                        <option>20000</option>
+                        <option>30000</option>
+                        <option>40000</option>
+                        <option>50000</option>
+                        <option>60000</option>
+                        <option>70000</option>
+                        <option>80000</option>
+                        <option>90000</option>
+                        <option>100000</option>
+                        <option>150000</option>
+                        <option>200000</option>
+                    </select>
+						-
+                </div>
+
+                <div class="field" id="aucmaxprice">
+                    <label for="id_aucmaxprice">Цена до</label>
+                    <select id="id_aucmaxprice" name="aucmaxprice">
+                        <option></option>
+                        <option>10000</option>
+                        <option>20000</option>
+                        <option>30000</option>
+                        <option>40000</option>
+                        <option>50000</option>
+                        <option>60000</option>
+                        <option>70000</option>
+                        <option>80000</option>
+                        <option>90000</option>
+                        <option>100000</option>
+                        <option>150000</option>
+                        <option>200000</option>
+                    </select>
+                </div>
+
+                <div id="sort">
+                    <label for="id_sort">Сортировка</label>
+                    <select id="id_sort" name="sort">
+                        <option value="end" selected="selected">End time</option>
+                        <option value="img">Presence or absence of image</option>
+                        <option value="bids">Number of bids</option>
+                        <option value="cbids">Current price</option>
+                        <option value="Bidorbuy">Prompt decision price</option>
+                        <option value="Affiliate">Affiliate</option>
+                    </select>
+                </div>
+
+                <div id="order">
+                    <label for="id_order">Упорядочить</label>
+                    <select id="id_order" name="order">
+                        <option value="a" selected="selected">Ascending</option>
+                        <option value="d">Descending</option>
+                    </select>
+                </div>
+
+                <div class="field" id="query">
+                    <label for="id_query">Номер лота или запрос</label>
+                    <input id="id_query" name="query" type="text" value="ce28 8.5J">
+                </div>
+
+                <div class="field" id="f">
+                    <label for="id_f">Искать в...</label>
+                    <select id="id_f" name="f">
+                        <option value="0x2" selected="selected">Search for "Title + store for Search"</option>
+                        <option value="0x4">Search for "Title + body"</option>
+                        <option value="0x8">Search for "title only"</option>
+                    </select>
+                </div>
+
+                <div class="field" id="category">
+                    <label for="id_category">В категории</label>
+                    <input id="id_category" name="category" type="text">
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn primary">Search</button>
+                </div>
+            </div>
+</form>

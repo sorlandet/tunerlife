@@ -23,8 +23,8 @@ class YahooAuctionAPI(object):
         if r.status_code == requests.codes.ok:
             # print r.encoding
             print r.url
-
-            return json.loads(r.content.lstrip('loaded(').rstrip(')'), encoding=r.encoding)
+            return r.content.lstrip('loaded(').rstrip(')')
+            # return json.loads(r.content.lstrip('loaded(').rstrip(')'), encoding=r.encoding)
 
         self.error_code = r.status_code
 
