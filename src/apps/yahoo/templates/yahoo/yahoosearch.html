@@ -35,16 +35,12 @@
 
         {% include "yahoo/blocks/form.html" %}
 
-        <hr />
-
-        <div class="clearfix">
+        <div class="clearfix" style="display: none">
             <div class="input">
                 <textarea id="test-box" class="xxlarge" rows="5"></textarea>
             </div>
-            <input type="text" id="pages">
+            <input type="hidden" id="pages">
         </div>
-
-        <hr />
 
         <ul id="ajax-result" class="thumbnails thumbnails-horizontal"></ul>
 
@@ -52,6 +48,7 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="{% static "js/lib/jquery.min.js" %}"></script>
+{#    <script type="text/javascript" src="{% static "js/lib/zepto.min.js" %}"></script>#}
     <script type="text/javascript" src="{% static "js/lib/jquery.endless-scroll.js" %}"></script>
     <script type="text/javascript" src="{% static "js/lib/mustache.js" %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

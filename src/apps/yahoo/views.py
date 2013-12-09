@@ -37,7 +37,9 @@ class YahooProcessFormView(ProcessFormView):
         obj.set_option('output', 'json')
         obj.set_option('store', 0)
         obj.set_option('type', 'all')
-        obj.set_option(Search.API_OPTION_PAGE, self.request.GET.get('page', 0))
+        page = int(self.request.GET.get('page', 0)) + 1
+        print 'page:', page
+        obj.set_option(Search.API_OPTION_PAGE, page)
 
         return obj.action()
 

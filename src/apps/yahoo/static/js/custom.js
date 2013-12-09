@@ -60,6 +60,92 @@ var SearchButton = function(container){
             },
             complete: function(){
 
+                $(document).endlessScroll({
+                    inflowPixels: 300,
+//                    fireOnce: true,
+//                    fireDelay: 100,
+                    ceaseFireOnEmpty: false,
+                    callback: function(fireSequence, pageSequence, scrollDirection) {
+                        console.log('callback:', fireSequence, pageSequence, scrollDirection)
+                        var pages = parseInt($('.container').find('#pages').val());
+
+                        if (fireSequence >= pages){
+                            console.log('callback -> true');
+                            return true;
+                        }
+
+                        var form = $('.container').find('form');
+
+                        $.ajax({
+                            type: 'GET',
+                            url: form.attr('action'),
+                            data: form.serialize() + '&page=' + fireSequence,
+                            dataType: 'json',
+                            success: function(response){
+                                console.log('Success: ' + response);
+
+                                $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
+
+                                var template = '<li class="span3"> \
+                                <div class="thumbnail border-radius-top"> \
+                                    <div class="bg-thumbnail-img"> \
+                                        <img class="border-radius-top" src="{{ Image }}"> \
+                                    </div> \
+                                    <h5><a href="{{ AuctionItemUrl }}">{{ Title }}</a></h5> \
+                                </div> \
+                                <div class="box border-radius-bottom"> \
+                                    <p> \
+                                        <span class="title_torrent pull-left pull-left">ET</span> \
+                                        <span class="number-view pull-right">{{ EndTime }}</span> \
+                                    </p> \
+                                </div> \
+                            <div class="box border-radius-bottom"> \
+                                    <p> \
+                                        <span class="title_torrent pull-left pull-left">Bids</span> \
+                                        <span class="number-view pull-right">{{ Bids }}</span> \
+                                    </p> \
+                                </div> \
+                            <div class="box border-radius-bottom"> \
+                                    <p> \
+                                        <span class="title_torrent pull-left pull-left">Price</span> \
+                                        <span class="number-view pull-right">{{ CurrentPrice }}</span> \
+                                    </p> \
+                                </div> \
+                            </li>'
+                                var output = Mustache.render("{{#Item}}" + template + "{{/Item}}", response.ResultSet.Result);
+            //                    return output;
+                                var last = $("ul#ajax-result li:last");
+                                last.after(output);
+
+                            },
+                            error: function(request, errorType, errorMessage){
+                                console.log('Error: ' + errorType + ' with message: ' + errorMessage);
+                            },
+                            beforeSend: function(){
+
+                            },
+                            complete: function(){
+
+                            }
+                        })
+
+
+
+                    },
+                    ceaseFire: function(fireSequence, pageSequence, scrollDirection){
+                        console.log('ceaseFire:', fireSequence, pageSequence, scrollDirection)
+                        var pages = parseInt($('.container').find('#pages').val());
+
+                        if (fireSequence >= pages){
+                            console.log('ceaseFire -> true');
+                            return true;
+                        }
+                        console.log('ceaseFire -> false');
+                        return false;
+                    }
+//                    intervalFrequency: 5
+                });
+
             }
         })
 
@@ -69,89 +155,6 @@ var SearchButton = function(container){
 }
 
 
-
-
-
 $(document).ready(function(){
     var yahoosearchform = new SearchButton($('.container'));
 });
-
-
-$(function() {
-    $(document).endlessScroll({
-        bottomPixels: 100,
-        fireOnce: true,
-        fireDelay: 100,
-        callback: function(fireSequence) {
-            console.log('fireSequence: ' + fireSequence)
-
-            var form = $('.container').find('form');
-
-            $.ajax({
-                type: 'GET',
-                url: form.attr('action'),
-                data: form.serialize() + '&page=' + fireSequence,
-                dataType: 'json',
-                success: function(response){
-                    console.log('Success: ' + response);
-//                    container.find('#test-box').val(JSON.stringify(response.ResultSet));
-
-                    var template = '<li class="span3"> \
-                    <div class="thumbnail border-radius-top"> \
-                        <div class="bg-thumbnail-img"> \
-                            <img class="border-radius-top" src="{{ Image }}"> \
-                        </div> \
-                        <h5><a href="{{ AuctionItemUrl }}">{{ Title }}</a></h5> \
-                    </div> \
-                    <div class="box border-radius-bottom"> \
-                        <p> \
-                            <span class="title_torrent pull-left pull-left">ET</span> \
-                            <span class="number-view pull-right">{{ EndTime }}</span> \
-                        </p> \
-                    </div> \
-                <div class="box border-radius-bottom"> \
-                        <p> \
-                            <span class="title_torrent pull-left pull-left">Bids</span> \
-                            <span class="number-view pull-right">{{ Bids }}</span> \
-                        </p> \
-                    </div> \
-                <div class="box border-radius-bottom"> \
-                        <p> \
-                            <span class="title_torrent pull-left pull-left">Price</span> \
-                            <span class="number-view pull-right">{{ CurrentPrice }}</span> \
-                        </p> \
-                    </div> \
-                </li>'
-                    var output = Mustache.render("{{#Item}}" + template + "{{/Item}}", response.ResultSet.Result);
-
-                    var last = $("ul#ajax-result li:last");
-                    last.after(output);
-
-                },
-                error: function(request, errorType, errorMessage){
-                    console.log('Error: ' + errorType + ' with message: ' + errorMessage);
-                },
-                beforeSend: function(){
-
-                },
-                complete: function(){
-
-                }
-            })
-
-
-
-        },
-        ceaseFire: function(fireSequence){
-            console.log('ceaseFire fireSequence: ' + fireSequence)
-            var pages = $('.container').find('#pages').val();
-
-            if (fireSequence >= pages){
-                return true;
-            }
-
-            return false;
-        }
-    });
-});
-
