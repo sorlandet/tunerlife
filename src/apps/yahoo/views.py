@@ -16,6 +16,12 @@ class YahooProcessFormView(ProcessFormView):
     def get(self, request, *args, **kwargs):
 
         form = YahooSearchForm(self.request.GET)
+
+        if self.request.GET.get('f'):
+            self.f = '0x4'
+        else:
+            self.f = '0x2'
+
         if form.is_valid():
             content = self.get_search_results(form=form)
         else:
@@ -32,7 +38,7 @@ class YahooProcessFormView(ProcessFormView):
         obj.set_option('order', form.cleaned_data.get('order', 'd'))
         obj.set_option('category', form.cleaned_data.get('category'))
         obj.set_option('item_status', form.cleaned_data.get('item_status'))
-        obj.set_option('f', form.cleaned_data.get('f'))
+        obj.set_option('f', self.f)
         obj.set_option('output', 'json')
         obj.set_option('store', 0)
         obj.set_option('type', 'all')
