@@ -65,7 +65,7 @@ $(document).ready(function(){
     });
 
     window.EndlessScroll = new EndlessScroll($(document), {
-        inflowPixels: 300,
+        inflowPixels: 350,
         //fireOnce: true,
         //fireDelay: 100,
         ceaseFireOnEmpty: false,
@@ -89,7 +89,7 @@ $(document).ready(function(){
 
                     $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
 
-                    $("ul#ajax-result li:last").after(
+                    $("div#ajax-result div.lot:last").after(
                         Mustache.render(ItemsTemplate, response.ResultSet.Result)
                     );
 

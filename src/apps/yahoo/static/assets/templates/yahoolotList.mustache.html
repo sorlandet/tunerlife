@@ -4,12 +4,11 @@ This is the template for items in the channel list for when the app first loads
 -->
 <script id="yahoolotListTpl" type="text/html">
 {{#Item}}
-<li class="span3">
-    <div class="thumbnail border-radius-top">
-        <div class="bg-thumbnail-img">
-            <img class="border-radius-top" src="{{ Image }}">
-        </div>
-        <h5><a href="{{ AuctionItemUrl }}">{{ Title }}</a></h5>
+<div class="col-lg-2 col-sm-3 col-xs-4 lot">
+    <div class="img-thumbnail">
+        <a href="{{ AuctionItemUrl }}" title="{{ Title }}">
+            <img class="thumbnail img-responsive" src="{{ Image }}">
+        </a>
     </div>
     <div class="box border-radius-bottom">
         <p>
@@ -29,6 +28,6 @@ This is the template for items in the channel list for when the app first loads
             <span class="number-view pull-right">{{ CurrentPrice }}</span>
         </p>
     </div>
-</li>
+</div>
 {{/Item}}
 </script>

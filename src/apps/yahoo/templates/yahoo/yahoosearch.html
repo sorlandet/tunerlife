@@ -6,10 +6,12 @@
 <head>
     <title>Yahoo search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.0.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="{% static "css/global.css" %}">
+    <!--link rel="stylesheet" href="{% static "css/global.css" %}"-->
 
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 
@@ -33,26 +35,31 @@
 <body>
     <div class="container">
 
-        {% include "yahoo/blocks/form.html" %}
+        <div class="row">
 
-        <div class="clearfix" style="display: none">
-            <div class="input">
-                <textarea id="test-box" class="xxlarge" rows="5"></textarea>
+            {% include "yahoo/blocks/form.html" %}
+
+            <div style="display: none">
+                <div class="input">
+                    <textarea id="test-box" class="xxlarge" rows="5"></textarea>
+                </div>
             </div>
-            <input type="hidden" id="pages">
+
         </div>
 
-        <ul id="ajax-result" class="thumbnails thumbnails-horizontal"></ul>
+
+
+        <div id="ajax-result" class="row"></div>
 
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="{% static "js/lib/jquery.min.js" %}"></script>
-{#    <script type="text/javascript" src="{% static "js/lib/zepto.min.js" %}"></script>#}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="{% static "js/lib/jquery.endless-scroll.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/lib/mustache.js" %}"></script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/2.0.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static "js/lib/mustache.js" %}"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="{% static "js/custom.js" %}"></script>
   </body>

@@ -17,12 +17,10 @@ class YahooProcessFormView(ProcessFormView):
 
         form = YahooSearchForm(self.request.GET)
         if form.is_valid():
-            print 'valid form'
+            content = self.get_search_results(form=form)
         else:
-            print 'invalid form'
-        # print self.request.GET
-        content = self.get_search_results(form=form)
-        # print content
+            content = ''
+
         return HttpResponse(content=content, content_type='application/json')
 
     def get_search_results(self, form):
