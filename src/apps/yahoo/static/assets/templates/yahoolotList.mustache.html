@@ -1,0 +1,34 @@
+<!--
+[yahoolotList.mustache.html]
+This is the template for items in the channel list for when the app first loads
+-->
+<script id="yahoolotListTpl" type="text/html">
+{{#Item}}
+<li class="span3">
+    <div class="thumbnail border-radius-top">
+        <div class="bg-thumbnail-img">
+            <img class="border-radius-top" src="{{ Image }}">
+        </div>
+        <h5><a href="{{ AuctionItemUrl }}">{{ Title }}</a></h5>
+    </div>
+    <div class="box border-radius-bottom">
+        <p>
+            <span class="title_torrent pull-left pull-left">ET</span>
+            <span class="number-view pull-right">{{ EndTime }}</span>
+        </p>
+    </div>
+    <div class="box border-radius-bottom">
+        <p>
+            <span class="title_torrent pull-left pull-left">Bids</span>
+            <span class="number-view pull-right">{{ Bids }}</span>
+        </p>
+    </div>
+    <div class="box border-radius-bottom">
+        <p>
+            <span class="title_torrent pull-left pull-left">Price</span>
+            <span class="number-view pull-right">{{ CurrentPrice }}</span>
+        </p>
+    </div>
+</li>
+{{/Item}}
+</script>

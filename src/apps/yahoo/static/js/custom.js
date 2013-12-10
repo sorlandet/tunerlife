@@ -1,3 +1,5 @@
+var ItemsTemplate = null;
+
 var SearchButton = function(container){
     this.form = container.find('form');
 
@@ -22,33 +24,8 @@ var SearchButton = function(container){
                 container.find('#test-box').val(JSON.stringify(response.ResultSet));
                 container.find('#pages').val(Math.ceil(total/per_query));
 
-                var template = '<li class="span3"> \
-                <div class="thumbnail border-radius-top"> \
-                    <div class="bg-thumbnail-img"> \
-                        <img class="border-radius-top" src="{{ Image }}"> \
-                    </div> \
-                    <h5><a href="{{ AuctionItemUrl }}">{{ Title }}</a></h5> \
-                </div> \
-                <div class="box border-radius-bottom"> \
-                    <p> \
-                        <span class="title_torrent pull-left pull-left">ET</span> \
-                        <span class="number-view pull-right">{{ EndTime }}</span> \
-                    </p> \
-                </div> \
-            <div class="box border-radius-bottom"> \
-                    <p> \
-                        <span class="title_torrent pull-left pull-left">Bids</span> \
-                        <span class="number-view pull-right">{{ Bids }}</span> \
-                    </p> \
-                </div> \
-            <div class="box border-radius-bottom"> \
-                    <p> \
-                        <span class="title_torrent pull-left pull-left">Price</span> \
-                        <span class="number-view pull-right">{{ CurrentPrice }}</span> \
-                    </p> \
-                </div> \
-            </li>'
-                var output = Mustache.render("{{#Item}}" + template + "{{/Item}}", response.ResultSet.Result);
+
+                var output = Mustache.render(ItemsTemplate, response.ResultSet.Result);
 
                 container.find('#ajax-result').hide().html(output).fadeIn();
             },
@@ -86,33 +63,7 @@ var SearchButton = function(container){
 
                                 $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
 
-                                var template = '<li class="span3"> \
-                                <div class="thumbnail border-radius-top"> \
-                                    <div class="bg-thumbnail-img"> \
-                                        <img class="border-radius-top" src="{{ Image }}"> \
-                                    </div> \
-                                    <h5><a href="{{ AuctionItemUrl }}">{{ Title }}</a></h5> \
-                                </div> \
-                                <div class="box border-radius-bottom"> \
-                                    <p> \
-                                        <span class="title_torrent pull-left pull-left">ET</span> \
-                                        <span class="number-view pull-right">{{ EndTime }}</span> \
-                                    </p> \
-                                </div> \
-                            <div class="box border-radius-bottom"> \
-                                    <p> \
-                                        <span class="title_torrent pull-left pull-left">Bids</span> \
-                                        <span class="number-view pull-right">{{ Bids }}</span> \
-                                    </p> \
-                                </div> \
-                            <div class="box border-radius-bottom"> \
-                                    <p> \
-                                        <span class="title_torrent pull-left pull-left">Price</span> \
-                                        <span class="number-view pull-right">{{ CurrentPrice }}</span> \
-                                    </p> \
-                                </div> \
-                            </li>'
-                                var output = Mustache.render("{{#Item}}" + template + "{{/Item}}", response.ResultSet.Result);
+                                var output = Mustache.render(ItemsTemplate, response.ResultSet.Result);
             //                    return output;
                                 var last = $("ul#ajax-result li:last");
                                 last.after(output);
@@ -157,4 +108,7 @@ var SearchButton = function(container){
 
 $(document).ready(function(){
     var yahoosearchform = new SearchButton($('.container'));
+    $.get('/static/assets/templates/yahoolotList.mustache.html', function(template, textStatus, jqXhr) {
+        ItemsTemplate = $(template).filter('#yahoolotListTpl').html()
+    });
 });
