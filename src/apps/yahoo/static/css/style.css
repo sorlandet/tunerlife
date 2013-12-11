@@ -1,54 +1,26 @@
-#fixfilter {
-    width: 1000px;
-    height: 200px;
-    padding: 10px;
-    margin-left: 40px;
-    line-height: 24px;
+.radio-toolbar input[type="radio"] {
+    display:none;
 }
 
-#fixfilter  select, input {
-    /*background:#1d1f24;*/
-	/*border:1px solid #45484c;*/
-	/*color:#999;*/
+.radio-toolbar label {
+    display: inline-block;
+    border-bottom: 1px dotted #000;
+    /*background-color:#ddd;*/
+    margin: 0 11px;
+    padding: 0;
+    font-family: Arial;
+    font-size: 16px;
 }
 
-#fixfilter .field {margin-left: 10px;}
+.radio-toolbar input[type="radio"]:checked + label {
+    margin: 0;
+    padding: 4px 11px;
+    background-color: #bbb;
+    border-color: transparent;
+}
 
-#fixfilter #type {float: left;}
-#fixfilter #type select {width: 130px;}
-
-#fixfilter #size {float: left;}
-#fixfilter #size select {width: 70px;}
-
-#fixfilter #width {float: left;}
-#fixfilter #width select {width: 70px;}
-
-#fixfilter #pcd {float: left;}
-#fixfilter #pcd select {width: 70px;}
-
-#fixfilter #offset {float: left;}
-#fixfilter #offset select {width: 45px;}
-
-#fixfilter #brand {margin-left: 10px; float: none;}
-
-
-#fixfilter #season {float: left;}
-#fixfilter #season select {width: 130px;}
-
-#fixfilter #item_status {float: left;}
-#fixfilter #item_status select {width: 90px;}
-
-#fixfilter #aucminprice, #fixfilter #aucmaxprice {float: left;}
-#fixfilter #aucminprice select, #fixfilter #aucmaxprice select {width: 70px;}
-
-#fixfilter #sort {float: left;}
-#fixfilter #sort select {width: 150px;}
-
-#fixfilter #order {float: none;}
-#fixfilter #order select {width: 150px;}
-
-#fixfilter #query {float: left;}
-#fixfilter #f {float: left;}
-#fixfilter #f select {width: 150px;}
-
-#fixfilter #category {float: left;}
+.for-label {
+    font-family: Arial;
+    font-size: 16px;
+    padding: 0;
+}
