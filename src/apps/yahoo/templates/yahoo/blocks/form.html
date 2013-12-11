@@ -12,6 +12,20 @@
                     <input type="radio" name="type" id="id_type2" value="2084005140">
                     <label for="id_type2" class="radio-inline">только диски</label>
                 </div>
+
+                <div class="col-lg-5 radio-toolbar">
+                    <span class="for-label">Сезон</span>
+
+                    <input type="radio" name="season" id="id_season0" value="all" checked>
+                    <label for="id_season0" class="radio-inline">хз</label>
+
+                    <input type="radio" name="season" id="id_season1" value="summer">
+                    <label for="id_season1" class="radio-inline">лето</label>
+
+                    <input type="radio" name="season" id="id_season2" value="winter">
+                    <label for="id_season2" class="radio-inline">зима</label>
+                </div>
+
             </div>
 
             <div class="form-group row">
@@ -421,15 +435,7 @@
             </div>
 
             <div class="form-group row">
-                <div class="col-lg-2">
-                    <label for="id_season" class="control-label">Сезон</label>
-                    <select id="id_season" name="season" class="form-control">
-                        <option></option>
-                        <option value="1">Лето</option>
-                        <option value="2">Зима-шипы</option>
-                        <option value="3">Зима-липучка</option>
-                    </select>
-                </div>
+
 
                 <div class="col-lg-2">
                     <label for="id_offset" class="control-label">Состояние</label>
@@ -506,7 +512,7 @@
                 </div>
 
 
-                <div class="col-lg-4 radio-toolbar">
+                <div class="col-lg-3 radio-toolbar">
                     <span class="for-label">Искать в</span>
 
                     <input type="radio" name="f" id="id_f1" value="0x8" checked>

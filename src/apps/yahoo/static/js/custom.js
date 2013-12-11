@@ -72,8 +72,8 @@ $(document).ready(function(){
         callback: function(fireSequence, pageSequence, scrollDirection) {
             console.log('callback:', fireSequence, pageSequence, scrollDirection);
 
-            if (fireSequence >= window.Pages){
-                console.log('callback -> true', window.Pages);
+            if (fireSequence >= window.Pages || scrollDirection != 'next'){
+                console.log('callback -> true', fireSequence);
                 return true;
             }
 

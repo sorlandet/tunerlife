@@ -36,13 +36,14 @@ class YahooProcessFormView(ProcessFormView):
         page = int(self.request.GET.get('page', 0)) + 1
 
         obj = Search('dj0zaiZpPXFONUl2dTR2ck5wYyZzPWNvbnN1bWVyc2VjcmV0Jng9YmY-', 'V2')
-        obj.set_option('query', form.cleaned_data.get('query'))
         obj.set_option('sort', form.cleaned_data.get('sort', 'end'))
         obj.set_option('order', form.cleaned_data.get('order', 'd'))
         obj.set_option('item_status', form.cleaned_data.get('item_status'))
         obj.set_option('f', form.cleaned_data.get('f'))
 
+        obj.set_option('query', self.get_query(form.cleaned_data.get('query')))
         obj.set_option('category', self.get_category())
+
         obj.set_option('output', 'json')
         obj.set_option('store', 0)
         obj.set_option('type', 'all')
@@ -62,3 +63,15 @@ class YahooProcessFormView(ProcessFormView):
             return int(category)
 
         return ctype
+
+    def get_query(self, query):
+        mixin = ''
+        season = self.request.GET.get('season')
+
+        print 'season:', season
+        if season == 'winter':
+            mixin += u'スタッドレス'
+        elif season == 'summer':
+            mixin += u'-スタッドレス'
+
+        return u' '.join((query, mixin))
