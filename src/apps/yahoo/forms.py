@@ -41,12 +41,12 @@ class YahooSearchForm(forms.Form):
 
     sort = forms.CharField(widget=forms.Select(choices=SORT_CHOICES))
     order = forms.CharField(widget=forms.Select(choices=ORDER_CHOICES))
-    category = forms.IntegerField(required=False)
+    # category = forms.IntegerField(required=False)
 
     # Get the product state that is entered in the form
     item_status = forms.CharField(widget=forms.Select(choices=ITEM_STATUS_CHOICES))
 
-    # f = forms.CharField(widget=forms.Select(choices=F_CHOICES))
+    f = forms.CharField(widget=forms.Select(choices=F_CHOICES))
 
     # Get the upper limit of the range specification of commodity prices entered in the form
     aucminprice = forms.IntegerField(required=False)
