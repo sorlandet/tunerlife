@@ -22,8 +22,13 @@ var SearchButton = function(container){
                 console.log('pages: ' + window.Pages);
 
                 container.find('#test-box').val(JSON.stringify(response.ResultSet));
+                var list = response.ResultSet.Result;
 
-                var output = Mustache.render(window.ItemsTemplate, response.ResultSet.Result);
+                list.Item.forEach(function(entry) {
+                    entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
+                });
+
+                var output = Mustache.render(window.ItemsTemplate, list);
 
                 container.find('#ajax-result').html(output)
             },
@@ -89,8 +94,14 @@ $(document).ready(function(){
 
                     $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
 
+                    list.Item.forEach(function(entry) {
+                        entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
+                    });
+
+                    var output = Mustache.render(window.ItemsTemplate, list);
+
                     $("div#ajax-result div.lot:last").after(
-                        Mustache.render(ItemsTemplate, response.ResultSet.Result)
+                        Mustache.render(ItemsTemplate, output)
                     );
 
                 },
@@ -120,4 +131,15 @@ $(document).ready(function(){
     });
 
     window.EndlessScroll.run();
+
+
+//    console.log(moment('2013-12-11T18:17:42+09:00').format('MMMM Do YYYY, h:mm:ss a'));
+//    console.log(moment('2013-12-11T18:17:42+09:00').format('dddd'));
+//    console.log(moment('2013-12-11T18:17:42+09:00').format("MMM Do YY"));
+//    console.log(moment('2013-12-11T18:17:42+09:00').format('YYYY [escaped] YYYY'));
+//    console.log(moment('2013-12-11T18:17:42+09:00').format());
+//    console.log(moment('2013-12-11T18:17:42+09:00').zone());
+//    console.log(moment('2013-12-11T18:17:42+09:00').fromNow());
+//    console.log(moment('2013-12-11T18:17:42+09:00').fromNow(true));
+//    console.log(moment('2013-12-11T18:17:42+09:00').fromNow(false));
 });
