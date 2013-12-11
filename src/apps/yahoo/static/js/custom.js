@@ -22,8 +22,8 @@ var SearchButton = function(container){
                 console.log('pages: ' + window.Pages);
 
                 container.find('#test-box').val(JSON.stringify(response.ResultSet));
-                var list = response.ResultSet.Result;
 
+                var list = response.ResultSet.Result;
                 list.Item.forEach(function(entry) {
                     entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
                 });
@@ -94,6 +94,7 @@ $(document).ready(function(){
 
                     $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
 
+                    var list = response.ResultSet.Result;
                     list.Item.forEach(function(entry) {
                         entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
                     });

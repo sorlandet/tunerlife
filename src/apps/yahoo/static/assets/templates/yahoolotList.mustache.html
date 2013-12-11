@@ -9,23 +9,10 @@ This is the template for items in the channel list for when the app first loads
         <a href="{{ AuctionItemUrl }}" title="{{ Title }}">
             <img class="thumbnail img-responsive" src="{{ Image }}">
         </a>
-    </div>
-    <div class="box border-radius-bottom">
-        <p>
-            <span>Начало {{ ttl }}</span>
-        </p>
-    </div>
-    <div class="box border-radius-bottom">
-        <p>
-            <span class="title_torrent pull-left pull-left">Bids</span>
-            <span class="number-view pull-right">{{ Bids }}</span>
-        </p>
-    </div>
-    <div class="box border-radius-bottom">
-        <p>
-            <span class="title_torrent pull-left pull-left">Price</span>
-            <span class="number-view pull-right">{{ CurrentPrice }}</span>
-        </p>
+
+        <p><span>{{ ttl }}</span></p>
+        <p><span>Ставок {{ Bids }}</span></p>
+        <p><span>Цена {{ CurrentPrice }}</span></p>
     </div>
 </div>
 {{/Item}}
