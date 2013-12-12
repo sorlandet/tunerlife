@@ -71,7 +71,8 @@ var SearchButton = function(container){
                                     list.Item.forEach(function(entry) {
                                         entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
                                         entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
-                                        entry.current_price_rubles = Number(entry.CurrentPrice * 0.319020012).formatMoney(2, '.', ' ');
+                                        var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000
+                                        entry.current_price_rubles = Number(end_price * 0.33).formatMoney(2, '.', ' ');
                                     });
 
                                     $("div#ajax-result div.lot:last")
