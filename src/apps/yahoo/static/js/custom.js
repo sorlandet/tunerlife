@@ -36,7 +36,8 @@ var SearchButton = function(container){
                 var list = response.ResultSet.Result;
                 list.Item.forEach(function(entry) {
                     entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
-                    entry.cost =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
+                    entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
+                    entry.current_price_rubles = Number(entry.CurrentPrice * 0.319020012).formatMoney(2, '.', ' ');
                 });
 
                 var output = Mustache.render(window.ItemsTemplate, list);
@@ -69,6 +70,8 @@ var SearchButton = function(container){
                                 if (typeof list.Item != "undefined"){
                                     list.Item.forEach(function(entry) {
                                         entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
+                                        entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
+                                        entry.current_price_rubles = Number(entry.CurrentPrice * 0.319020012).formatMoney(2, '.', ' ');
                                     });
 
                                     $("div#ajax-result div.lot:last")
