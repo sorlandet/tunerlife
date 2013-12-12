@@ -11,7 +11,6 @@ var SearchButton = function(container){
             data: $(this).serialize(),
             dataType: 'json',
             success: function(response){
-                console.log('success');
 
                 var total = response.ResultSet['@attributes'].totalResultsAvailable;
                 var per_query = response.ResultSet['@attributes'].totalResultsReturned;
@@ -36,24 +35,37 @@ var SearchButton = function(container){
                 console.log('Error: ' + errorType + ' with message: ' + errorMessage);
             },
             beforeSend: function(){
-                console.log('beforeSend');
-
-                window.Pages = 0;
-                window.EndlessScroll.firing = false;
-                window.EndlessScroll.fireSequence = 0;
-                window.EndlessScroll.pageSequence = 0;
-                window.EndlessScroll.nextSequence = 1;
-                window.EndlessScroll.prevSequence = -1;
-                window.EndlessScroll.lastScrollTop = 0;
-                window.EndlessScroll.didScroll = false;
-                window.EndlessScroll.isScrollable = true;
-
                 container.find('#test-box').val('');
                 container.find('#ajax-result').html('');
             },
             complete: function(){
-                console.log('complete');
-                window.EndlessScroll.firing = true;
+                $(document).simpleInfiniteScroll({
+                    threshold: 200,
+                    method: 'get',
+                    url: $('#searchForm').attr('action'),
+                    totalPagesNumber: window.Pages,
+                    ajaxData: $('#searchForm').serialize(),
+                    newPageLoaded: function(e, response) {
+                        //console.log('newPageLoaded', response);
+
+                        if (typeof response.ResultSet != "undefined"){
+                            $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
+
+                            if (typeof response.ResultSet.Result != "undefined"){
+                                var list = response.ResultSet.Result;
+
+                                if (typeof list.Item != "undefined"){
+                                    list.Item.forEach(function(entry) {
+                                        entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
+                                    });
+
+                                    $("div#ajax-result div.lot:last")
+                                        .after(Mustache.render(window.ItemsTemplate, list));
+                                }
+                            }
+                        }
+                    }
+                });
             }
         })
 
@@ -69,70 +81,18 @@ $(document).ready(function(){
         window.ItemsTemplate = $(template).filter('#yahoolotListTpl').html();
     });
 
-    window.EndlessScroll = new EndlessScroll($(document), {
-        inflowPixels: 350,
-        //fireOnce: true,
-        //fireDelay: 100,
-        ceaseFireOnEmpty: false,
-        callback: function(fireSequence, pageSequence, scrollDirection) {
-            console.log('callback:', fireSequence, pageSequence, scrollDirection);
-
-            if (fireSequence >= window.Pages || scrollDirection != 'next'){
-                console.log('callback -> true', fireSequence);
-                return true;
-            }
-
-            var form = $('.container').find('form');
-
-            $.ajax({
-                type: 'GET',
-                url: form.attr('action'),
-                data: form.serialize() + '&page=' + fireSequence,
-                dataType: 'json',
-                success: function(response){
-                    console.log('callback -> ajax -> success');
-
-                    $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
-
-                    var list = response.ResultSet.Result;
-                    list.Item.forEach(function(entry) {
-                        entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
-                    });
-
-                    var output = Mustache.render(window.ItemsTemplate, list);
-
-                    $("div#ajax-result div.lot:last").after(
-                        Mustache.render(ItemsTemplate, output)
-                    );
-
-                },
-                error: function(request, errorType, errorMessage){
-                    console.log('Error: ' + errorType + ' with message: ' + errorMessage);
-                },
-                beforeSend: function(){
-                    console.log('callback -> ajax -> beforeSend');
-                },
-                complete: function(){
-                    console.log('callback -> ajax -> complete');
-                }
-            })
-
-
-
-        },
-        ceaseFire: function(fireSequence, pageSequence, scrollDirection){
-            //console.log('ceaseFire:', fireSequence, pageSequence, scrollDirection)
-
-            if (fireSequence >= window.Pages){
-                return true;
-            }
-
-            return false;
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('.scrollup').fadeIn();
+        } else {
+            $('.scrollup').fadeOut();
         }
     });
 
-    window.EndlessScroll.run();
-
+    $('.scrollup').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
+    });
 
 //    console.log(moment('2013-12-11T18:17:42+09:00').format('MMMM Do YYYY, h:mm:ss a'));
 //    console.log(moment('2013-12-11T18:17:42+09:00').format('dddd'));

@@ -30,7 +30,8 @@ class YahooProcessFormView(ProcessFormView):
         else:
             content = ''
 
-        return HttpResponse(content=content, content_type='application/json')
+        return HttpResponse(content=content,
+                            content_type='application/json; charset=utf-8')
 
     def get_search_results(self, form):
         page = int(self.request.GET.get('page', 0)) + 1

@@ -24,3 +24,38 @@
     font-size: 16px;
     padding: 0;
 }
+
+.scrollup{
+    -webkit-background-clip: border-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-size: auto;
+    -webkit-font-smoothing: antialiased;
+
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url(http://icdn.lenta.ru/assets/icons-sa1cb1b62ba-de907e09ece41a5195f0cdfd26a26608.png);
+    background-origin: padding-box;
+    background-position: -2695px 0px;
+    background-size: auto;
+
+    color: rgb(68, 68, 68);
+    cursor: pointer;
+
+    font-family: 'PT Serif', Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;
+
+    height: 54px;
+    width: 54px;
+
+    line-height: 20px;
+    vertical-align: middle;
+
+    text-indent: -9999px;
+    opacity: 0.3;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+    display: none;
+
+}
