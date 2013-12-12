@@ -36,11 +36,22 @@ class YahooProcessFormView(ProcessFormView):
     def get_search_results(self, form):
         page = int(self.request.GET.get('page', 0)) + 1
 
+        print 'item_status:', form.cleaned_data.get('item_status')
+
         obj = Search('dj0zaiZpPXFONUl2dTR2ck5wYyZzPWNvbnN1bWVyc2VjcmV0Jng9YmY-', 'V2')
         obj.set_option('sort', form.cleaned_data.get('sort', 'end'))
         obj.set_option('order', form.cleaned_data.get('order', 'd'))
         obj.set_option('item_status', form.cleaned_data.get('item_status'))
         obj.set_option('f', form.cleaned_data.get('f'))
+
+        aucminprice = form.cleaned_data.get('aucminprice')
+        aucmaxprice = form.cleaned_data.get('aucmaxprice')
+
+        print aucminprice, aucmaxprice
+        if aucminprice:
+            obj.set_option('aucminprice', aucminprice)
+        if aucmaxprice:
+            obj.set_option('aucmaxprice', aucmaxprice)
 
         obj.set_option('query', self.get_query(form.cleaned_data.get('query')))
         obj.set_option('category', self.get_category())
@@ -51,7 +62,11 @@ class YahooProcessFormView(ProcessFormView):
 
         obj.set_option(Search.API_OPTION_PAGE, page)
 
-        return obj.action()
+        result = obj.action()
+
+        del obj
+
+        return result
 
     def get_category(self):
         category = self.request.GET.get('category')
@@ -61,7 +76,7 @@ class YahooProcessFormView(ProcessFormView):
         print 'type:', type
 
         if category and category.isdigit():
-            return int(category)
+            return category
 
         return ctype
 

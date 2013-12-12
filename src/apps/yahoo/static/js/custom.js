@@ -9,17 +9,21 @@ Number.prototype.formatMoney = function(c, d, t){
    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
  };
 
+
+
 var SearchButton = function(container){
     this.form = container.find('form');
 
     this.search = function(event){
         event.preventDefault(); //prevent default form submit
 
+        window.searchData = $(this).serialize();
+
         $.ajax({
             type: 'GET',
             url: $(this).attr('action'),
             context: container,
-            data: $(this).serialize(),
+            data: window.searchData,
             dataType: 'json',
             success: function(response){
 
@@ -58,7 +62,7 @@ var SearchButton = function(container){
                     method: 'get',
                     url: $('#searchForm').attr('action'),
                     totalPagesNumber: window.Pages,
-                    ajaxData: $('#searchForm').serialize(),
+                    ajaxData: window.searchData,
                     newPageLoaded: function(e, response) {
                         //console.log('newPageLoaded', response);
 
@@ -110,6 +114,8 @@ $(document).ready(function(){
         $("html, body").animate({ scrollTop: 0 }, 600);
         return false;
     });
+
+    window.searchData = null;
 
 //    console.log(moment('2013-12-11T18:17:42+09:00').format('MMMM Do YYYY, h:mm:ss a'));
 //    console.log(moment('2013-12-11T18:17:42+09:00').format('dddd'));

@@ -23,9 +23,9 @@ class YahooSearchForm(forms.Form):
     )
 
     ITEM_STATUS_CHOICES = (
-        (0, 'Not specified'),
-        (1, 'New'),
-        (2, 'Used')
+        ('0', 'Not specified'),
+        ('1', 'New'),
+        ('2', 'Used')
     )
 
     F_CHOICES = (
@@ -35,12 +35,12 @@ class YahooSearchForm(forms.Form):
     )
 
     # Get the search words entered in the form
-    query = forms.CharField()
+    query = forms.CharField(required=False)
 
     # type = forms.CharField(widget=forms.Select(choices=TYPE_CHOICES))
 
-    sort = forms.CharField(widget=forms.Select(choices=SORT_CHOICES))
-    order = forms.CharField(widget=forms.Select(choices=ORDER_CHOICES))
+    sort = forms.CharField(widget=forms.Select(choices=SORT_CHOICES), initial='end')
+    order = forms.CharField(widget=forms.Select(choices=ORDER_CHOICES), initial='a')
     # category = forms.IntegerField(required=False)
 
     # Get the product state that is entered in the form
