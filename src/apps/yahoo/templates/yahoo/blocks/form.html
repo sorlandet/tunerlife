@@ -484,25 +484,26 @@
                     </select>
                 </div>
 
-                <div class="col-lg-2">
-                    <label for="id_sort" class="control-label">Сортировка</label>
-                    <select id="id_sort" name="sort" class="form-control">
-                        <option value="end" selected="selected">End time</option>
-                        <option value="img">Presence or absence of image</option>
-                        <option value="bids">Number of bids</option>
-                        <option value="cbids">Current price</option>
-                        <option value="Bidorbuy">Prompt decision price</option>
-                        <option value="Affiliate">Affiliate</option>
-                    </select>
-                </div>
 
-                <div class="col-lg-2">
-                    <label for="id_order" class="control-label">Упорядочить</label>
-                    <select id="id_order" name="order" class="form-control">
-                        <option value="a" selected="selected">Ascending</option>
-                        <option value="d">Descending</option>
-                    </select>
-                </div>
+{#                <div class="col-lg-2">#}
+{#                    <label for="id_sort" class="control-label">Сортировка</label>#}
+{#                    <select id="id_sort" name="sort" class="form-control">#}
+{#                        <option value="end" selected="selected">End time</option>#}
+{#                        <option value="img">Presence or absence of image</option>#}
+{#                        <option value="bids">Number of bids</option>#}
+{#                        <option value="cbids">Current price</option>#}
+{#                        <option value="Bidorbuy">Prompt decision price</option>#}
+{#                        <option value="Affiliate">Affiliate</option>#}
+{#                    </select>#}
+{#                </div>#}
+
+{#                <div class="col-lg-2">#}
+{#                    <label for="id_order" class="control-label">Упорядочить</label>#}
+{#                    <select id="id_order" name="order" class="form-control">#}
+{#                        <option value="a" selected="selected">Ascending</option>#}
+{#                        <option value="d">Descending</option>#}
+{#                    </select>#}
+{#                </div>#}
 
             </div>
 
@@ -529,6 +530,29 @@
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-default">Search</button>
                 </span>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-4 radio-toolbar">
+                    <span class="for-label">Сортировать по</span>
+
+                    <input type="radio" name="sort" id="id_sort1" value="end" checked>
+                    <label for="id_sort1" class="radio-inline">времени</label>
+
+                    <input type="radio" name="sort" id="id_sort2" value="cbids">
+                    <label for="id_sort2" class="radio-inline">цене</label>
+                </div>
+
+
+                <div class="col-lg-4 radio-toolbar">
+                    <span class="for-label">упорядочить</span>
+
+                    <input type="radio" name="order" id="id_order1" value="a" checked>
+                    <label for="id_order1" class="radio-inline">с начала</label>
+
+                    <input type="radio" name="order" id="id_ordert2" value="d">
+                    <label for="id_ordert2" class="radio-inline">с конца</label>
+                </div>
             </div>
         </div>
     </div>

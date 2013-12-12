@@ -34,7 +34,7 @@
     background-attachment: scroll;
     background-clip: border-box;
     background-color: rgba(0, 0, 0, 0);
-    background-image: url(http://icdn.lenta.ru/assets/icons-sa1cb1b62ba-de907e09ece41a5195f0cdfd26a26608.png);
+    background-image: url(images/icons.png);
     background-origin: padding-box;
     background-position: -2695px 0px;
     background-size: auto;
@@ -42,14 +42,8 @@
     color: rgb(68, 68, 68);
     cursor: pointer;
 
-    font-family: 'PT Serif', Georgia, 'Times New Roman', Times, serif;
-    font-size: 14px;
-
     height: 54px;
     width: 54px;
-
-    line-height: 20px;
-    vertical-align: middle;
 
     text-indent: -9999px;
     opacity: 0.3;
@@ -57,5 +51,8 @@
     bottom: 50px;
     right: 100px;
     display: none;
+}
 
+.scrollup:hover {
+    background-position: -2754px 0;
 }

@@ -1,3 +1,14 @@
+Number.prototype.formatMoney = function(c, d, t){
+    var n = this,
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
+    d = d == undefined ? "." : d,
+    t = t == undefined ? "," : t,
+    s = n < 0 ? "-" : "",
+    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
+
 var SearchButton = function(container){
     this.form = container.find('form');
 
@@ -25,6 +36,7 @@ var SearchButton = function(container){
                 var list = response.ResultSet.Result;
                 list.Item.forEach(function(entry) {
                     entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
+                    entry.cost =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
                 });
 
                 var output = Mustache.render(window.ItemsTemplate, list);
