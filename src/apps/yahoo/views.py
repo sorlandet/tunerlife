@@ -81,13 +81,21 @@ class YahooProcessFormView(ProcessFormView):
 
     def get_category(self):
         category = self.request.REQUEST.get('category')
-        ctype = self.request.REQUEST.get('type')
-
-        # print 'category:', category
-        # print 'type:', type
-
         if category and category.isdigit():
             return category
+
+        ctype = self.request.REQUEST.get('type')
+
+        size = self.request.REQUEST.get('size')
+        if size:
+            actions = {
+                '2084200183': get_wheels,
+                '2084005140': get_rims,
+            }
+
+            return actions[ctype](size)
+
+
 
         return ctype
 
@@ -102,3 +110,21 @@ class YahooProcessFormView(ProcessFormView):
             mixin += u'-スタッドレス'
 
         return u' '.join((query, mixin))
+
+
+def get_wheels(size):
+    if size == '17':
+        return '2084200189'
+    if size == '18':
+        return '2084200190'
+    if size == '19':
+        return '2084200191'
+
+
+def get_rims(size):
+    if size == '17':
+        return '2084040548'
+    if size == '18':
+        return '2084040547'
+    if size == '19':
+        return '2084195226'
