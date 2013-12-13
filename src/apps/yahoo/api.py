@@ -3,12 +3,14 @@ import requests
 
 
 class YahooAuctionAPI(object):
-    url = ''
-    query = {}
-    headers = {}
-    method = 'GET'
-    timeout = 30.0
-    error_code = ''
+
+    def __init__(self):
+        self.url = ''
+        self.query = {}
+        self.headers = {}
+        self.method = 'GET'
+        self.timeout = 30.0
+        self.error_code = ''
 
     def set_query(self, key, value):
         self.query[key] = value
