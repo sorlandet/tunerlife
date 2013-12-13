@@ -36,15 +36,27 @@
     <div class="container">
 
         <div class="row">
-
             {% include "yahoo/blocks/form.html" %}
+        </div>
 
-            <div style="display: none">
-                <div class="input">
-                    <textarea id="test-box" class="xxlarge" rows="5"></textarea>
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="display: none">
+                    <div class="input">
+                        <textarea id="test-box" class="xxlarge" rows="5"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <span>Всего найдено:</span>
+                    <span id="totalResultsAvailable"></span>
+
+                    <span>Всего вернуло:</span>
+                    <span id="totalResultsReturned"></span>
+
+                    <span>Запросов требуется:</span>
+                    <span id="totalPages"></span>
                 </div>
             </div>
-
         </div>
 
 

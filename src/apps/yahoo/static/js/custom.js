@@ -20,7 +20,7 @@ var SearchButton = function(container){
         window.searchData = $(this).serialize();
 
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: $(this).attr('action'),
             context: container,
             data: window.searchData,
@@ -32,22 +32,16 @@ var SearchButton = function(container){
 
                 window.Pages = Math.ceil(total / per_query);
 
-                console.log('total: ' + total);
-                console.log('pages: ' + window.Pages);
+                $('#totalResultsAvailable').html(total);
+                $('#totalResultsReturned').html(per_query)
+                $('#totalPages').html(Math.ceil(total / per_query))
 
-                container.find('#test-box').val(JSON.stringify(response.ResultSet));
+                //console.log('total: ' + total);
+                //console.log('pages: ' + window.Pages);
 
-                var list = response.ResultSet.Result;
-                list.Item.forEach(function(entry) {
-                    entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
-                    entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
-                    var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000
-                    entry.current_price_rubles = Number(end_price * 0.33).formatMoney(2, '.', ' ');
-                });
+                $(document).trigger('ajaxResponse', response);
 
-                var output = Mustache.render(window.ItemsTemplate, list);
 
-                container.find('#ajax-result').html(output)
             },
             error: function(request, errorType, errorMessage){
                 console.log('Error: ' + errorType + ' with message: ' + errorMessage);
@@ -59,33 +53,11 @@ var SearchButton = function(container){
             complete: function(){
                 $(document).simpleInfiniteScroll({
                     threshold: 200,
-                    method: 'get',
+                    method: 'post',
                     url: $('#searchForm').attr('action'),
                     totalPagesNumber: window.Pages,
                     ajaxData: window.searchData,
-                    newPageLoaded: function(e, response) {
-                        //console.log('newPageLoaded', response);
-
-                        if (typeof response.ResultSet != "undefined"){
-                            $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
-
-                            if (typeof response.ResultSet.Result != "undefined"){
-                                var list = response.ResultSet.Result;
-
-                                if (typeof list.Item != "undefined"){
-                                    list.Item.forEach(function(entry) {
-                                        entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
-                                        entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
-                                        var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000
-                                        entry.current_price_rubles = Number(end_price * 0.33).formatMoney(2, '.', ' ');
-                                    });
-
-                                    $("div#ajax-result div.lot:last")
-                                        .after(Mustache.render(window.ItemsTemplate, list));
-                                }
-                            }
-                        }
-                    }
+                    newPageLoaded: ajaxResponseHandler
                 });
             }
         })
@@ -95,8 +67,35 @@ var SearchButton = function(container){
     this.form.on('submit', this.search)
 }
 
+var ajaxResponseHandler = function(e, response) {
+    if (typeof response.ResultSet != "undefined"){
+        $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
+
+        if (typeof response.ResultSet.Result != "undefined"){
+            var list = response.ResultSet.Result;
+
+            if (typeof list.Item != "undefined"){
+                list.Item.forEach(function(entry) {
+                    entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
+                    entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
+                    var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000 + 500
+                    entry.current_price_rubles = Number(end_price * 0.33).formatMoney(2, '.', ' ');
+                });
+                var data = Mustache.render(window.ItemsTemplate, list)
+                var lots = $("div#ajax-result").children();
+                if (lots.length == 0) {
+                    $("div#ajax-result").html(data);
+                }
+                lots.last().after(data);
+            }
+        }
+    }
+};
+
+$(document).on('ajaxResponse', ajaxResponseHandler);
 
 $(document).ready(function(){
+
     var yahoosearchform = new SearchButton($('.container'));
     $.get('/static/assets/templates/yahoolotList.mustache.html', function(template, textStatus, jqXhr) {
         window.ItemsTemplate = $(template).filter('#yahoolotListTpl').html();
@@ -116,6 +115,10 @@ $(document).ready(function(){
     });
 
     window.searchData = null;
+
+
+
+
 
 //    console.log(moment('2013-12-11T18:17:42+09:00').format('MMMM Do YYYY, h:mm:ss a'));
 //    console.log(moment('2013-12-11T18:17:42+09:00').format('dddd'));

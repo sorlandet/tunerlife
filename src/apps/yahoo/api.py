@@ -14,6 +14,7 @@ class YahooAuctionAPI(object):
         self.query[key] = value
 
     def execute(self):
+        print self.query
         if self.method == 'GET':
             r = requests.get(self.url, params=self.query,
                              headers=self.headers, timeout=self.timeout)
@@ -22,7 +23,7 @@ class YahooAuctionAPI(object):
                               headers=self.headers, timeout=self.timeout)
         if r.status_code == requests.codes.ok:
             # print r.encoding
-            print r.url
+            # print r.url
             return r.content.lstrip('loaded(').rstrip(')')
             # return json.loads(r.content.lstrip('loaded(').rstrip(')'), encoding=r.encoding)
 

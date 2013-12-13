@@ -33,10 +33,21 @@ class YahooProcessFormView(ProcessFormView):
         return HttpResponse(content=content,
                             content_type='application/json; charset=utf-8')
 
-    def get_search_results(self, form):
-        page = int(self.request.GET.get('page', 0)) + 1
+    def post(self, request, *args, **kwargs):
 
-        print 'item_status:', form.cleaned_data.get('item_status')
+        form = YahooSearchForm(self.request.POST)
+
+        if form.is_valid():
+            content = self.get_search_results(form=form)
+        else:
+            content = ''
+
+        return HttpResponse(content=content,
+                            content_type='application/json; charset=utf-8')
+
+
+    def get_search_results(self, form):
+        page = int(self.request.REQUEST.get('page', 1))
 
         obj = Search('dj0zaiZpPXFONUl2dTR2ck5wYyZzPWNvbnN1bWVyc2VjcmV0Jng9YmY-', 'V2')
         obj.set_option('sort', form.cleaned_data.get('sort', 'end'))
@@ -69,11 +80,11 @@ class YahooProcessFormView(ProcessFormView):
         return result
 
     def get_category(self):
-        category = self.request.GET.get('category')
-        ctype = self.request.GET.get('type')
+        category = self.request.REQUEST.get('category')
+        ctype = self.request.REQUEST.get('type')
 
-        print 'category:', category
-        print 'type:', type
+        # print 'category:', category
+        # print 'type:', type
 
         if category and category.isdigit():
             return category
@@ -82,9 +93,9 @@ class YahooProcessFormView(ProcessFormView):
 
     def get_query(self, query):
         mixin = ''
-        season = self.request.GET.get('season')
+        season = self.request.REQUEST.get('season')
 
-        print 'season:', season
+        # print 'season:', season
         if season == 'winter':
             mixin += u'スタッドレス'
         elif season == 'summer':
