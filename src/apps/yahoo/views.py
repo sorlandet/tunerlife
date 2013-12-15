@@ -34,7 +34,6 @@ class YahooProcessFormView(ProcessFormView):
                             content_type='application/json; charset=utf-8')
 
     def post(self, request, *args, **kwargs):
-
         form = YahooSearchForm(self.request.POST)
 
         if form.is_valid():
@@ -53,7 +52,6 @@ class YahooProcessFormView(ProcessFormView):
         obj.set_option('sort', form.cleaned_data.get('sort', 'end'))
         obj.set_option('order', form.cleaned_data.get('order', 'd'))
         obj.set_option('item_status', form.cleaned_data.get('item_status'))
-        obj.set_option('f', form.cleaned_data.get('f'))
 
         aucminprice = form.cleaned_data.get('aucminprice')
         aucmaxprice = form.cleaned_data.get('aucmaxprice')
@@ -70,6 +68,7 @@ class YahooProcessFormView(ProcessFormView):
         obj.set_option('output', 'json')
         obj.set_option('store', 0)
         obj.set_option('type', 'all')
+        obj.set_option('f', '0x4')
 
         obj.set_option(Search.API_OPTION_PAGE, page)
 
@@ -80,13 +79,13 @@ class YahooProcessFormView(ProcessFormView):
         return result
 
     def get_category(self):
-        category = self.request.REQUEST.get('category')
+        category = self.request.POST.get('category')
         if category and category.isdigit():
             return category
 
-        ctype = self.request.REQUEST.get('type')
+        ctype = self.request.POST.get('type')
 
-        size = self.request.REQUEST.get('size')
+        size = self.request.POST.get('size')
         if size:
             actions = {
                 '2084200183': get_wheels,
@@ -100,16 +99,38 @@ class YahooProcessFormView(ProcessFormView):
         return ctype
 
     def get_query(self, query):
-        mixin = ''
-        season = self.request.REQUEST.get('season')
+        mixins = [query, ]
 
+        widths = self.request.POST.getlist('width')
+        widths = ' '.join([el for el in widths if el])
+        if widths:
+            width_mixin = '(%s)J' % widths
+            print 'width_mixin:', width_mixin
+            mixins.append(width_mixin)
+
+        bolt_pattern = self.request.POST.get('bolt_pattern')
+        if bolt_pattern:
+            print 'bolt pattern:', bolt_pattern
+            holes, pcd = bolt_pattern.split('x')
+            bolt_pattern_mixin = u'%s穴 %s' % (holes, pcd)
+            mixins.append(bolt_pattern_mixin)
+
+        offsets = self.request.POST.getlist('offset')
+        offsets = ' '.join([el for el in offsets if el])
+        if offsets:
+            print 'offsets:', offsets
+            offset_mixin = '(%s)' % offsets
+            print 'offset_mixin:', offset_mixin
+            mixins.append(offset_mixin)
+
+        # season = self.request.REQUEST.get('season')
         # print 'season:', season
-        if season == 'winter':
-            mixin += u'スタッドレス'
-        elif season == 'summer':
-            mixin += u'-スタッドレス'
+        # if season == 'winter':
+        #     mixin += u'スタッドレス'
+        # elif season == 'summer':
+        #     mixin += u'-スタッドレス'
 
-        return u' '.join((query, mixin))
+        return u' '.join(mixins)
 
 
 def get_wheels(size):

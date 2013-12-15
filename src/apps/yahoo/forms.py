@@ -28,11 +28,11 @@ class YahooSearchForm(forms.Form):
         ('2', 'Used')
     )
 
-    F_CHOICES = (
-        ('0x2', 'Search for "Title + store for Search"'),
-        ('0x4', 'Search for "Title + body"'),
-        ('0x8', 'Search for "title only"')
-    )
+    # F_CHOICES = (
+    #     ('0x2', 'Search for "Title + store for Search"'),
+    #     ('0x4', 'Search for "Title + body"'),
+    #     ('0x8', 'Search for "title only"')
+    # )
 
     # Get the search words entered in the form
     query = forms.CharField(required=False)
@@ -46,7 +46,7 @@ class YahooSearchForm(forms.Form):
     # Get the product state that is entered in the form
     item_status = forms.CharField(widget=forms.Select(choices=ITEM_STATUS_CHOICES))
 
-    f = forms.CharField(widget=forms.Select(choices=F_CHOICES))
+    # f = forms.CharField(widget=forms.Select(choices=F_CHOICES))
 
     # Get the upper limit of the range specification of commodity prices entered in the form
     aucminprice = forms.IntegerField(required=False)
