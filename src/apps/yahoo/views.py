@@ -116,12 +116,19 @@ class YahooProcessFormView(ProcessFormView):
             mixins.append(bolt_pattern_mixin)
 
         offsets = self.request.POST.getlist('offset')
-        offsets = ' '.join([el for el in offsets if el])
-        if offsets:
-            print 'offsets:', offsets
-            offset_mixin = '(%s)' % offsets
-            print 'offset_mixin:', offset_mixin
-            mixins.append(offset_mixin)
+        offsets_pos = ' '.join([el.strip('+') for el in offsets if el and '+' in el])
+        offsets_neg = ' '.join([el.strip('-') for el in offsets if el and '-' in el])
+        if offsets_pos:
+            print 'offsets_pos:', offsets_pos
+            offset_pos_mixin = '+(%s)' % offsets_pos
+            print 'offset_pos_mixin:', offset_pos_mixin
+            mixins.append(offset_pos_mixin)
+
+        if offsets_neg:
+            print 'offsets_neg:', offsets_neg
+            offsets_neg_mixin = '-(%s)' % offsets_neg
+            print 'offsets_neg_mixin:', offsets_neg_mixin
+            mixins.append(offsets_neg_mixin)
 
         # season = self.request.REQUEST.get('season')
         # print 'season:', season
