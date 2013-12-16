@@ -42,6 +42,7 @@ class YahooProcessFormView(ProcessFormView):
         form = YahooSearchForm(self.request.POST)
 
         if form.is_valid():
+            print 'valid form'
             content = self.get_search_results(form=form)
         else:
             content = ''
@@ -57,6 +58,10 @@ class YahooProcessFormView(ProcessFormView):
         obj.set_option('sort', form.cleaned_data.get('sort', 'end'))
         obj.set_option('order', form.cleaned_data.get('order', 'd'))
         obj.set_option('item_status', form.cleaned_data.get('item_status'))
+
+        buynow = form.cleaned_data.get('buynow')
+        if buynow:
+            obj.set_option('buynow', 1)
 
         aucminprice = form.cleaned_data.get('aucminprice')
         aucmaxprice = form.cleaned_data.get('aucmaxprice')

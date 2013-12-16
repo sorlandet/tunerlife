@@ -51,3 +51,5 @@ class YahooSearchForm(forms.Form):
     # Get the upper limit of the range specification of commodity prices entered in the form
     aucminprice = forms.IntegerField(required=False)
     aucmaxprice = forms.IntegerField(required=False)
+
+    buynow = forms.BooleanField(required=False)

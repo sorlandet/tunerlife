@@ -417,51 +417,29 @@
             <div class="form-group row">
 
 
-                <div class="col-lg-2">
-                    <label for="id_offset" class="control-label">Состояние</label>
-                    <select id="id_item_status" name="item_status" class="form-control">
-                        <option value="0"></option>
-                        <option value="1">Новый</option>
-                        <option value="2">Б/У</option>
-                    </select>
+                <div class="col-lg-5">
+                    <span class="for-label">Цена:</span>
+
+                    <input type="text" id="id_aucminprice" name="aucminprice"  placeholder="от">
+                    <input type="text" id="id_aucmaxprice" name="aucmaxprice"  placeholder="до">
+                </div>
+
+                <div class="col-lg-4 radio-toolbar">
+                    <span class="for-label">Состояние</span>
+
+                    <input type="radio" name="item_status" id="id_item_status1" value="0" checked>
+                    <label for="id_item_status1" class="radio-inline">все</label>
+
+                    <input type="radio" name="item_status" id="id_item_status1" value="1" checked>
+                    <label for="id_item_status1" class="radio-inline">новые</label>
+
+                    <input type="radio" name="item_status" id="id_item_status2" value="2">
+                    <label for="id_item_status2" class="radio-inline">б/у</label>
                 </div>
 
                 <div class="col-lg-2">
-                    <label for="id_aucminprice" class="control-label">Цена от</label>
-                    <select id="id_aucminprice" name="aucminprice" class="form-control">
-                        <option></option>
-                        <option>10000</option>
-                        <option>20000</option>
-                        <option>30000</option>
-                        <option>40000</option>
-                        <option>50000</option>
-                        <option>60000</option>
-                        <option>70000</option>
-                        <option>80000</option>
-                        <option>90000</option>
-                        <option>100000</option>
-                        <option>150000</option>
-                        <option>200000</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-2">
-                    <label for="id_aucmaxprice" class="control-label">Цена до</label>
-                    <select id="id_aucmaxprice" name="aucmaxprice" class="form-control">
-                        <option></option>
-                        <option>10000</option>
-                        <option>20000</option>
-                        <option>30000</option>
-                        <option>40000</option>
-                        <option>50000</option>
-                        <option>60000</option>
-                        <option>70000</option>
-                        <option>80000</option>
-                        <option>90000</option>
-                        <option>100000</option>
-                        <option>150000</option>
-                        <option>200000</option>
-                    </select>
+                    <input id="chkBuyNow" type="checkbox" name="buynow">
+                    <label for="chkBuyNow"> с блиц-ценой</label>
                 </div>
 
 
