@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import json
+import re
+import urllib
+import urllib2
 
 from django.http import HttpResponse
+from django.utils.encoding import smart_unicode
 from django.views.generic import TemplateView
 from django.views.generic.edit import ProcessFormView
 
@@ -74,9 +79,13 @@ class YahooProcessFormView(ProcessFormView):
 
         result = obj.action()
 
-        del obj
-
-        return result
+        data = json.loads(result)
+        if data['ResultSet']['Result']['Item']:
+            items = list(data['ResultSet']['Result']['Item'])
+            for item in items:
+                item['TitleRus'] = translate('ja', 'ru', smart_unicode(item['Title']))
+        return json.dumps(data)
+        # return result
 
     def get_category(self):
         category = self.request.POST.get('category')
@@ -130,29 +139,60 @@ class YahooProcessFormView(ProcessFormView):
             print 'offsets_neg_mixin:', offsets_neg_mixin
             mixins.append(offsets_neg_mixin)
 
-        # season = self.request.REQUEST.get('season')
-        # print 'season:', season
-        # if season == 'winter':
-        #     mixin += u'スタッドレス'
-        # elif season == 'summer':
-        #     mixin += u'-スタッドレス'
+        season = self.request.REQUEST.get('season')
+        print 'season:', season
+        if season == 'winter':
+            mixins.append(u'スタッドレス')
+        elif season == 'summer':
+            mixins.append(u'-スタッドレス')
 
         return u' '.join(mixins)
 
 
 def get_wheels(size):
+    if size == '16':
+        return '2084200188'
     if size == '17':
         return '2084200189'
     if size == '18':
         return '2084200190'
     if size == '19':
         return '2084200191'
+    if size == '20':
+        return '2084200192'
 
 
 def get_rims(size):
+    if size == '16':
+        return '2084008474'
     if size == '17':
         return '2084040548'
     if size == '18':
         return '2084040547'
     if size == '19':
         return '2084195226'
+    if size == '20':
+        return '2084195227'
+
+
+def translate(sl, tl, text):
+    """
+    Translates a given text from
+    source language (sl) to target language (tl)
+    """
+
+    opener = urllib2.build_opener()
+    opener.addheaders = [
+        ('User-agent',
+         'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)')
+    ]
+
+    data = urllib.urlencode(
+        {'ie': 'UTF8', 'text': text.encode('utf-8'), 'sl': sl, 'tl': tl}
+    )
+    params = urllib.urlencode({'client': 't'})
+    url = "http://translate.google.com/translate_a/t?" + params
+    res = smart_unicode(opener.open(url, data=data).read())
+    fixed_json = re.sub(r',{2,}', ',', res).replace(',]', ']')
+    data = json.loads(fixed_json)
+    return "%s" % data[0][0][0]

@@ -92,6 +92,12 @@ var ajaxResponseHandler = function(e, response) {
     }
 };
 
+var translationHandler = function(response) {
+    console.log(response);
+    //return response.data.translations[0].translatedText;
+}
+
+
 $(document).on('ajaxResponse', ajaxResponseHandler);
 
 $(document).ready(function(){
