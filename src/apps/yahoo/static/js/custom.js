@@ -97,8 +97,23 @@ var translationHandler = function(response) {
     //return response.data.translations[0].translatedText;
 }
 
+$('#myTab a:first').tab('show');
+
 
 $(document).on('ajaxResponse', ajaxResponseHandler);
+
+$(document).on('click', '.to-compare', function(e){
+    e.preventDefault();
+    var lot = $(this).closest($('.lot'));
+    var lots = $("div#for-comparison").children();
+    if (lots.length == 0) {
+        $("div#for-comparison").html(lot);
+    }
+    lots.last().after(lot);
+
+    var total = parseInt($('#totalLotsForComparison').html());
+    $('#totalLotsForComparison').html(total + 1);
+});
 
 $(document).ready(function(){
 
@@ -121,6 +136,12 @@ $(document).ready(function(){
     });
 
     window.searchData = null;
+
+
+    $('#myTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
 
 
 

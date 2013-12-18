@@ -47,6 +47,7 @@
                     </div>
                 </div>
                 <div>
+                    <!--
                     <span>Всего найдено:</span>
                     <span id="totalResultsAvailable"></span>
 
@@ -55,13 +56,29 @@
 
                     <span>Запросов требуется:</span>
                     <span id="totalPages"></span>
+                    -->
                 </div>
             </div>
         </div>
 
 
+        <div class="row">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="myTab">
+                <li><a href="#results" data-toggle="tab">Результаты (<span id="totalResultsAvailable">0</span>)</a></li>
+                <li><a href="#comparison" data-toggle="tab">Отложено (<span id="totalLotsForComparison">0</span>)</a></li>
+            </ul>
 
-        <div id="ajax-result" class="row"></div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="results">
+                  <div id="ajax-result"></div>
+              </div>
+              <div class="tab-pane fade" id="comparison">
+                  <div id="for-comparison"></div>
+              </div>
+            </div>
+        </div>
 
         <a href="#" class="scrollup" title="наверх">Scroll</a>
 
