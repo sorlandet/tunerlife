@@ -33,8 +33,8 @@ var SearchButton = function(container){
                 window.Pages = Math.ceil(total / per_query);
 
                 $('#totalResultsAvailable').html(total);
-                $('#totalResultsReturned').html(per_query)
-                $('#totalPages').html(Math.ceil(total / per_query))
+                //$('#totalResultsReturned').html(per_query)
+                //$('#totalPages').html(Math.ceil(total / per_query))
 
                 //console.log('total: ' + total);
                 //console.log('pages: ' + window.Pages);
@@ -49,6 +49,10 @@ var SearchButton = function(container){
             beforeSend: function(){
                 container.find('#test-box').val('');
                 container.find('#ajax-result').html('');
+                container.find('#for-comparison').html('');
+
+                $('#totalResultsAvailable').html('0');
+                $('#totalLotsForComparison').html('0');
             },
             complete: function(){
                 $(document).simpleInfiniteScroll({
