@@ -84,13 +84,13 @@ class YahooProcessFormView(ProcessFormView):
 
         result = obj.action()
 
-        data = json.loads(result)
-        if data['ResultSet']['Result']['Item']:
-            items = list(data['ResultSet']['Result']['Item'])
-            for item in items:
-                item['TitleRus'] = translate('ja', 'ru', smart_unicode(item['Title']))
-        return json.dumps(data)
-        # return result
+        # data = json.loads(result)
+        # if data['ResultSet']['Result']['Item']:
+        #     items = list(data['ResultSet']['Result']['Item'])
+        #     for item in items:
+        #         item['TitleRus'] = translate('ja', 'ru', smart_unicode(item['Title']))
+        # return json.dumps(data)
+        return result
 
     def get_category(self):
         category = self.request.POST.get('category')

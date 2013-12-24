@@ -56,3 +56,52 @@
 .scrollup:hover {
     background-position: -2754px 0;
 }
+
+.lot {
+    margin-top: 20px;
+}
+
+.lot-inner {
+    height: 300px;
+}
+.lot-inner:hover {
+    background: #FCFCFC;
+}
+
+.lot-inner .img-wrapper {
+    width: 100%;
+    height: 120px;
+}
+
+.lot-info {
+  padding: 10px;
+}
+
+.lot-info .ttl {
+    font-size: 15px;
+    font-weight: bold;
+    height: 40px;
+}
+
+.lot-info .bids-count {
+    font-size: 10px;
+}
+
+.lot-info .price-yen {
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+.lot-info .price-rub {
+    font-size: 15px;
+    font-weight: bold;
+    color: CRIMSON;
+}
+
+.lot-info .lot-link {
+    font-size: 12px;
+}
+
+.lot-info .lot-link .glyphicon {
+    margin-right: 10px;
+}
