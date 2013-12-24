@@ -62,7 +62,7 @@
 }
 
 .lot-inner {
-    height: 300px;
+    height: 380px;
 }
 .lot-inner:hover {
     background: #FCFCFC;
@@ -77,10 +77,19 @@
   padding: 10px;
 }
 
+.lot-info .title {
+    font-size: 12px;
+    height: 80px;
+    line-height: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .lot-info .ttl {
     font-size: 15px;
     font-weight: bold;
     height: 40px;
+    line-height: 15px;
 }
 
 .lot-info .bids-count {
