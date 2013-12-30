@@ -38,6 +38,7 @@ urlpatterns = patterns('',
 
     url(r'', include('src.apps.account.urls', namespace='account')),
     url(r'', include('src.apps.yahoo.urls', namespace='yahoo')),
+    url(r'^translate/', include('src.apps.translation.urls')),
 
     url(r"^confirm_email/(\w+)/$", confirm_email, name="emailconfirmation_confirm_email"),
 

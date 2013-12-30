@@ -185,6 +185,7 @@ INSTALLED_APPS = [
     'src.apps.account',
     'src.apps.auto',
     'src.apps.yahoo',
+    'src.apps.translation'
     #'src.apps.reviews',
 ]
 

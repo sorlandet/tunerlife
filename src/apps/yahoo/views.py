@@ -179,26 +179,3 @@ def get_rims(size):
         return '2084195226'
     if size == '20':
         return '2084195227'
-
-
-def translate(sl, tl, text):
-    """
-    Translates a given text from
-    source language (sl) to target language (tl)
-    """
-
-    opener = urllib2.build_opener()
-    opener.addheaders = [
-        ('User-agent',
-         'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)')
-    ]
-
-    data = urllib.urlencode(
-        {'ie': 'UTF8', 'text': text.encode('utf-8'), 'sl': sl, 'tl': tl}
-    )
-    params = urllib.urlencode({'client': 't'})
-    url = "http://translate.google.com/translate_a/t?" + params
-    res = smart_unicode(opener.open(url, data=data).read())
-    fixed_json = re.sub(r',{2,}', ',', res).replace(',]', ']')
-    data = json.loads(fixed_json)
-    return "%s" % data[0][0][0]

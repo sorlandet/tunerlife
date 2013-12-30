@@ -91,20 +91,35 @@ var ajaxResponseHandler = function(e, response) {
                     $("div#ajax-result").html(data);
                 }
                 lots.last().after(data);
+                $('.title').each(function() {
+                    $(this).trigger('ajaxTranslate');
+                });
             }
         }
     }
 };
 
-var translationHandler = function(response) {
-    console.log(response);
-    //return response.data.translations[0].translatedText;
+var ajaxTranslateHandler = function(e) {
+    e.preventDefault();
+    var title = e.target;
+    var translationAPI = '/translate/ajax/';
+    //console.log(title);
+    $.get( translationAPI, {title: title.innerHTML, sl: "ja", tl: "ru"})
+        .done(function( data ) {
+            console.log( "Data Loaded: " + data );
+            $(title).html(data);
+        }).fail(function( jqxhr, textStatus, error ) {
+            var err = textStatus + ", " + error;
+            console.log( "Request Failed: " + err );
+        });
 }
 
 $('#myTab a:first').tab('show');
 
 
 $(document).on('ajaxResponse', ajaxResponseHandler);
+$(document).on('ajaxTranslate', ajaxTranslateHandler);
+//$(document).on('click', '.title', ajaxTranslateHandler);
 
 $(document).on('click', '.to-compare', function(e){
     e.preventDefault();
