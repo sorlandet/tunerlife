@@ -11,6 +11,9 @@ from src.apps.translation.models import Translation
 
 
 class TranslateProcessFormView(ProcessFormView):
+    target_lang = 'en'
+    source_lang = 'auto'
+    text = ''
 
     def get(self, request, *args, **kwargs):
 

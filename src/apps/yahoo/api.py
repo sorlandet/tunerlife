@@ -1,5 +1,6 @@
 import json
 import requests
+from requests.exceptions import ChunkedEncodingError
 
 
 class YahooAuctionAPI(object):
@@ -18,8 +19,11 @@ class YahooAuctionAPI(object):
     def execute(self):
         print self.query
         if self.method == 'GET':
-            r = requests.get(self.url, params=self.query,
-                             headers=self.headers, timeout=self.timeout)
+            try:
+                r = requests.get(self.url, params=self.query,
+                                 headers=self.headers, timeout=self.timeout)
+            except ChunkedEncodingError:
+                return False
         elif self.method == 'POST':
             r = requests.post(self.url, data=self.query,
                               headers=self.headers, timeout=self.timeout)
