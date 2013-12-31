@@ -7,17 +7,20 @@
 
 
 {% block custom-css %}
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://fotorama.s3.amazonaws.com/c/style.css?20131230210928" />
 
     <!-- Fotorama -->
-    <link  href="{% static "css/fotorama.css" %}" rel="stylesheet">
+    <link  href="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.css" rel="stylesheet">
+    <!--link  href="{% static "css/fotorama.css" %}" rel="stylesheet"-->
 {% endblock %}
 
 
 {% block custom-js %}
+    <!--script type="text/javascript" src="{% static "js/script.js" %}"></script-->
     <script src="http://fotorama.s3.amazonaws.com/j/script.js?20131230210928"></script>
-
     <!-- Fotorama -->
+    <!--script src="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.js"></script-->
     <script type="text/javascript" src="{% static "js/lib/fotorama.js" %}"></script>
 {% endblock %}
 
