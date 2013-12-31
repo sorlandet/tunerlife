@@ -1,0 +1,103 @@
+{% extends "yahoo/skeleton.html" %}
+
+{% load staticfiles %}
+
+
+{% block title %}{{ lot.Title }}{% endblock %}
+
+
+{% block container %}
+
+    <div class="container">
+
+        <div class="row">
+        {% for item in lot.Images %}
+            <div><img src="{{ item }}" class="img-wrapper img-responsive"></div>
+        {% endfor %}
+        </div>
+
+        <div class="row">
+            <h2>Seller info</h2>
+            <span>ID: {{ lot.Seller.Id }}</span></br>
+            <span>Rating: {{ lot.Seller.Rating }}</span></br>
+            <span>ItemListURL: {{ lot.Seller.ItemListURL }}</span></br>
+            <span>RatingURL: {{ lot.Seller.RatingURL }}</span>
+        </div>
+
+        <div class="row">
+            <h2>Item info</h2>
+            <span>AuctionItemUrl: {{ lot.AuctionItemUrl }}</span></br>
+
+
+            <span>Initprice: {{ lot.Initprice }}</span></br>
+            <span>Price: {{ lot.Price }}</span></br>
+            <span>Quantity: {{ lot.Quantity }}</span></br>
+            <span>Bids: {{ lot.Bids }}</span></br>
+        </div>
+
+        <div class="row">
+            <h2>HighestBidders</h2>
+            <span>HighestBidders: {{ lot.HighestBidders }}</span></br>
+            <ul>
+            {% for item in lot.HighestBidders %}
+                <li>{{ item }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="row">
+            <h2>Item info</h2>
+            <span>YPoint: {{ lot.YPoint }}</span></br>
+            <span>Item Status: {{ lot.ItemStatus }}</span></br>
+            <span>Item Status Condition: {{ lot.ItemStatus.Condition }}</span></br>
+            <span>Item Status Comment: {{ lot.ItemStatus.Comment }}</span></br>
+            <span>Item Returnable: {{ lot.ItemReturnable }}</span></br>
+            <span>Item Returnable Allowed: {{ lot.Returnable.Allowed }}</span></br>
+            <span>Item Returnable Allowed Comment: {{ lot.Returnable.Allowed.Comment }}</span></br>
+            <span>StartTime: {{ lot.StartTime }}</span></br>
+            <span>EndTime: {{ lot.EndTime }}</span></br>
+            <span>Bidorbuy: {{ lot.Bidorbuy }}</span></br>
+            <span>Reserved: {{ lot.Reserved }}</span></br>
+            <span>IsBidCreditRestrictions: {{ lot.IsBidCreditRestrictions }}</span></br>
+            <span>IsBidderRestrictions: {{ lot.IsBidderRestrictions }}</span></br>
+            <span>isBidderRatioRestrictions: {{ lot.isBidderRatioRestrictions }}</span></br>
+            <span>IsEarlyClosing: {{ lot.IsEarlyClosing }}</span></br>
+            <span>IsAutomaticExtension: {{ lot.IsAutomaticExtension }}</span></br>
+            <span>IsOffer: {{ lot.IsOffer }}</span></br>
+            <span>IsCharity: {{ lot.IsCharity }}</span></br>
+            <span>Option: {{ lot.Option }}</span></br>
+        </div>
+
+        <div class="row">
+            <h2>Description</h2>
+            <span>{{ lot.Description|safe }}</span></br>
+        </div>
+
+        <div class="row">
+            <h2>Payment</h2>
+            <span>Payment: {{ lot.Payment }}</span></br>
+        </div>
+
+        <div class="row">
+            <h2>...</h2>
+            <span>ChargeForShipping: {{ lot.ChargeForShipping }}</span></br>
+            <span>Location: {{ lot.Location }}</span></br>
+            <span>IsWorldwide: {{ lot.IsWorldwide }}</span></br>
+            <span>ShipTime: {{ lot.ShipTime }}</span></br>
+        </div>
+
+        <div class="row">
+            <h2>Shipping</h2>
+            <span>Shipping: {{ lot.Shipping }}</span></br>
+        </div>
+
+        <div class="row">
+            <h2>...</h2>
+
+            <span>BaggageInfo: {{ lot.BaggageInfo }}</span></br>
+            <span>CharityOption: {{ lot.CharityOption }}</span></br>
+        </div>
+
+    </div>
+
+{% endblock %}

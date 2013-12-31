@@ -73,7 +73,7 @@ var SearchButton = function(container){
 
 var ajaxResponseHandler = function(e, response) {
     if (typeof response.ResultSet != "undefined"){
-        $('.container').find('#test-box').val(JSON.stringify(response.ResultSet));
+        $('#test-box').val(JSON.stringify(response.ResultSet));
 
         if (typeof response.ResultSet.Result != "undefined"){
             var list = response.ResultSet.Result;
@@ -82,6 +82,7 @@ var ajaxResponseHandler = function(e, response) {
                 list.Item.forEach(function(entry) {
                     entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
                     entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
+                    entry.buyout_price =  Number(entry.BidOrBuy).formatMoney(2, '.', ' ');
                     var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000 + 500
                     entry.current_price_rubles = Number(end_price * 0.33).formatMoney(2, '.', ' ');
                 });

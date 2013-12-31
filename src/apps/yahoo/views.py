@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import json
-import re
-import urllib
-import urllib2
 
 from django.http import HttpResponse
-from django.utils.encoding import smart_unicode
 from django.views.generic import TemplateView
 from django.views.generic.edit import ProcessFormView
+import jsonpickle
 
-from src.apps.yahoo.api import Search
+from src.apps.yahoo.api import Search, AuctionItem
 from src.apps.yahoo.forms import YahooSearchForm
 
 
@@ -154,6 +152,62 @@ class YahooProcessFormView(ProcessFormView):
 
         return u' '.join(mixins)
 
+
+class AuctionLotDetailView(TemplateView):
+    template_name = 'yahoo/auctionlot_detail.html'
+    auction_id_url_kwarg = 'AuctionID'
+
+    def get_object(self):
+        auction_id = self.kwargs.get(self.auction_id_url_kwarg, None)
+
+        obj = AuctionItem('dj0zaiZpPXFONUl2dTR2ck5wYyZzPWNvbnN1bWVyc2VjcmV0Jng9YmY-', 'V2')
+        obj.set_option(AuctionItem.API_OPTION_AUCTIONID, auction_id)
+        obj.set_option('output', 'json')
+
+        return obj.action()
+
+    def get_context_data(self, **kwargs):
+        context = super(AuctionLotDetailView, self).get_context_data(**kwargs)
+        decoded_response = jsonpickle.decode(self.get_object(), keys=True)
+        lot = auction_item_decoder(decoded_response['ResultSet']['Result'])
+        context['lot'] = lot
+        return context
+
+
+class AuctionLot(object):
+    pass
+
+
+class Seller(object):
+    pass
+
+
+def auction_item_decoder(obj):
+    lot = AuctionLot()
+    lot.AuctionID = obj['AuctionID']
+    lot.CategoryID = obj['CategoryID']
+    lot.Title = obj['Title']
+
+    seller = Seller()
+    seller.Id = obj['Seller']['Id']
+    seller.Rating = obj['Seller']['Rating']
+    seller.ItemListURL = obj['Seller']['ItemListURL']
+    seller.RatingURL = obj['Seller']['RatingURL']
+
+    lot.Seller = seller
+    lot.AuctionItemUrl = obj['AuctionItemUrl']
+
+    images = []
+    for key in obj['Img']:
+        images.append(obj['Img'][key])
+
+    lot.Images = images
+
+
+    # print obj
+    # obj['ResultSet']
+
+    return lot
 
 def get_wheels(size):
     if size == '16':

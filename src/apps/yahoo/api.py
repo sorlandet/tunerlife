@@ -51,6 +51,8 @@ class YahooAuctionAPI(object):
 
 
 class APIAccessBase(object):
+    AUCTION_API_URL = 'http://auctions.yahooapis.jp/AuctionWebService/'
+
     API_OPTION_APPID = "appid"
     API_OPTION_URL = "url"
     API_OPTION_PAGE = "page"
@@ -60,14 +62,20 @@ class APIAccessBase(object):
     API_OPTION_EASYPAYMENT = "easypayment"
     API_OPTION_THUMBNAIL = "thumbnail"
 
-    LISTINGS_PER_PAGE = 50
 
-    def __init__(self, application_id):
+    LISTINGS_PER_PAGE = 50
+    version = None
+
+    def __init__(self, application_id, version):
+        self.version = version
         self.api = YahooAuctionAPI()
         self.api.headers.setdefault('User-Agent', 'Yahoo  AppID :  %s' % application_id)
         self.api.set_query(self.API_OPTION_APPID, application_id)
 
     def action(self):
+        url = '%s%s/%s' % (self.AUCTION_API_URL, self.version, self.API_NAME)
+        self.set_option(self.API_OPTION_URL, url)
+
         obj = self.api.execute()
         if not obj:
             obj = self.api.get_error_code()
@@ -82,16 +90,9 @@ class APIAccessBase(object):
 
 
 class Search(APIAccessBase):
-    AUCTION_API_URL = 'http://auctions.yahooapis.jp/AuctionWebService/'
+
     API_NAME = 'search'
 
-    version = None
 
-    def __init__(self, application_id, version):
-        super(Search, self).__init__(application_id)
-        self.version = version
-
-    def action(self):
-        url = '%s%s/%s' % (self.AUCTION_API_URL, self.version, self.API_NAME)
-        self.set_option(self.API_OPTION_URL, url)
-        return super(Search, self).action()
+class AuctionItem(APIAccessBase):
+    API_NAME = 'auctionItem'

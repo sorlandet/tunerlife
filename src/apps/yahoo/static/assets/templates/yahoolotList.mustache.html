@@ -6,7 +6,7 @@ This is the template for items in the channel list for when the app first loads
 {{#Item}}
 <div class="col-lg-2 col-sm-3 col-xs-4 lot">
     <div class="lot-inner thumbnail">
-        <a href="" title="{{ Title }}" class="img-wrapper img-responsive">
+        <a href="/search/{{ AuctionID }}" title="{{ Title }}" class="img-wrapper img-responsive">
             <img src="{{ Image }}">
         </a>
         <div class="lot-info">
@@ -14,7 +14,12 @@ This is the template for items in the channel list for when the app first loads
             <div class="bids-count">cтавок {{ Bids }}</div>
             <div class="ttl">{{ ttl }}</div>
             <div class="price-rub">{{ current_price_rubles }} руб.</div>
-            <div class="price-yen">{{ current_price }} йен</div>
+            <div class="price-yen">
+                <span>{{ current_price }} йен</span>
+              {{#BidOrBuy}}
+                </br><span>блиц цена {{ buyout_price }} йен</span>
+              {{/BidOrBuy}}
+            </div>
 
             <div class="lot-link in-japan">
                 <a target="_blank" href="http://injapan.ru/auction/{{ AuctionID }}.html">
