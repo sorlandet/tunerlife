@@ -7,18 +7,18 @@
 
 
 {% block custom-css %}
-    <style>
-        textarea.xxlarge {
-            overflow-y: auto;
-            width: 100%;
-        }
-
-        .endless_scroll_loader { position: fixed; top: 10px; right: 20px; }
-    </style>
+    <link href="{% static "css/search.css" %}" rel="stylesheet">
 {% endblock %}
 
 
-{% block custom-js %}
+{% block custom-fore-js %}
+    <script type="text/javascript" src="{% static "js/lib/jquery.simple-infinite-scroll.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/lib/mustache.js" %}"></script>
+{% endblock %}
+
+
+{% block custom-after-js %}
+    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script>
     <script type="text/javascript" src="{% static "js/custom.js" %}"></script>
 {% endblock %}
 

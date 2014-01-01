@@ -7,38 +7,52 @@
 
 
 {% block custom-css %}
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://fotorama.s3.amazonaws.com/c/style.css?20131230210928" />
-
-    <!-- Fotorama -->
-    <link  href="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.css" rel="stylesheet">
-    <!--link  href="{% static "css/fotorama.css" %}" rel="stylesheet"-->
+    <!-- Fotorama 4.4.9 -->
+    <link href="{% static "css/fotorama.css" %}" rel="stylesheet">
+    <link href="{% static "css/item.css" %}" rel="stylesheet">
 {% endblock %}
 
 
-{% block custom-js %}
-    <!--script type="text/javascript" src="{% static "js/script.js" %}"></script-->
-    <script src="http://fotorama.s3.amazonaws.com/j/script.js?20131230210928"></script>
-    <!-- Fotorama -->
-    <!--script src="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.js"></script-->
+{% block custom-fore-js %}
+    <script type="text/javascript" src="{% static "js/fotorama-custom.js" %}"></script>
+{% endblock %}
+
+{% block custom-after-js %}
+
+    <!-- Fotorama 4.4.9 -->
     <script type="text/javascript" src="{% static "js/lib/fotorama.js" %}"></script>
 {% endblock %}
 
 
 {% block container %}
 
+    <div class="body-wrap">
+        <div class="content">
+
+        </div>
+
+        <div class="fotorama-wrap-frontpage noise">
+            <div class="fotorama-frontpage"
+                 data-auto="false"
+                 data-width="100%" data-ratio="16/9" data-hash="true"
+                 data-minheight="{{ lot.ImageMinHeight }}" data-maxheight="100%"
+                 data-minwidth="{{ lot.ImageMinWidth }}"
+                 data-nav="thumbs" data-allowfullscreen="native" data-loop="true">
+            {% for item in lot.Images %}
+                <a href="{{ item.url }}"
+                   data-thumb="{{ item.url }}"
+                   data-thumbwidth="{{ item.width }}"
+                   data-thumbheight="{{ item.height }}"></a>
+            {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
     <div class="container">
 
         <div class="row">
-            <div class="fotorama-wrap-frontpage noise">
-                <div class="fotorama-frontpage" data-auto="false" data-width="100%" data-ratio="16/9" data-hash="true" data-maxheight="100%" data-minheight="200" data-nav="thumbs" data-keyboard="true" data-allowfullscreen="native" data-shadows="false" data-thumbheight="48">
-                {% for item in lot.Images %}
-                    <a href="{{ item }}"
-                       data-thumb="{{ item }}"
-                       data-thumbwidth="155"
-                       data-thumbheight="100"></a>
-                {% endfor %}
-            </div>
+
         </div>
 
         <div class="row">

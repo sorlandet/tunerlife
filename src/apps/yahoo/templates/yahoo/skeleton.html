@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <!--link rel="stylesheet" href="{% static "css/global.css" %}"-->
+    <!-- Normalize.css makes browsers render all elements more consistently and in line with modern standards.
+         It precisely targets only the styles that need normalizing. -->
+    <link href="{% static "css/normalize.css" %}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <!-- Bootstrap -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 
     {% block custom-css %}{% endblock %}
 
@@ -25,19 +25,17 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="root">
     {% block container %}{% endblock %}
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <!--script type="text/javascript" src="{% static "js/lib/jquery.endless-scroll.js" %}"></script-->
-    <script type="text/javascript" src="{% static "js/lib/jquery.simple-infinite-scroll.js" %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="{% static "js/lib/mustache.js" %}"></script>
+    {% block custom-fore-js %}{% endblock %}
+
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script>
 
-    {% block custom-js %}{% endblock %}
-  </body>
+    {% block custom-after-js %}{% endblock %}
+</body>
+
 </html>

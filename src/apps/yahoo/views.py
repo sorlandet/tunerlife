@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import json
+from urlparse import urlparse
 
 from django.http import HttpResponse
 from django.views.generic import TemplateView
@@ -198,11 +199,19 @@ def auction_item_decoder(obj):
     lot.AuctionItemUrl = obj['AuctionItemUrl']
 
     images = []
+    min_width, min_height = 1000, 1000
     for key in obj['Img']:
-        images.append(obj['Img'][key])
-
+        img = {'url': obj['Img'][key]}
+        o = urlparse(obj['Img'][key])
+        dimensions = o.path.split('/')[-1].split('-')[0]
+        img['width'], img['height'] = map(int, dimensions.split('x'))
+        min_width = min(min_width, img['width'])
+        min_height = min(min_height, img['height'])
+        images.append(img)
+    # print min_width, max_width, min_height, max_height
     lot.Images = images
-
+    lot.ImageMinWidth = min_width
+    lot.ImageMinHeight = min_height
 
     # print obj
     # obj['ResultSet']
