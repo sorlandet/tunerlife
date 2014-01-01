@@ -26,32 +26,60 @@
 
 {% block container %}
 
-    <div class="body-wrap">
-        <div class="content">
-
-        </div>
-
-        <div class="fotorama-wrap-frontpage noise">
-            <div class="fotorama-frontpage"
-                 data-auto="false"
-                 data-width="100%" data-ratio="16/9" data-hash="true"
-                 data-minheight="{{ lot.ImageMinHeight }}" data-maxheight="100%"
-                 data-minwidth="{{ lot.ImageMinWidth }}"
-                 data-nav="thumbs" data-allowfullscreen="native" data-loop="true">
-            {% for item in lot.Images %}
-                <a href="{{ item.url }}"
-                   data-thumb="{{ item.url }}"
-                   data-thumbwidth="{{ item.width }}"
-                   data-thumbheight="{{ item.height }}"></a>
-            {% endfor %}
-            </div>
-        </div>
-
-    </div>
-
     <div class="container">
 
+        <div class="page-header">
+          <h1>{{ lot.Title }} <small>{{ lot.Condition }}</small></h1>
+        </div>
+
         <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading">Основная информация</div>
+                  <div class="panel-body">
+                    <p>...</p>
+                  </div>
+
+                  <table class="table">
+
+                    <tbody>
+                        <tr><td>Название:</td><td>{{ lot.Title }}</td></tr>
+                        <tr><td>Текущая цена:</td><td>{{ lot.Price }}</td></tr>
+                        <tr><td>Лидер:</td><td>&mdash;</td></tr>
+                        <tr><td>Стартовая цена:</td><td>{{ lot.Initprice }}</td></tr>
+                        <tr><td>Шаг ставки:</td><td>{{ lot.YPoint }}</td></tr>
+                        <tr><td>Ставок:</td><td>{{ lot.Bids }}</td></tr>
+                        <tr><td>Осталось до конца торгов:</td><td>{{ lot.EndTime }}</td></tr>
+                        <tr><td>Состояние товара:</td><td>{{ lot.Condition }}</td></tr>
+                        <tr><td>Начало торгов*:</td><td>{{ lot.StartTime }}</td></tr>
+                        <tr><td>Завершение торгов*:</td><td>{{ lot.EndTime }}</td></tr>
+                  </tbody>
+                </table>
+                </div>
+
+                <span>Название</span><span>{{ lot.Title }}</span>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+
+            <div class="fotorama-wrap-frontpage">
+                <div class="fotorama-frontpage"
+                     data-auto="false"
+                     data-width="100%" data-ratio="16/9" data-hash="true"
+                     data-minheight="{{ lot.ImageMinHeight }}" data-maxheight="100%"
+                     data-minwidth="{{ lot.ImageMinWidth }}"
+                     data-nav="thumbs" data-allowfullscreen="native" data-loop="true">
+                {% for item in lot.Images %}
+                    <a href="{{ item.url }}"
+                       data-thumb="{{ item.url }}"
+                       data-thumbwidth="{{ item.width }}"
+                       data-thumbheight="{{ item.height }}"></a>
+                {% endfor %}
+                </div>
+            </div>
 
         </div>
 

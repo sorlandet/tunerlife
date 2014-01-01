@@ -1,13 +1,3 @@
-
-#root a:hover, #root a:hover u, .switch:hover {
-    color: #a00;
-    border-color: rgba(170, 0, 0, .3);
-}
-#root .selected>a, #root .selected>a u {
-    color: #a00;
-    border-color: #a00;
-}
-
 .fotorama {
     margin-bottom: 5px;
 }
@@ -15,21 +5,9 @@
     visibility: hidden;
 }
 
-.fotorama-with-numbers .fotorama__html div {
-    background-color: #fff;
-    width: 2em;
-    height: 2em;
-    text-align: center;
-    line-height: 2em;
-    border-radius: 1em;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
-    position: absolute;
-    top: 1em;
-    left: 1em;
-}
+
 .fotorama-wrap-frontpage {
-    background: #090907;
+    background: #ccc;
     padding: 0;
     margin: 0 -16px 5px;
     overflow: hidden;
@@ -49,31 +27,4 @@
 }
 .fotorama-frontpage .fotorama__nav--thumbs .fotorama__nav__frame:last-child {
     padding-right: 4px!important;
-}
-
-html, body {
-    height: 100%}
-.body-wrap {
-    padding: 10px 16px 40px;
-    position: relative;
-    background-color: #fff;
-    z-index: 9;
-    height: auto;
-    min-height: -webkit-calc(100% - 200px);
-    min-height: calc(100% - 200px);
-}
-.body-wrap:after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 5px;
-    background: radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .4), rgba(0, 0, 0, 0))-webkit-gradient(linear, top left, bottom left, from(#ddddda), to(#ddddda));
-    background: -webkit-radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .4), rgba(0, 0, 0, 0)), -webkit-linear-gradient(#ddddda, #ddddda);
-    background: radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .4), rgba(0, 0, 0, 0)), linear-gradient(#ddddda, #ddddda);
-    -webkit-background-size: 100% 5px, 100% 1px;
-    background-size: 100% 5px, 100% 1px;
-    background-repeat: no-repeat;
 }

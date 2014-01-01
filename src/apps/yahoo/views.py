@@ -213,6 +213,22 @@ def auction_item_decoder(obj):
     lot.ImageMinWidth = min_width
     lot.ImageMinHeight = min_height
 
+    lot.Initprice = obj['Initprice']
+    lot.Price = obj['Price']
+    lot.Quantity = obj['Quantity']
+    lot.Bids = obj['Bids']
+    lot.HighestBidders = obj['HighestBidders']
+    print lot.HighestBidders
+    lot.YPoint = obj.get('YPoint')
+    lot.Condition = obj['ItemStatus']['Condition']
+    print lot.Condition
+
+    lot.StartTime = obj['StartTime']
+    lot.EndTime = obj['EndTime']
+    lot.Bidorbuy = obj['Bidorbuy']
+    lot.Reserved = obj.get('Reserved')
+    lot.IsEarlyClosing = obj['IsEarlyClosing']
+    lot.IsAutomaticExtension = obj['IsAutomaticExtension']
     # print obj
     # obj['ResultSet']
 
