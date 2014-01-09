@@ -139,3 +139,6 @@
 .admin-interface .lot-inner {
     height: 290px;
 }
+#for-comparison .postpone {
+    display: none;
+}
