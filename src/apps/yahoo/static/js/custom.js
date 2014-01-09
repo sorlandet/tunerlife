@@ -80,7 +80,10 @@ var ajaxResponseHandler = function(e, response) {
 
             if (typeof list.Item != "undefined"){
                 list.Item.forEach(function(entry) {
-                    entry.ttl = moment(entry.EndTime).lang('ru').fromNow();
+                    var rusMoment = moment(entry.EndTime).lang('ru');
+                    rusMoment.lang()._relativeTime.s = "секунды";
+                    entry.ttl = rusMoment.fromNow(true);
+
                     entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
                     entry.buyout_price =  Number(entry.BidOrBuy).formatMoney(2, '.', ' ');
                     var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000 + 500
