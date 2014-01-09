@@ -18,7 +18,7 @@ This is the template for items in the channel list for when the app first loads
 
             <div class="price">
                 <div class="price-rub">{{ current_price_rubles }} руб.</div>
-                <div class="price-yen">
+                <div class="price-yen show-admin">
                     <span>{{ current_price }} йен</span>
                   {{#BidOrBuy}}
                     </br><span>блиц цена {{ buyout_price }} йен</span>
@@ -26,19 +26,20 @@ This is the template for items in the channel list for when the app first loads
                 </div>
             </div>
 
+            <div class="lot-link postpone">
+                <a href="" class="to-compare">
+                    <i class="glyphicon glyphicon-star-empty"></i>
+                    <span class="hide-admin">отложить лот</span>
+                </a>
+            </div>
             <div class="lot-link in-japan show-admin">
-                <a target="_blank" href="http://injapan.ru/auction/{{ AuctionID }}.html">
-                    <i class="glyphicon glyphicon-new-window"></i>InJapan
+                <a target="_blank" href="http://injapan.ru/auction/{{ AuctionID }}.html" title="InJapan">
+                    <i class="glyphicon glyphicon-new-window"></i>
                 </a>
             </div>
             <div class="lot-link yahoo show-admin">
-                <a target="_blank" href="{{ AuctionItemUrl }}">
-                    <i class="glyphicon glyphicon-new-window"></i>Yahoo! JAPAN
-                </a>
-            </div>
-            <div class="lot-link postpone">
-                <a href="" class="to-compare">
-                    <i class="glyphicon glyphicon-star-empty"></i>отложить лот
+                <a target="_blank" href="{{ AuctionItemUrl }}" title="Yahoo! JAPAN">
+                    <i class="glyphicon glyphicon-new-window"></i>
                 </a>
             </div>
         </div>

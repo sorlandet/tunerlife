@@ -25,7 +25,7 @@
 
 {% block container %}
 
-    <div class="container{% if user.isAuthenticated %} admin-interface{% endif %}">
+    <div class="container{% if user.is_superuser %} admin-interface{% endif %}">
 
         <div class="row">
             {% include "yahoo/blocks/form.html" %}
