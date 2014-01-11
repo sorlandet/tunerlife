@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import json
+import re
 from urlparse import urlparse
 
 from django.http import HttpResponse
@@ -200,35 +201,44 @@ def auction_item_decoder(obj):
 
     images = []
     min_width, min_height = 1000, 1000
+
+    wh_regex = re.compile("(?P<width>\d*?)x(?P<height>\d*?)-")
+
     for key in obj['Img']:
         img = {'url': obj['Img'][key]}
         o = urlparse(obj['Img'][key])
-        dimensions = o.path.split('/')[-1].split('-')[0]
-        img['width'], img['height'] = map(int, dimensions.split('x'))
-        min_width = min(min_width, img['width'])
-        min_height = min(min_height, img['height'])
+        r = wh_regex.search(o.path)
+        wh = r.groupdict()
+        if wh:
+            img['width'] = int(wh['width'])
+            img['height'] = int(wh['height'])
+            min_width = min(min_width, img['width'])
+            min_height = min(min_height, img['height'])
         images.append(img)
     # print min_width, max_width, min_height, max_height
     lot.Images = images
     lot.ImageMinWidth = min_width
     lot.ImageMinHeight = min_height
 
-    lot.Initprice = obj['Initprice']
-    lot.Price = obj['Price']
-    lot.Quantity = obj['Quantity']
-    lot.Bids = obj['Bids']
-    lot.HighestBidders = obj['HighestBidders']
+    lot.Initprice = obj.get('Initprice')
+    lot.Price = obj.get('Price')
+    lot.Quantity = obj.get('Quantity')
+    lot.Bids = obj.get('Bids')
+    lot.HighestBidders = obj.get('HighestBidders')
     print lot.HighestBidders
     lot.YPoint = obj.get('YPoint')
-    lot.Condition = obj['ItemStatus']['Condition']
+    lot.Condition = obj.get('ItemStatus').get('Condition')
     print lot.Condition
 
-    lot.StartTime = obj['StartTime']
-    lot.EndTime = obj['EndTime']
-    lot.Bidorbuy = obj['Bidorbuy']
+    lot.StartTime = obj.get('StartTime')
+    lot.EndTime = obj.get('EndTime')
+    lot.Bidorbuy = obj.get('Bidorbuy')
     lot.Reserved = obj.get('Reserved')
-    lot.IsEarlyClosing = obj['IsEarlyClosing']
-    lot.IsAutomaticExtension = obj['IsAutomaticExtension']
+    lot.IsEarlyClosing = obj.get('IsEarlyClosing')
+    lot.IsAutomaticExtension = obj.get('IsAutomaticExtension')
+
+    lot.ChargeForShipping = obj.get('ChargeForShipping')
+    lot.Location = obj.get('Location')
     # print obj
     # obj['ResultSet']
 
