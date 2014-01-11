@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 import json
 import re
 from urlparse import urlparse
+from datetime import datetime
+from dateutil.parser import parse
 
 from django.http import HttpResponse
 from django.views.generic import TemplateView
@@ -215,7 +217,7 @@ def auction_item_decoder(obj):
             min_width = min(min_width, img['width'])
             min_height = min(min_height, img['height'])
         images.append(img)
-    # print min_width, max_width, min_height, max_height
+    # print min_width, min_height
     lot.Images = images
     lot.ImageMinWidth = min_width
     lot.ImageMinHeight = min_height
@@ -227,11 +229,15 @@ def auction_item_decoder(obj):
     lot.HighestBidders = obj.get('HighestBidders')
     print lot.HighestBidders
     lot.YPoint = obj.get('YPoint')
-    lot.Condition = obj.get('ItemStatus').get('Condition')
-    print lot.Condition
 
-    lot.StartTime = obj.get('StartTime')
-    lot.EndTime = obj.get('EndTime')
+    conditions = {'used': u'б/у', 'new': u'новый'}
+
+    lot.Condition = conditions.get(obj.get('ItemStatus').get('Condition'))
+    print obj.get('ItemStatus').get('Condition')
+
+    lot.StartTime = parse(obj.get('StartTime'))
+    lot.EndTime = parse(obj.get('EndTime'))
+
     lot.Bidorbuy = obj.get('Bidorbuy')
     lot.Reserved = obj.get('Reserved')
     lot.IsEarlyClosing = obj.get('IsEarlyClosing')

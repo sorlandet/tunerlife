@@ -1,16 +1,3 @@
-Number.prototype.formatMoney = function(c, d, t){
-    var n = this,
-    c = isNaN(c = Math.abs(c)) ? 2 : c,
-    d = d == undefined ? "." : d,
-    t = t == undefined ? "," : t,
-    s = n < 0 ? "-" : "",
-    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-    j = (j = i.length) > 3 ? j % 3 : 0;
-   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
- };
-
-
-
 var SearchButton = function(container){
     this.form = container.find('form');
 
@@ -84,8 +71,8 @@ var ajaxResponseHandler = function(e, response) {
                     rusMoment.lang()._relativeTime.s = "секунды";
                     entry.ttl = rusMoment.fromNow(true);
 
-                    entry.current_price =  Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
-                    entry.buyout_price =  Number(entry.BidOrBuy).formatMoney(2, '.', ' ');
+                    entry.current_price = Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
+                    entry.buyout_price = Number(entry.BidOrBuy).formatMoney(2, '.', ' ');
                     var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000 + 500
                     entry.current_price_rubles = Number(end_price * 0.33).formatMoney(2, '.', ' ');
                 });

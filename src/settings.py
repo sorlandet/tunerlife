@@ -33,7 +33,7 @@ LANGUAGE_CODE = 'ru' #'en-us'
 gettext = lambda s: s
 
 LANGUAGES = (
-    ('en', gettext('English')),
+    # ('en', gettext('English')),
     ('ru', gettext('Russian')),
 )
 
@@ -154,7 +154,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    # Uncomment the next line to enable the admin:
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.flatpages',
     # Uncomment the next line to enable admin documentation:

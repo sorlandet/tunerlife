@@ -1,6 +1,7 @@
 {% extends "yahoo/skeleton.html" %}
 
 {% load staticfiles %}
+{% load humanize %}
 
 
 {% block title %}{{ lot.Title }}{% endblock %}
@@ -15,6 +16,7 @@
 
 {% block custom-fore-js %}
     <script type="text/javascript" src="{% static "js/translate.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/core.js" %}"></script>
     <script type="text/javascript" src="{% static "js/fotorama-custom.js" %}"></script>
 {% endblock %}
 
@@ -56,18 +58,18 @@
 
                     <table class="table">
                         <tbody>
-                            <tr><td>Название:</td><td>{{ lot.Title }}</td></tr>
-                            <tr><td>Текущая цена:</td><td>{{ lot.Price }}</td></tr>
+                            <tr><td>Название:</td><td class="translate">{{ lot.Title }}</td></tr>
+                            <tr><td>Текущая цена:</td><td>{{ lot.Price|intcomma  }} йен</td></tr>
                             <tr><td>Лидер:</td><td>&mdash;</td></tr>
-                            <tr><td>Стартовая цена:</td><td>{{ lot.Initprice }}</td></tr>
+                            <tr><td>Стартовая цена:</td><td>{{ lot.Initprice|intcomma }} йен</td></tr>
                             <tr><td>Шаг ставки:</td><td>{{ lot.YPoint }}</td></tr>
                             <tr><td>Ставок:</td><td>{{ lot.Bids }}</td></tr>
-                            <tr><td>Осталось до конца торгов:</td><td>{{ lot.EndTime }}</td></tr>
+                            <tr><td>Осталось до конца торгов:</td><td>{{ lot.EndTime|naturaltime }}</td></tr>
                             <tr><td>Состояние товара:</td><td>{{ lot.Condition }}</td></tr>
                             <tr><td>Начало торгов*:</td><td>{{ lot.StartTime }}</td></tr>
                             <tr><td>Завершение торгов*:</td><td>{{ lot.EndTime }}</td></tr>
                             <tr><td>Номер лота:</td><td><a href="{{ lot.AuctionItemUrl }}">{{ lot.AuctionID }}</a> </td></tr>
-                            <tr><td>Местоположение:</td><td>{{ lot.Location }}</td></tr>
+                            <tr><td>Местоположение:</td><td class="translate">{{ lot.Location }}</td></tr>
                         </tbody>
                     </table>
                 </div>
