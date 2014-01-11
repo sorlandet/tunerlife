@@ -230,7 +230,7 @@ def auction_item_decoder(obj):
     print lot.HighestBidders
     lot.YPoint = obj.get('YPoint')
 
-    conditions = {'used': u'б/у', 'new': u'новый'}
+    conditions = {'new': u'новый', 'used': u'б/у', 'other': u'иное'}
 
     lot.Condition = conditions.get(obj.get('ItemStatus').get('Condition'))
     print obj.get('ItemStatus').get('Condition')
@@ -240,15 +240,21 @@ def auction_item_decoder(obj):
 
     lot.Bidorbuy = obj.get('Bidorbuy')
     lot.Reserved = obj.get('Reserved')
-    lot.IsEarlyClosing = obj.get('IsEarlyClosing')
-    lot.IsAutomaticExtension = obj.get('IsAutomaticExtension')
+    lot.IsEarlyClosing = str2bool(obj.get('IsEarlyClosing'))
+    lot.IsAutomaticExtension = str2bool(obj.get('IsAutomaticExtension'))
 
-    lot.ChargeForShipping = obj.get('ChargeForShipping')
+    chargers = {'seller': u'продавцом', 'winner': u'победителем'}
+    lot.ChargeForShipping = chargers.get(obj.get('ChargeForShipping'))
     lot.Location = obj.get('Location')
+    lot.IsWorldwide = str2bool(obj.get('IsWorldwide'))
     # print obj
     # obj['ResultSet']
 
     return lot
+
+
+def str2bool(v):
+  return v.lower() in ("yes", "true")
 
 def get_wheels(size):
     if size == '16':

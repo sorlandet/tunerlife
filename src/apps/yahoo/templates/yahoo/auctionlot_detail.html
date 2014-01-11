@@ -74,7 +74,31 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Информация по аукциону</div>
+                    <div class="panel-body">
+                        <p>...</p>
+                    </div>
+
+                    <table class="table">
+                        <tbody>
+                            <tr><td>Магазин(Продавец):</td><td>{{ lot.Seller.Id }}</td></tr>
+                            <tr><td colspan="2"><a href="http://injapan.ru/search/do.html?seller={{ lot.Seller.Id }}">Все товары продавца</a></td></tr>
+                            <tr><td><a href="http://injapan.ru/SellerRating/yahoo/{{ lot.Seller.Id }}.html">Рейтинг Yahoo</a>:</td>
+                                <td>
+                                    <span style="color: green" title="положительных">+{{ lot.Seller.Rating.TotalGoodRating }}</span>&nbsp;&nbsp;
+                                    <span style="color: red" title="отрицательных">-{{ lot.Seller.Rating.TotalBadRating }}</span>
+                                </td></tr>
+                            <tr><td>Раннее закрытие:</td><td>{{ lot.IsEarlyClosing|yesno }}</td></tr>
+                            <tr><td>Автоматическое продление:</td><td>{{ lot.IsAutomaticExtension|yesno }}</td></tr>
+                            <tr><td>Оплата доставки:</td><td>{{ lot.ChargeForShipping }}</td></tr>
+                            <tr><td>Доставка по миру:</td><td>{{ lot.IsWorldwide|yesno }}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -97,24 +121,6 @@
 
         </div>
 
-        <div class="row">
-            <h2>Seller info</h2>
-            <span>ID: {{ lot.Seller.Id }}</span></br>
-            <span>Rating: {{ lot.Seller.Rating }}</span></br>
-            <span>ItemListURL: {{ lot.Seller.ItemListURL }}</span></br>
-            <span>RatingURL: {{ lot.Seller.RatingURL }}</span>
-        </div>
-
-        <div class="row">
-            <h2>Item info</h2>
-            <span>AuctionItemUrl: {{ lot.AuctionItemUrl }}</span></br>
-
-
-            <span>Initprice: {{ lot.Initprice }}</span></br>
-            <span>Price: {{ lot.Price }}</span></br>
-            <span>Quantity: {{ lot.Quantity }}</span></br>
-            <span>Bids: {{ lot.Bids }}</span></br>
-        </div>
 
         <div class="row">
             <h2>HighestBidders</h2>
