@@ -237,8 +237,8 @@ def auction_item_decoder(obj):
     lot.Condition = conditions.get(obj.get('ItemStatus').get('Condition'))
     # print obj.get('ItemStatus').get('Condition')
 
-    lot.StartTime = parse(obj.get('StartTime'))
-    lot.EndTime = parse(obj.get('EndTime'))
+    lot.StartTime = obj.get('StartTime')
+    lot.EndTime = obj.get('EndTime')
 
     lot.Bidorbuy = obj.get('Bidorbuy')
     lot.Reserved = obj.get('Reserved')

@@ -21,6 +21,9 @@
 {% endblock %}
 
 {% block custom-after-js %}
+    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script>
+    <!-- Fotorama 4.4.9 -->
+    <script type="text/javascript" src="{% static "js/lib/fotorama.js" %}"></script>
 
     <script type="text/javascript">
         $(function() {
@@ -29,12 +32,18 @@
             $('.translate').each(function() {
                 $(this).trigger('ajaxTranslate');
             });
+
+            var rusEndTimeMoment = moment('{{ lot.EndTime }}').lang('ru');
+            var rusStartTimeMoment = moment('{{ lot.StartTime }}').lang('ru');
+            rusEndTimeMoment.lang()._relativeTime.s = "секунды";
+            $('#ttl').html(rusEndTimeMoment.fromNow(true));
+            $('#endtime').html(rusEndTimeMoment.format('D.MM.YYYY  H:mm:ss'));
+            $('#starttime').html(rusStartTimeMoment.format('D.MM.YYYY  H:mm:ss'));
+
+            $('#init_price').html(Number({{ lot.Initprice }}).formatMoney(2, '.', ' '));
+            $('#price').html(Number({{ lot.Price }}).formatMoney(2, '.', ' '));
         });
     </script>
-
-    <!-- Fotorama 4.4.9 -->
-    <script type="text/javascript" src="{% static "js/lib/fotorama.js" %}"></script>
-
 
 {% endblock %}
 
@@ -83,15 +92,15 @@
 
                     <table class="table">
                         <tbody>
-                            <tr><td>Текущая цена:</td><td> <span class="price-value">{{ lot.Price|intcomma }}</span> йен</td></tr>
+                            <tr><td>Текущая цена:</td><td> <span id="price"></span> йен</td></tr>
 
-                            <tr><td>Стартовая цена:</td><td>{{ lot.Initprice|intcomma }} йен</td></tr>
+                            <tr><td>Стартовая цена:</td><td><span id="init_price"></span> йен</td></tr>
                             <tr><td>Шаг ставки:</td><td>{{ lot.YPoint }}</td></tr>
                             <tr><td>Ставок:</td><td>{{ lot.Bids }}</td></tr>
-                            <tr><td>Осталось до конца торгов:</td><td>{{ lot.EndTime|naturaltime }}</td></tr>
+                            <tr><td>Осталось до начала торгов:</td><td id="ttl"></td></tr>
                             <tr><td>Состояние товара:</td><td>{{ lot.Condition }}</td></tr>
-                            <tr><td>Начало торгов*:</td><td>{{ lot.StartTime }}</td></tr>
-                            <tr><td>Завершение торгов*:</td><td>{{ lot.EndTime }}</td></tr>
+                            <tr><td>Начало торгов:</td><td id="starttime"></td></tr>
+                            <tr><td>Завершение торгов:</td><td id="endtime"></td></tr>
                             <tr><td>Номер лота:</td><td><a href="{{ lot.AuctionItemUrl }}">{{ lot.AuctionID }}</a> </td></tr>
 
                         </tbody>
