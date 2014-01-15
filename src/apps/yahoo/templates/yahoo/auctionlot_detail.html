@@ -48,19 +48,43 @@
         </div>
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Информация по аукциону</div>
+                    <div class="panel-body" >
+                        <p title="Магазин" class="text-center">
+                            <a href="http://injapan.ru/search/do.html?seller={{ lot.Seller.Id }}"
+                               title="Все товары продавца">{{ lot.Seller.Id }}</a>
+                        </p>
+                    </div>
+
+                    <table class="table"><tbody>
+
+                        <tr><td><a href="http://injapan.ru/SellerRating/yahoo/{{ lot.Seller.Id }}.html">Рейтинг Yahoo</a>:</td>
+                            <td>
+                                <span style="color: green" title="положительных">+{{ lot.Seller.Rating.TotalGoodRating }}</span>&nbsp;&nbsp;
+                                <span style="color: red" title="отрицательных">-{{ lot.Seller.Rating.TotalBadRating }}</span>
+                            </td></tr>
+                        <tr><td>Раннее закрытие:</td><td>{{ lot.IsEarlyClosing|yesno }}</td></tr>
+                        <tr><td>Авто-продление:</td><td>{{ lot.IsAutomaticExtension|yesno }}</td></tr>
+                        <tr><td>Лидер:</td><td>{{ lot.HighestBidder }}</td></tr>
+
+                    </tbody></table>
+                </div>
+            </div>
+            <div class="col-md-5">
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
                     <div class="panel-heading">Основная информация</div>
                     <div class="panel-body">
-                        <p>...</p>
+                        <p title="Название" class="text-center translate">{{ lot.Title }}</p>
                     </div>
 
                     <table class="table">
                         <tbody>
-                            <tr><td>Название:</td><td class="translate">{{ lot.Title }}</td></tr>
-                            <tr><td>Текущая цена:</td><td>{{ lot.Price|intcomma  }} йен</td></tr>
-                            <tr><td>Лидер:</td><td>&mdash;</td></tr>
+                            <tr><td>Текущая цена:</td><td> <span class="price-value">{{ lot.Price|intcomma }}</span> йен</td></tr>
+
                             <tr><td>Стартовая цена:</td><td>{{ lot.Initprice|intcomma }} йен</td></tr>
                             <tr><td>Шаг ставки:</td><td>{{ lot.YPoint }}</td></tr>
                             <tr><td>Ставок:</td><td>{{ lot.Bids }}</td></tr>
@@ -69,7 +93,7 @@
                             <tr><td>Начало торгов*:</td><td>{{ lot.StartTime }}</td></tr>
                             <tr><td>Завершение торгов*:</td><td>{{ lot.EndTime }}</td></tr>
                             <tr><td>Номер лота:</td><td><a href="{{ lot.AuctionItemUrl }}">{{ lot.AuctionID }}</a> </td></tr>
-                            <tr><td>Местоположение:</td><td class="translate">{{ lot.Location }}</td></tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -77,22 +101,14 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
-                    <div class="panel-heading">Информация по аукциону</div>
+                    <div class="panel-heading">Калькулятор</div>
                     <div class="panel-body">
                         <p>...</p>
                     </div>
 
                     <table class="table">
                         <tbody>
-                            <tr><td>Магазин(Продавец):</td><td>{{ lot.Seller.Id }}</td></tr>
-                            <tr><td colspan="2"><a href="http://injapan.ru/search/do.html?seller={{ lot.Seller.Id }}">Все товары продавца</a></td></tr>
-                            <tr><td><a href="http://injapan.ru/SellerRating/yahoo/{{ lot.Seller.Id }}.html">Рейтинг Yahoo</a>:</td>
-                                <td>
-                                    <span style="color: green" title="положительных">+{{ lot.Seller.Rating.TotalGoodRating }}</span>&nbsp;&nbsp;
-                                    <span style="color: red" title="отрицательных">-{{ lot.Seller.Rating.TotalBadRating }}</span>
-                                </td></tr>
-                            <tr><td>Раннее закрытие:</td><td>{{ lot.IsEarlyClosing|yesno }}</td></tr>
-                            <tr><td>Автоматическое продление:</td><td>{{ lot.IsAutomaticExtension|yesno }}</td></tr>
+                            <tr><td>Местоположение:</td><td class="translate">{{ lot.Location }}</td></tr>
                             <tr><td>Оплата доставки:</td><td>{{ lot.ChargeForShipping }}</td></tr>
                             <tr><td>Доставка по миру:</td><td>{{ lot.IsWorldwide|yesno }}</td></tr>
                         </tbody>
@@ -123,67 +139,26 @@
 
 
         <div class="row">
-            <h2>HighestBidders</h2>
-            <span>HighestBidders: {{ lot.HighestBidders }}</span></br>
-            <ul>
-            {% for item in lot.HighestBidders %}
-                <li>{{ item }}</li>
-            {% endfor %}
-            </ul>
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Описание</div>
+
+                <div>
+                    <p>{{ lot.Description|safe }}</p>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <h2>Item info</h2>
-            <span>YPoint: {{ lot.YPoint }}</span></br>
-            <span>Item Status: {{ lot.ItemStatus }}</span></br>
-            <span>Item Status Condition: {{ lot.ItemStatus.Condition }}</span></br>
-            <span>Item Status Comment: {{ lot.ItemStatus.Comment }}</span></br>
-            <span>Item Returnable: {{ lot.ItemReturnable }}</span></br>
-            <span>Item Returnable Allowed: {{ lot.Returnable.Allowed }}</span></br>
-            <span>Item Returnable Allowed Comment: {{ lot.Returnable.Allowed.Comment }}</span></br>
-            <span>StartTime: {{ lot.StartTime }}</span></br>
-            <span>EndTime: {{ lot.EndTime }}</span></br>
-            <span>Bidorbuy: {{ lot.Bidorbuy }}</span></br>
-            <span>Reserved: {{ lot.Reserved }}</span></br>
-            <span>IsBidCreditRestrictions: {{ lot.IsBidCreditRestrictions }}</span></br>
-            <span>IsBidderRestrictions: {{ lot.IsBidderRestrictions }}</span></br>
-            <span>isBidderRatioRestrictions: {{ lot.isBidderRatioRestrictions }}</span></br>
-            <span>IsEarlyClosing: {{ lot.IsEarlyClosing }}</span></br>
-            <span>IsAutomaticExtension: {{ lot.IsAutomaticExtension }}</span></br>
-            <span>IsOffer: {{ lot.IsOffer }}</span></br>
-            <span>IsCharity: {{ lot.IsCharity }}</span></br>
-            <span>Option: {{ lot.Option }}</span></br>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Описание</div>
+
+                <div><p>{{ lot.Description }}</p></div>
+            </div>
         </div>
 
-        <div class="row">
-            <h2>Description</h2>
-            <span>{{ lot.Description|safe }}</span></br>
-        </div>
-
-        <div class="row">
-            <h2>Payment</h2>
-            <span>Payment: {{ lot.Payment }}</span></br>
-        </div>
-
-        <div class="row">
-            <h2>...</h2>
-            <span>ChargeForShipping: {{ lot.ChargeForShipping }}</span></br>
-            <span>Location: {{ lot.Location }}</span></br>
-            <span>IsWorldwide: {{ lot.IsWorldwide }}</span></br>
-            <span>ShipTime: {{ lot.ShipTime }}</span></br>
-        </div>
-
-        <div class="row">
-            <h2>Shipping</h2>
-            <span>Shipping: {{ lot.Shipping }}</span></br>
-        </div>
-
-        <div class="row">
-            <h2>...</h2>
-
-            <span>BaggageInfo: {{ lot.BaggageInfo }}</span></br>
-            <span>CharityOption: {{ lot.CharityOption }}</span></br>
-        </div>
 
     </div>
 

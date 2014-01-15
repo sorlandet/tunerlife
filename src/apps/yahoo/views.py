@@ -226,14 +226,16 @@ def auction_item_decoder(obj):
     lot.Price = obj.get('Price')
     lot.Quantity = obj.get('Quantity')
     lot.Bids = obj.get('Bids')
+
     lot.HighestBidders = obj.get('HighestBidders')
-    print lot.HighestBidders
+    lot.HighestBidder = lot.HighestBidders.get('Bidder', {}).get('Id')
+
     lot.YPoint = obj.get('YPoint')
 
     conditions = {'new': u'новый', 'used': u'б/у', 'other': u'иное'}
 
     lot.Condition = conditions.get(obj.get('ItemStatus').get('Condition'))
-    print obj.get('ItemStatus').get('Condition')
+    # print obj.get('ItemStatus').get('Condition')
 
     lot.StartTime = parse(obj.get('StartTime'))
     lot.EndTime = parse(obj.get('EndTime'))
@@ -247,7 +249,8 @@ def auction_item_decoder(obj):
     lot.ChargeForShipping = chargers.get(obj.get('ChargeForShipping'))
     lot.Location = obj.get('Location')
     lot.IsWorldwide = str2bool(obj.get('IsWorldwide'))
-    # print obj
+
+    lot.Description = obj.get('Description')  # .replace('<BR>', '')
     # obj['ResultSet']
 
     return lot
