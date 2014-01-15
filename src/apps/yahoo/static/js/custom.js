@@ -71,10 +71,10 @@ var ajaxResponseHandler = function(e, response) {
                     rusMoment.lang()._relativeTime.s = "секунды";
                     entry.ttl = rusMoment.fromNow(true);
 
-                    entry.current_price = Number(entry.CurrentPrice).formatMoney(2, '.', ' ');
-                    entry.buyout_price = Number(entry.BidOrBuy).formatMoney(2, '.', ' ');
+                    entry.current_price = Number(entry.CurrentPrice).formatMoneyShort(2, '.', ' ');
+                    entry.buyout_price = Number(entry.BidOrBuy).formatMoneyShort(2, '.', ' ');
                     var end_price = entry.CurrentPrice * 1.05 + 5000 + 24000 + 500
-                    entry.current_price_rubles = Number(end_price * 0.33).formatMoney(2, '.', ' ');
+                    entry.current_price_rubles = Number(end_price * 0.33).formatMoneyShort(2, '.', ' ');
                 });
                 var data = Mustache.render(window.ItemsTemplate, list)
                 var lots = $("div#ajax-result").children();

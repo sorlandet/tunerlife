@@ -40,8 +40,8 @@
             $('#endtime').html(rusEndTimeMoment.format('D.MM.YYYY  H:mm:ss'));
             $('#starttime').html(rusStartTimeMoment.format('D.MM.YYYY  H:mm:ss'));
 
-            $('#init_price').html(Number({{ lot.Initprice }}).formatMoney(2, '.', ' '));
-            $('#price').html(Number({{ lot.Price }}).formatMoney(2, '.', ' '));
+            $('#init_price').html(Number({{ lot.Initprice }}).formatMoneyShort(2, '.', ' '));
+            $('#price').html(Number({{ lot.Price }}).formatMoneyShort(2, '.', ' '));
         });
     </script>
 
