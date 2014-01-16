@@ -228,7 +228,7 @@ def auction_item_decoder(obj):
     lot.Bids = obj.get('Bids')
 
     lot.HighestBidders = obj.get('HighestBidders')
-    lot.HighestBidder = lot.HighestBidders.get('Bidder', {}).get('Id')
+    lot.HighestBidder = lot.HighestBidders.get('Bidder', {}).get('Id', '-')
 
     lot.YPoint = obj.get('YPoint')
 

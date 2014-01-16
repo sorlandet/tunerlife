@@ -37,8 +37,8 @@
             var rusStartTimeMoment = moment('{{ lot.StartTime }}').lang('ru');
             rusEndTimeMoment.lang()._relativeTime.s = "секунды";
             $('#ttl').html(rusEndTimeMoment.fromNow(true));
-            $('#endtime').html(rusEndTimeMoment.format('D.MM.YYYY  H:mm:ss'));
-            $('#starttime').html(rusStartTimeMoment.format('D.MM.YYYY  H:mm:ss'));
+            $('#endtime').html(rusEndTimeMoment.format('DD.MM.YYYY  H:mm:ss'));
+            $('#starttime').html(rusStartTimeMoment.format('DD.MM.YYYY  H:mm:ss'));
 
             $('#init_price').html(Number({{ lot.Initprice }}).formatMoneyShort(2, '.', ' '));
             $('#price').html(Number({{ lot.Price }}).formatMoneyShort(2, '.', ' '));
@@ -69,7 +69,7 @@
                     </div>
 
                     <table class="table"><tbody>
-
+                        <tr><td>Номер лота:</td><td><a href="{{ lot.AuctionItemUrl }}">{{ lot.AuctionID }}</a> </td></tr>
                         <tr><td><a href="http://injapan.ru/SellerRating/yahoo/{{ lot.Seller.Id }}.html">Рейтинг Yahoo</a>:</td>
                             <td>
                                 <span style="color: green" title="положительных">+{{ lot.Seller.Rating.TotalGoodRating }}</span>&nbsp;&nbsp;
@@ -77,6 +77,7 @@
                             </td></tr>
                         <tr><td>Раннее закрытие:</td><td>{{ lot.IsEarlyClosing|yesno }}</td></tr>
                         <tr><td>Авто-продление:</td><td>{{ lot.IsAutomaticExtension|yesno }}</td></tr>
+                        <tr><td>Ставок:</td><td>{{ lot.Bids }}</td></tr>
                         <tr><td>Лидер:</td><td>{{ lot.HighestBidder }}</td></tr>
 
                     </tbody></table>
@@ -93,16 +94,11 @@
                     <table class="table">
                         <tbody>
                             <tr><td>Текущая цена:</td><td> <span id="price"></span> йен</td></tr>
-
                             <tr><td>Стартовая цена:</td><td><span id="init_price"></span> йен</td></tr>
-                            <tr><td>Шаг ставки:</td><td>{{ lot.YPoint }}</td></tr>
-                            <tr><td>Ставок:</td><td>{{ lot.Bids }}</td></tr>
                             <tr><td>Осталось до начала торгов:</td><td id="ttl"></td></tr>
                             <tr><td>Состояние товара:</td><td>{{ lot.Condition }}</td></tr>
                             <tr><td>Начало торгов:</td><td id="starttime"></td></tr>
                             <tr><td>Завершение торгов:</td><td id="endtime"></td></tr>
-                            <tr><td>Номер лота:</td><td><a href="{{ lot.AuctionItemUrl }}">{{ lot.AuctionID }}</a> </td></tr>
-
                         </tbody>
                     </table>
                 </div>
