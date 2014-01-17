@@ -4,13 +4,28 @@ var SearchButton = function(container){
     this.search = function(event){
         event.preventDefault(); //prevent default form submit
 
-        window.searchData = $(this).serialize();
+        var paramObj = {};
+        $.each($(this).serializeArray(), function(_, kv) {
+            if (paramObj.hasOwnProperty(kv.name)) {
+                paramObj[kv.name] = $.makeArray(paramObj[kv.name]);
+                paramObj[kv.name].push(kv.value);
+            }
+            else {
+                paramObj[kv.name] = kv.value;
+            }
+        });
+
+        paramObj.aucminprice = Number(paramObj.aucminprice).calculateInYens(0.33);
+        paramObj.aucmaxprice = Number(paramObj.aucmaxprice).calculateInYens(0.33);
+
+        window.searchData = paramObj;
 
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),
             context: container,
             data: window.searchData,
+            traditional: true,
             dataType: 'json',
             success: function(response){
 

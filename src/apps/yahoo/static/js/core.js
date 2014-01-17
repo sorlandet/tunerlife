@@ -30,3 +30,10 @@ Number.prototype.calculateInRubles = function(coef){
 
    return (n * 1.05 + 5000 + 24000 + 500) * coef
 };
+
+Number.prototype.calculateInYens = function(coef){
+   var n = this,
+       coef = coef == undefined ? 0.33 : coef;
+
+   return Math.ceil((n / coef - (5000 + 24000 + 500)) / 1.05)
+};
