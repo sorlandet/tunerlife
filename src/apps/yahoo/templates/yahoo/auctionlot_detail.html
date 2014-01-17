@@ -132,8 +132,8 @@
                      data-minwidth="{{ lot.ImageMinWidth }}"
                      data-nav="thumbs" data-allowfullscreen="native" data-loop="true">
                 {% for item in lot.Images %}
-                    <a href="{{ item.url }}"
-                       data-thumb="{{ item.url }}"
+                    <a href="{{ item.src }}"
+                       data-thumb="{{ item.src }}"
                        data-thumbwidth="{{ item.width }}"
                        data-thumbheight="{{ item.height }}"></a>
                 {% endfor %}
@@ -150,7 +150,7 @@
                 <div class="panel-heading">Описание</div>
 
                 <div>
-                    <p>{{ lot.Description|safe }}</p>
+                    {{ lot.Description|safe }}
                 </div>
             </div>
         </div>

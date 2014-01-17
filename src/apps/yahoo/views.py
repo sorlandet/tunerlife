@@ -207,7 +207,7 @@ def auction_item_decoder(obj):
     wh_regex = re.compile("(?P<width>\d*?)x(?P<height>\d*?)-")
 
     for key in obj['Img']:
-        img = {'url': obj['Img'][key]}
+        img = {'src': obj['Img'][key]}
         o = urlparse(obj['Img'][key])
         r = wh_regex.search(o.path)
         wh = r.groupdict()
@@ -217,6 +217,11 @@ def auction_item_decoder(obj):
             min_width = min(min_width, img['width'])
             min_height = min(min_height, img['height'])
         images.append(img)
+
+    description_images, description = get_images(obj.get('Description'))
+    lot.Description = description
+    images.extend(description_images)
+
     # print min_width, min_height
     lot.Images = images
     lot.ImageMinWidth = min_width
@@ -250,14 +255,25 @@ def auction_item_decoder(obj):
     lot.Location = obj.get('Location')
     lot.IsWorldwide = str2bool(obj.get('IsWorldwide'))
 
-    lot.Description = obj.get('Description')  # .replace('<BR>', '')
+
     # obj['ResultSet']
 
     return lot
 
 
+def get_images(doc):
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(doc, "lxml")
+    images = []
+    for tag in soup.findAll('img'):
+        images.append(tag.attrs)
+        tag.replaceWith('')
+    return images, soup.prettify()
+
+
 def str2bool(v):
   return v.lower() in ("yes", "true")
+
 
 def get_wheels(size):
     if size == '16':
