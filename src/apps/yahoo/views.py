@@ -69,9 +69,9 @@ class YahooProcessFormView(ProcessFormView):
         aucmaxprice = form.cleaned_data.get('aucmaxprice')
 
         print aucminprice, aucmaxprice
-        if aucminprice:
+        if aucminprice and aucminprice > 0:
             obj.set_option('aucminprice', aucminprice)
-        if aucmaxprice:
+        if aucmaxprice and aucmaxprice > 0:
             obj.set_option('aucmaxprice', aucmaxprice)
 
         query = form.cleaned_data.get('query')

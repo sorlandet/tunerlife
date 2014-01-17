@@ -422,8 +422,8 @@
                 <div class="col-lg-5">
                     <span class="for-label">Цена (в рублях):</span>
 
-                    <input type="text" id="id_aucminprice" name="aucminprice"  placeholder="от">
-                    <input type="text" id="id_aucmaxprice" name="aucmaxprice"  placeholder="до">
+                    <input type="number" min="10000" id="id_aucminprice" name="aucminprice"  placeholder="от">
+                    <input type="number" min="15000" id="id_aucmaxprice" name="aucmaxprice"  placeholder="до">
                 </div>
 
                 <div class="col-lg-4 radio-toolbar">
@@ -469,7 +469,17 @@
 
             <div class="form-group row">
                 <div class="col-lg-3">
-                    <input id="id_query" name="query" type="text" value="" placeholder="Номер лота или запрос" class="form-control">
+
+                    <div class="input-group custom-search-form">
+                        <input id="id_query" name="query" type="text" class="form-control" placeholder="Номер лота или запрос">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+
+                    <!--input id="id_query" name="query" type="text" value="" placeholder="Номер лота или запрос" class="form-control"-->
                 </div>
 
                 <div class="col-lg-2">

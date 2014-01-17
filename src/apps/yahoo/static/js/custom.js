@@ -14,9 +14,12 @@ var SearchButton = function(container){
                 paramObj[kv.name] = kv.value;
             }
         });
-
-        paramObj.aucminprice = Number(paramObj.aucminprice).calculateInYens(0.33);
-        paramObj.aucmaxprice = Number(paramObj.aucmaxprice).calculateInYens(0.33);
+        if (paramObj.aucminprice){
+            paramObj.aucminprice = Number(paramObj.aucminprice).calculateInYens();
+        }
+        if (paramObj.aucmaxprice){
+            paramObj.aucmaxprice = Number(paramObj.aucmaxprice).calculateInYens();
+        }
 
         window.searchData = paramObj;
 
