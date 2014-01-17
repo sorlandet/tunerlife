@@ -23,3 +23,10 @@ Number.prototype.formatMoneyShort = function(c, d, t){
     j = (j = i.length) > 3 ? j % 3 : 0;
    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t)
 };
+
+Number.prototype.calculateInRubles = function(coef){
+   var n = this,
+       coef = coef == undefined ? 0.33 : coef;
+
+   return (n * 1.05 + 5000 + 24000 + 500) * coef
+};

@@ -58,9 +58,11 @@ class TranslateProcessFormView(ProcessFormView):
             fixed_json = re.sub(r',{2,}', ',', res).replace(',]', ']')
             data = json.loads(fixed_json)
             return "%s" % data[0][0][0]
+        except ValueError, e:
+            print e, res
         except urllib2.HTTPError, e:
             print e.code
         except urllib2.URLError, e:
             print e.args
 
-        return ''
+        return self.text

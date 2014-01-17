@@ -264,11 +264,14 @@ def auction_item_decoder(obj):
 def get_images(doc):
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(doc, "lxml")
+
+    desc = u'<br/>'.join('<span class="translate">%s</span>' % el for el in soup.find_all(text=True) if el != u' ')
+
     images = []
     for tag in soup.findAll('img'):
         images.append(tag.attrs)
         tag.replaceWith('')
-    return images, soup.prettify()
+    return images, desc
 
 
 def str2bool(v):

@@ -42,6 +42,8 @@
 
             $('#init_price').html(Number({{ lot.Initprice }}).formatMoneyShort(2, '.', ' '));
             $('#price').html(Number({{ lot.Price }}).formatMoneyShort(2, '.', ' '));
+
+            $('#price_rus').html(Number({{ lot.Price }}).calculateInRubles(0.33).formatMoneyShort(2, '.', ' '));
         });
     </script>
 
@@ -53,7 +55,7 @@
     <div class="container">
 
         <div class="page-header">
-          <h1 class="translate">{{ lot.Title }} <small>{{ lot.Condition }}</small></h1>
+          <h1 class="translate">{{ lot.Title }}</h1>
         </div>
 
         <div class="row">
@@ -93,7 +95,7 @@
 
                     <table class="table">
                         <tbody>
-                            <tr><td>Текущая цена:</td><td> <span id="price"></span> йен</td></tr>
+                            <tr><td>Текущая цена:</td><td> <span id="price"></span> йен (<strong class="highlight" id="price_rus"></strong> руб)</td></tr>
                             <tr><td>Стартовая цена:</td><td><span id="init_price"></span> йен</td></tr>
                             <tr><td>Осталось до начала торгов:</td><td id="ttl"></td></tr>
                             <tr><td>Состояние товара:</td><td>{{ lot.Condition }}</td></tr>
